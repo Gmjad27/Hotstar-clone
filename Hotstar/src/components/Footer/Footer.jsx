@@ -25,8 +25,8 @@ const Footer = () => {
                 <h3>Connect with Us</h3>
 
                 <div className="f1">
-                    <h1><i class="fa-brands fa-facebook-f"></i></h1>
-                    <h1><i class="fa-brands fa-x-twitter"></i></h1>
+                    <h1><i className="fa-brands fa-facebook-f"></i></h1>
+                    <h1><i className="fa-brands fa-x-twitter"></i></h1>
                 </div>
 
                 <div className="f1">

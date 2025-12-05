@@ -1,23 +1,31 @@
 .card {
     /* background-color: aqua; */
+    /* display: none; */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    position: relative;
+    top: -60px;
     flex: 0 0 auto;
     /* border: 1px solid white; */
     border-radius: 5px;
     width: 240px;
     height: 130px;
+    background-color: rgba(29, 29, 29, 0.471);
     /* background-image: url('https://img10.hotstar.com/image/upload/f_auto,q_90,w_384/sources/r1/cms/prod/6847/1754203346847-v'); */
     background-size: cover;
     background-position: center;
-    position: relative;
+    /* position: relative; */
     transition: all 0.4s ease-in-out;
+    cursor: pointer;
 
 }
 
 .info {
     display: none;
     /* width: 100px; */
+    /* padding-top: 10px; */
+    border-radius: 5px;
     height: 240px;
-    background-color: black;
+    background-color: rgb(23, 23, 23);
    transition: all 0.4s ease-in-out;
 
 }
@@ -32,7 +40,7 @@
 .card:hover {
     z-index: 1001;
     scale: 1.2;
-    width: 250px;
+    /* width: 250px;./ */
     /* height: 240px; */
     
 
@@ -57,15 +65,27 @@
 
 .play{
     border: none;
-    border-radius: 5px;
-    padding: 5px 20px;
+    border-radius: 2px;
+    padding: 5px 40px;
+    cursor: pointer;
 
 }
+
+.play:hover{
+    background-color: rgba(255, 255, 255, 0.863);
+}
 .add{
-    padding: 5px 20px;
+    padding: 0 20px;
+    border-radius: 2px;
     color: white;
-    background-color: rgba(13, 255, 0, 0.45);
+    background-color: #0dff0073;
     border: none;
+    cursor: pointer;
+    font-size: large;
+}
+.add:hover{
+    background-color: #0dff004f;
+    /* font-size: large; */
 }
 
 .info2{
@@ -79,5 +99,6 @@
 .desc2{
     color: gray;
     font-size: small;
+    padding: 5px;
 
 }
