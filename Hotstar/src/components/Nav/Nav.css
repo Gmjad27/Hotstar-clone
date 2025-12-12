@@ -11,9 +11,15 @@
 }
 
 .nav .img {
-    background-image: url('https://img.hotstar.com/image/upload/v1737554969/web-assets/prod/images/rebrand/logo.png');
+    color: white;
+    position: absolute;
+    font-size: larger;
+    font-weight: 400;
+    left: 10px;
+    top: 30px;
+    /* background-image: url('https://img.hotstar.com/image/upload/v1737554969/web-assets/prod/images/rebrand/logo.png'); */
     width: 70px;
-    height: 50px;
+    /* height: 50px; */
     background-position: center;
     background-size: cover;
 }
@@ -23,16 +29,73 @@
     flex-direction: column;
     gap: 10px;
     height: 100%;
+    background-color: black;
     justify-content: center;
-    align-items: center;
+    transition: all 0.3s ease-in;
+    width: 90px;
+    box-shadow: 10px 20px 30px 40px;
+    /* align-items: center; */
 }
 
 .logos button {
+    cursor: pointer;
     width: 30px;
     height: 35px;
     font-size: 23px;
     background: transparent;
-    color: rgba(245, 245, 220, 0.646);
+    color: #9f9f9fe0;
     border: none;
     font-weight: 100;
 }
+
+.logos button:hover{
+    color: #ffffffe0;
+}
+
+.la{
+    position: relative;
+    display: flex;
+    left: 30px;
+    width: 70px;
+    align-items: center;
+    gap: 30px;
+    text-decoration: none;
+    color: #9f9f9fe0;
+}
+
+.la:hover ,.la button:hover{
+    color: #ffffffe0;
+}
+.la:hover button{
+    color: #ffffffe0;
+}
+
+.la p{
+    display: none;
+    text-decoration: none;
+    /* color: aliceblue; */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+}
+
+.logos:hover .la>p{
+    display: block;
+    transition: all 0.3s ease-in;
+}
+
+.logos:hover .la{
+    left:60px;
+    transition: all 0.3s ease-in;
+}
+
+.logos:hover{
+    transition: all 0.3s ease-in;
+    width: 190px;
+}
+
+.l{
+    text-decoration: none;
+    
+}
+
+

@@ -75,18 +75,21 @@
     bottom: 20px;
     display: flex;
     gap: 10px;
+    z-index: 2;
 }
 
 .desc{
     margin-bottom: 20px;
     color: rgb(197, 197, 197);
     width: 400px;
+    z-index: 2;
 }
 
 .lan{
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
+    z-index: 2;
 }
 
 .play{
@@ -97,6 +100,7 @@
     border: none;
     color: white;
     cursor: pointer;
+    z-index: 4;
     background: linear-gradient(to right , rgb(0, 208, 255),rgb(255, 0, 221));
 }
 .add{
@@ -106,6 +110,7 @@
     border-radius: 5px;
     color: white;
     cursor: pointer;
+    z-index: 2;
     background-color: rgba(72, 72, 72, 0.47);
 }
 
@@ -114,4 +119,18 @@
     display: flex;
     gap: 20px;
     margin-bottom: 10px;
+    z-index: 1;
+}
+
+.video{
+    position: fixed;
+    overflow: hidden;
+    /* z-index: -2; */
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* height: 100%; */
+    /* background-color: black; */
+    border: 1px solid red;
+    box-shadow:inset -20px 30px 20px 25px;
 }

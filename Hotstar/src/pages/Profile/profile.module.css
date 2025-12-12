@@ -1,0 +1,55 @@
+.con{
+    padding-top: 30px;
+    /* border: 1px solid red; */
+    /* text-align: center; */
+    color: white;
+    padding-left: 150px;
+    height: 100vh;
+}
+
+.p_img{
+    /* border: 1px  solid green; */
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background-image: url('https://png.pngtree.com/png-vector/20230420/ourmid/pngtree-dc-batman-logo-symbol-of-superhero-comic-cartoon-symbol-vector-png-image_51620966.jpg');
+    background-size: cover;
+    cursor: pointer;
+}
+
+.wraper{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    top: 60px;
+}
+
+.info{
+    position: relative;
+    /* top: 20px; */
+    left: -170px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+
+}
+
+.log button{
+    border: none;
+    background-color: brown;
+    color: white;
+    padding: 10px 40px;
+    border-radius: 10px;
+    font-weight: 900;
+    cursor: pointer;
+}
+.log button:hover{
+    background-color: rgba(165, 42, 42, 0.877);
+}
+
+.wList{
+    display: flex;
+    gap: 10px;
+}

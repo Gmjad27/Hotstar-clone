@@ -1,9 +1,54 @@
-import React from 'react'
+import React, { useState } from 'react'
+import styles from './movie.module.css'
+import Card from '../../components/Card/Card'
+import Watch from '../../components/Watch/Watch'
+import { Data } from '../../content/movie'
 
 const Movie = () => {
+
+  const [img, setImg] = useState('https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/8834/808834-i')
+  const [nameImg, setNameImg] = useState("https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/1202/1371202-t-8b12119920aa")
+  const [releaseYear, setReleaseYear] = useState(2016)
+  const [Ua, setUa] = useState("U/A 7+")
+  const [Sea, setSea] = useState("1h 48m")
+  const [lang, setLang] = useState(["English", "Hindi", "Spanish", " German", "Japanese", "Tamil", "Korean"])
+  const [de, setDe] = useState("Judy Hopps, the first rabbit police officer, is determined to solve a dangerous case.",)
+  const [cat, setCate] = useState(["Kids", "Family"])
+
+  const sow = (id) => {
+    Data.map((keys) => {
+      if (keys.id === id) {
+        setImg(keys.img)
+        setNameImg(keys.nameImg)
+        setReleaseYear(keys.releaseYear)
+        setUa(keys.ua)
+        setSea(keys.season)
+        setLang(keys.language)
+        setDe(keys.desc)
+        setCate(keys.category)
+
+      }
+    })
+    const watch = document.querySelector('#watch');
+    watch.style.display = 'block';
+    // call(id);
+
+  }
   return (
-    <div>
-      <h1 style={{color:'white', textAlign:'center'}}>Movie page</h1>
+    <div className={styles.con}>
+      <h1 style={{ color: 'white', textAlign: 'center', fontSize: '54px' }}>MOVIES</h1><br />
+      <div className={styles.con2}>
+
+        {
+          Data.map((keys) => {
+            if (keys.type.includes('movie')) return <Card sow={(i) => { sow(i); }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
+          })
+        }
+
+      </div>
+
+      <Watch img={img} name={nameImg} yr={releaseYear} ua={Ua} season={Sea} lan={lang.length} desc={de} cat={cat} language={lang} />
+
     </div>
   )
 }

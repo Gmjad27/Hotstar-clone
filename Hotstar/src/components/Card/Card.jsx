@@ -5,7 +5,7 @@ import { Data } from '../../content/movie'
 
 const Card = (props) => {
   return (
-    <div className={styles.card} style={{ backgroundImage: `url(${props.img})` }} onClick={()=>{props.sow(props.id)}
+    <div className={styles.card} style={{ backgroundImage: `url(${props.img}), linear-gradient(to top left,black,brown)` }} onClick={() => { props.sow(props.id) }
       // {
       // props.sow
 
@@ -24,7 +24,7 @@ const Card = (props) => {
     }>
 
       <div className={styles.info}>
-        <div className={styles.img} style={{ backgroundImage: `url(${props.img})`, marginBottom: '5px' }}>
+        <div className={styles.img} style={{ backgroundImage: `url(${props.img}),linear-gradient(to top left,black,brown)`, marginBottom: '5px' }}>
 
         </div>
         <div className={styles.btn}>

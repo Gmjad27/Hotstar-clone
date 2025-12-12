@@ -4,6 +4,7 @@
     justify-content: flex-end;
     position: relative;
     /* padding-left: 6%; */
+    margin-left: 20px;
     padding-right: 6%;
     /* padding-top: 5%; */
     /* margin-bottom: 60px; */
@@ -20,8 +21,8 @@
 
 
 .name {
-    height: 150px;
-    width: 250px;
+    /* height: 150px; */
+    width: 350px;
     margin-bottom: 20px;
 }
 
@@ -41,10 +42,16 @@
 .watch {
     font-size: 23px;
     color: white;
-    background: linear-gradient(to right, rgb(0, 170, 255), rgb(83, 83, 230), rgb(255, 0, 183));
+    /* background: linear-gradient(to right, rgb(0, 170, 255), rgb(83, 83, 230), rgb(255, 0, 183)); */
+    background-color: #ff4d00;
     padding: 10px 120px;
     border: none;
     border-radius: 4px;
+    cursor: pointer;
+}
+.watch:hover{
+    background-color: #eb4802dc;
+    
 }
 
 .add {
@@ -55,6 +62,12 @@
     margin-left: 15px;
     border: none;
     border-radius: 4px;
+    cursor: pointer;
+}
+
+.add:hover{
+    background-color: rgba(0, 136, 255, 0.072);
+
 }
 
 .con2 {

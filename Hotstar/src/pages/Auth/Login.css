@@ -1,0 +1,169 @@
+/* General Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Find this class in your CSS and update min-height */
+.login-container {
+    /* ... previous styles ... */
+    min-height: auto;
+    /* Allow box to grow based on content */
+    padding-bottom: 60px;
+    /* Add padding at bottom for breathing room */
+}
+
+/* Background Setup */
+.login-page {
+    width: 100%;
+    min-height: 100vh;
+    /* Use a URL to a movie poster collage or a dark texture */
+    background-image: url('https://d3ghupt9z9s6o0.cloudfront.net/app/uploads/2017/04/13100509/Netflix-Background.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Dark Gradient Overlay */
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    /* Darkens the image */
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%);
+    z-index: 0;
+}
+
+/* Main Container */
+.login-container {
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.75);
+    /* Semi-transparent black */
+    padding: 60px 68px 40px;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 450px;
+    color: white;
+    min-height: 600px;
+}
+
+/* Logo Styling */
+.logo-area {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.logo-text {
+    color: #e50914;
+    /* Netflix Red */
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.logo-highlight {
+    color: white;
+}
+
+/* Form Elements */
+.login-form h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 28px;
+}
+
+.input-group {
+    margin-bottom: 16px;
+}
+
+.input-group input {
+    width: 100%;
+    height: 50px;
+    background: #333;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 16px 20px;
+    font-size: 16px;
+    outline: none;
+}
+
+.input-group input:focus {
+    background: #454545;
+}
+
+/* Error Message */
+.error-message {
+    color: #e87c03;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+/* Button */
+.signin-btn {
+    width: 100%;
+    padding: 16px;
+    background-color: #e50914;
+    /* Brand Red */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.signin-btn:hover {
+    background-color: #f40612;
+}
+
+/* Helpers (Remember me, Need help) */
+.form-help {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #b3b3b3;
+    margin-top: 10px;
+}
+
+.form-help a {
+    color: #b3b3b3;
+    text-decoration: none;
+}
+
+.form-help a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Area */
+.login-footer {
+    margin-top: 50px;
+    color: #737373;
+    font-size: 16px;
+}
+
+.signup-link {
+    color: white;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}
+
+.recaptcha-text {
+    font-size: 13px;
+    margin-top: 15px;
+    text-align: left;
+}

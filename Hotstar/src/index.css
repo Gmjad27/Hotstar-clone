@@ -1,0 +1,8 @@
+.owner {
+    position: fixed;
+    right: 0;
+    color: rgb(0, 0, 0);
+    z-index: 10005;
+    bottom: 0;
+    background-color: aqua;
+}

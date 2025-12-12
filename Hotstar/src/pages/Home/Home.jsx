@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import Banner from "../../components/Banner/Banner";
 import { mediaData } from "../../content/contect";
+import { studio } from "../../content/contect";
 import Card from "../../components/Card/Card";
 // import Nav from "../../components/Nav/Nav";
 import Watch from "../../components/Watch/Watch";
 import Footer from "../../components/Footer/Footer";
 import { Data } from '../../content/movie'
+import Card2 from "../../components/Card/Card2";
 // import "../../App.css";
 import "./Home.css"
 
@@ -21,7 +23,7 @@ import "./Home.css"
 
 // }
 
-function Home() {
+function Home(props) {
     // Extract all image URLs from mediaData
     const images = mediaData.map(item => item.img);
     const name = mediaData.map(item => item.name);
@@ -172,7 +174,6 @@ function Home() {
                         Data.map((keys) => {
 
                             if (keys.id >= 1 && keys.id <= 10) return <Card sow={(i) => {
-                                // alert(i);
                                 sow(i);
                             }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
                         })
@@ -180,11 +181,11 @@ function Home() {
 
                 </div>
                 <section className="sections">
-                    {/* <h2 className="title">Kids</h2> */}
+                    <h2 className="title">Kids</h2>
                     <div className="content">
                         {
                             Data.map((keys) => {
-                                if (keys.id >= 11 && keys.id <= 20) {
+                                if (keys.category.includes('Kids')) {
                                     return <Card sow={(i) => { sow(i); }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
                                 }
 
@@ -194,7 +195,7 @@ function Home() {
                     </div>
                 </section>
                 <section className="sections">
-                    {/* <h2 className="title">Kids</h2> */}
+                    <h2 className="title">For You</h2>
                     <div className="content">
                         {
                             Data.map((keys) => {
@@ -208,7 +209,7 @@ function Home() {
                     </div>
                 </section>
                 <section className="sections">
-                    {/* <h2 className="title">Kids</h2> */}
+                    <h2 className="title">Action</h2>
                     <div className="content">
                         {
                             Data.map((keys) => {
@@ -222,11 +223,27 @@ function Home() {
                     </div>
                 </section>
                 <section className="sections">
-                    {/* <h2 className="title">Kids</h2> */}
+                    <h2 className="title">Shuperhero</h2>
                     <div className="content">
                         {
                             Data.map((keys) => {
-                                if (keys.id >= 41 && keys.id <= 50) {
+                                if (keys.category.includes('Superhero')) {
+                                    return <Card sow={(i) => {
+                                        sow(i);
+
+                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
+                                }
+                            })
+                        }
+
+                    </div>
+                </section>
+                <section className="sections">
+                    <h2 className="title">Sci-fi</h2>
+                    <div className="content">
+                        {
+                            Data.map((keys) => {
+                                if (keys.category.includes('Sci-Fi')) {
                                     return <Card sow={(i) => { sow(i); }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
                                 }
                             })
@@ -235,24 +252,11 @@ function Home() {
                     </div>
                 </section>
                 <section className="sections">
-                    {/* <h2 className="title">Kids</h2> */}
+                    <h2 className="title">Netflix</h2>
                     <div className="content">
                         {
                             Data.map((keys) => {
-                                if (keys.id >= 51 && keys.id <= 60) {
-                                    return <Card sow={(i) => { sow(i); }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
-                                }
-                            })
-                        }
-
-                    </div>
-                </section>
-                <section className="sections">
-                    {/* <h2 className="title">Kids</h2> */}
-                    <div className="content">
-                        {
-                            Data.map((keys) => {
-                                if (keys.id >= 61 && keys.id <= 70) {
+                                if (keys.studio.includes('Netflix')) {
                                     return <Card sow={(i) => { sow(i); }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
                                 }
                             })
@@ -272,6 +276,15 @@ function Home() {
                         }
 
                     </div>
+                </section>
+                <section className="sections2">
+                    {
+                        studio.map((key) => {
+                            return <Card2 bg={key.bg} himg={key.himg} img={key.img} studio={key.studio} stu={()=>{
+                                props.stu(key.studio,key.img)
+                            }}/>
+                        })
+                    }
                 </section>
                 <Footer />
             </div>

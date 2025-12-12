@@ -9,24 +9,28 @@ import { Data } from './content/movie'
 import Home from "./pages/Home/Home";
 import Movie from "./pages/Movies/Movie";
 import Tv from "./pages/TV/Tv";
+import Search from './pages/Search/Search'
+import Login from "./pages/Auth/Login";
+import Card2 from "./components/Card/Card2";
+import Studio from "./pages/Studio/Studio";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 
 import "./App.css";
-
-
-
-
+import Signup from "./pages/Auth/Signup";
+import Profile from "./pages/Profile/Profile";
 
 // watch.style.display = 'block';
 
-// export const sow = (id) => {
-//   // alert(id);
-//   call(id);
-
-// }
 
 function App() {
-  // Extract all image URLs from mediaData
+
+  const [Img, setImg] = useState('')
+  const [studio, setStudio] = useState('')
+  const sow = (stud, img) => {
+    alert(img);
+    setStudio(stud)
+    setImg(img)
+  }
 
 
   return (
@@ -37,7 +41,9 @@ function App() {
           <Route path='/' element={
             <>
               <Nav />
-              <Home />
+              <Home stu={(stud, img) => {
+                sow(stud, img)
+              }} />
             </>
           } />
           <Route path="/movies" element={
@@ -50,6 +56,27 @@ function App() {
             <>
               <Nav />
               <Tv />
+              {/* <Login /> */}
+            </>
+          } />
+
+          <Route path="/search" element={
+            <>
+              <Nav />
+              <Search />
+              {/* <Signup /> */}
+            </>
+          } />
+          <Route path="/studio" element={
+            <>
+              <Nav />
+              <Studio studio={studio} img={Img} />
+            </>
+          } />
+          <Route path="/profile" element={
+            <>
+              <Nav />
+              <Profile />
             </>
           } />
 
@@ -57,6 +84,7 @@ function App() {
         </Routes>
 
       </Router>
+      <h1 className="owner">Made by Girish</h1>
     </>
   );
 }

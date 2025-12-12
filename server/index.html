@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+  /* 1. The Container (The "Frame") */
+  .video-container {
+    background-image: url('https://www.onlykollywood.com/wp-content/uploads/2025/08/coolie-movie-review.jpg');
+    position: relative; /* Essential: Defines boundaries for absolute children */
+    width: 100%;
+    height: 300px;      /* You can set this to any height you want */
+    overflow: hidden;   /* Essential: Crops the video if it spills out */
+    /* background: #000;   Fallback color */
+    display: flex;      /* To center the text content */
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* 2. The Background Video */
+  .bg-video {
+    position: absolute; /* Takes video out of normal flow */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Ensures video fills the box without stretching */
+    z-index: 0;         /* Bottom layer */
+    opacity: 0;         /* Hidden initially for the fade-in effect */
+    transition: opacity 1s ease-in-out;
+  }
+
+  /* 3. The Content (Text/Buttons) */
+  .video-content {
+    position: relative; /* Brings content back into flow above absolute items */
+    z-index: 1;         /* Top layer */
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5); /* Optional: dark overlay for readability */
+    padding: 20px;
+    border-radius: 8px;
+    background-image: url('https://www.onlykollywood.com/wp-content/uploads/2025/08/coolie-movie-review.jpg');
+  }
+</style>
+</head>
+<body>
+
+  <div class="video-container">
+    
+    <video class="bg-video" id="myDivVideo" muted loop playsinline poster="https://www.onlykollywood.com/wp-content/uploads/2025/08/coolie-movie-review.jpg">
+      <source src="power.mp4" type="video/mp4">
+    </video>
+
+    <div class="video-content">
+      <h2>Div Background Video</h2>
+      <p>This video plays inside this box only.</p>
+    </div>
+
+  </div>
+
+  <script>
+    const videoDiv = document.getElementById('myDivVideo');
+
+    setTimeout(() => {
+      videoDiv.play().then(() => {
+        // Fade the video in once it starts playing
+        videoDiv.style.opacity = "1";
+      }).catch(err => {
+        console.error("Video play failed:", err);
+      });
+    }, 5000);
+  </script>
+
+</body>
+</html>
