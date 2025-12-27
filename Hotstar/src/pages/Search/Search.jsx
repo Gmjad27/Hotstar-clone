@@ -32,7 +32,7 @@ const Search = () => {
         })
         const watch = document.querySelector('#watch');
         watch.style.display = 'block';
-        
+
 
     }
 
@@ -65,7 +65,11 @@ const Search = () => {
                 </div>
             </div>
             <Watch img={img} name={nameImg} yr={releaseYear} ua={Ua} season={Sea} lan={lang.length} desc={de} cat={cat} language={lang} />
-
+            {/* {
+                Data.map((key) => {
+                    return <p style={{color:'white'}}>{key.name2}</p>
+                })
+            } */}
         </div>
     )
 }

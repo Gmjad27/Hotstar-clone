@@ -106,15 +106,15 @@
     padding: 0 20px;
     border-radius: 2px;
     color: white;
-    background-color: #0dff0073;
+    background-color: red;
     border: none;
     cursor: pointer;
     font-size: large;
 }
-.add:hover{
-    background-color: #0dff004f;
+/* .add:hover{ */
+    /* background-color: rgb(255, 0, 0); */
     /* font-size: large; */
-}
+/* } */
 
 .info2{
     color: white;

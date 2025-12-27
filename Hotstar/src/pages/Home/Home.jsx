@@ -24,7 +24,7 @@ import "./Home.css"
 // }
 
 function Home(props) {
-    // Extract all image URLs from mediaData
+
     const images = mediaData.map(item => item.img);
     const name = mediaData.map(item => item.name);
     const lan = mediaData.map(item => item.language);
@@ -46,23 +46,23 @@ function Home(props) {
     const [Desc, setDesc] = useState();
     const [Season, setSeason] = useState();
 
-    const [w, setW] = useState([{
+    // const [w, setW] = useState([{
 
 
-        id: 1,
-        img: "https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/8834/808834-i",
-        nameImg: "https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/1202/1371202-t-8b12119920aa",
-        name: "https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/5589/675589-h",
-        name2: 'Zootopia',
-        releaseYear: 2016,
-        ua: "U/A 7+",
-        season: "1h 48m",
-        language: ["English", "Hindi", "Spanish", " German", "Japanese", "Tamil", "Korean"],
-        desc: "Judy Hopps, the first rabbit police officer, is determined to solve a dangerous case.",
-        category: ["Kids", "Family"],
-        type: "movie",
-        studio: "Disney"
-    }]);
+    //     id: 1,
+    //     img: "https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/8834/808834-i",
+    //     nameImg: "https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/1202/1371202-t-8b12119920aa",
+    //     name: "https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/5589/675589-h",
+    //     name2: 'Zootopia',
+    //     releaseYear: 2016,
+    //     ua: "U/A 7+",
+    //     season: "1h 48m",
+    //     language: ["English", "Hindi", "Spanish", " German", "Japanese", "Tamil", "Korean"],
+    //     desc: "Judy Hopps, the first rabbit police officer, is determined to solve a dangerous case.",
+    //     category: ["Kids", "Family"],
+    //     type: "movie",
+    //     studio: "Disney"
+    // }]);
 
     const [img, setImg] = useState('https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/8834/808834-i')
     const [nameImg, setNameImg] = useState("https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/1202/1371202-t-8b12119920aa")
@@ -175,7 +175,7 @@ function Home(props) {
 
                             if (keys.id >= 1 && keys.id <= 10) return <Card sow={(i) => {
                                 sow(i);
-                            }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
+                            }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} add={(e) => { props.add(e) }} e={props.e} />
                         })
                     }
 
@@ -280,9 +280,9 @@ function Home(props) {
                 <section className="sections2">
                     {
                         studio.map((key) => {
-                            return <Card2 bg={key.bg} himg={key.himg} img={key.img} studio={key.studio} stu={()=>{
-                                props.stu(key.studio,key.img)
-                            }}/>
+                            return <Card2 bg={key.bg} himg={key.himg} img={key.img} studio={key.studio} stu={() => {
+                                props.stu(key.studio, key.img)
+                            }} />
                         })
                     }
                 </section>

@@ -4,32 +4,42 @@ import Watch from '../Watch/Watch'
 import { Data } from '../../content/movie'
 
 const Card = (props) => {
+  const added = () => {
+    alert('hello world.');
+    const add = document.getElementById('add');
+    // add.style.backgroundColor = add.style.backgroundColor == 'red' ? 'green' : 'red';
+    add.value = add.value == '+' ? '✔' : '+';
+  }
   return (
-    <div className={styles.card} style={{ backgroundImage: `url(${props.img}), linear-gradient(to top left,black,brown)` }} onClick={() => { props.sow(props.id) }
-      // {
-      // props.sow
+    <div className={styles.card} style={{ backgroundImage: `url(${props.img}), linear-gradient(to top left,black,brown)` }}
+    // {
+    // props.sow
 
-      // alert('hello')
-      // const watch = document.querySelector('#watch');
-      // Data.map((keys) => {
-      //   if (keys.id == props.id) {
-      //     console.log(keys);
+    // alert('hello')
+    // const watch = document.querySelector('#watch');
+    // Data.map((keys) => {
+    //   if (keys.id == props.id) {
+    //     console.log(keys);
 
-      //     return <Watch img={keys.img} name={keys.nameImg} yr={keys.releaseYear} ua={keys.ua} season={keys.season} lan={keys.language.length} desc={keys.desc} cat={keys.category} language={keys.language} />
-      //   }
-      // })
-      // watch.style.display = 'block';
+    //     return <Watch img={keys.img} name={keys.nameImg} yr={keys.releaseYear} ua={keys.ua} season={keys.season} lan={keys.language.length} desc={keys.desc} cat={keys.category} language={keys.language} />
+    //   }
+    // })
+    // watch.style.display = 'block';
 
-      // }
-    }>
+    // }
+    >
 
       <div className={styles.info}>
-        <div className={styles.img} style={{ backgroundImage: `url(${props.img}),linear-gradient(to top left,black,brown)`, marginBottom: '5px' }}>
+        <div className={styles.img} style={{ backgroundImage: `url(${props.img}),linear-gradient(to top left,black,brown)`, marginBottom: '5px' }} onClick={() => { props.sow(props.id) }}>
 
         </div>
         <div className={styles.btn}>
           <button className={styles.play}><i className="fa-solid fa-play"></i> Watch Now</button>
-          <button className={styles.add}>+</button>
+          <input type='button' value='+' id='add' className={styles.add} onClick={() => {
+            // alert(props.e)
+            props.add(props.id);
+            // added();
+          }} />
         </div>
         <div className={styles.info2}>
           <span>{props.ry}</span>

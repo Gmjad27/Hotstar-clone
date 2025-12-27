@@ -1,9 +1,9 @@
-import React from 'react'
+// import React from 'react'
 import styles from './profile.module.css'
 import { Data } from '../../content/movie'
 import Card from '../../components/Card/Card'
 
-const Profile = () => {
+const Profile = (props) => {
     return (
         <div className={styles.con}>
             <h1>Profile</h1>
@@ -19,12 +19,14 @@ const Profile = () => {
                 </div>
             </div><br /><br /><br /><br /><br /><br /><br /><br />
             <h1>Watch List</h1>
-<br /><br /><br /><br />
+            <br /><br /><br /><br />
             <div className={styles.wList}>
 
                 {
                     Data.map((keys) => {
-                        if (keys.id > 50 && keys.id < 55) {
+                        // console.log(props.E);
+
+                        if (props.E.includes(keys.id)) {
                             return <Card id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
                         }
                     })
