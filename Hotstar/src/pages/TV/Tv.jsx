@@ -5,7 +5,7 @@ import Watch from '../../components/Watch/Watch'
 import { Data } from '../../content/movie'
 
 
-const Tv = () => {
+const Tv = (props) => {
 
   const [img, setImg] = useState('https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/8834/808834-i')
   const [nameImg, setNameImg] = useState("https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/1202/1371202-t-8b12119920aa")
@@ -41,12 +41,14 @@ const Tv = () => {
 
   return (
     <div className={styles.con}>
-      <h1 style={{ color: 'white', textAlign: 'center',fontSize:'54px' }}>TV</h1><br />
+      <h1 style={{ color: 'white', textAlign: 'center', fontSize: '54px' }}>TV</h1><br />
       <div className={styles.con2}>
 
         {
           Data.map((keys) => {
-            if (keys.type.includes('tv')) return <Card sow={(i) => { sow(i); }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
+            if (keys.type.includes('tv')) return <Card sow={(i) => {
+              sow(i);
+            }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
           })
         }
 

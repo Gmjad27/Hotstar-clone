@@ -25,8 +25,13 @@ import "./Home.css"
 
 function Home(props) {
 
+    const id = mediaData.map(item => item.id);
+    const type = mediaData.map(item => item.type);
+    const tid = mediaData.map(item => item.tmdbId);
     const images = mediaData.map(item => item.img);
-    const name = mediaData.map(item => item.name);
+    const name = mediaData.map(item => item.nameImg);
+    // const name2 = Data.map(item => item.name2);
+    const I = mediaData.map(item => item.name)
     const lan = mediaData.map(item => item.language);
     const ua = mediaData.map(item => item.ua);
     const ry = mediaData.map(item => item.releaseYear);
@@ -38,6 +43,11 @@ function Home(props) {
 
 
     const [index, setIndex] = useState(0);
+    const [ID, setID] = useState();
+    const [TID, setTID] = useState();
+    const [Type, setType] = useState();
+
+    const [i, seti] = useState()
     const [Name, setName] = useState();
     const [Lan, setLan] = useState();
     const [UA, setUA] = useState();
@@ -66,6 +76,8 @@ function Home(props) {
 
     const [img, setImg] = useState('https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/8834/808834-i')
     const [nameImg, setNameImg] = useState("https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/1202/1371202-t-8b12119920aa")
+    const [Name2, setName2] = useState()
+
     const [releaseYear, setReleaseYear] = useState(2016)
     const [Ua, setUa] = useState("U/A 7+")
     const [Sea, setSea] = useState("1h 48m")
@@ -78,6 +90,7 @@ function Home(props) {
             if (keys.id === id) {
                 setImg(keys.img)
                 setNameImg(keys.nameImg)
+                setName2(keys.name2)
                 setReleaseYear(keys.releaseYear)
                 setUa(keys.ua)
                 setSea(keys.season)
@@ -140,6 +153,10 @@ function Home(props) {
 
             // body.style.transition = "background-image 1s ease-out";
             setName(name[index]);
+            setType(type[index])
+            setID(id[index])
+            setTID(tid[index])
+            seti(I[index])
             setLan(lan[index].length)
             setUA(ua[index])
             setRY(ry[index])
@@ -163,10 +180,10 @@ function Home(props) {
 
                 <div className="con">
 
-                    <Banner name={Name} imgs={images} lan={Lan} ua={UA} ry={RY} cat={Cat} desc={Desc} season={Season} />
+                    <Banner id={ID} tid={TID} type={Type} name={Name} i={i} imgs={images} lan={Lan} ua={UA} ry={RY} cat={Cat} desc={Desc} season={Season} add={(e) => { props.add(e) }} play={(tid) => { props.play(tid) }} />
 
                 </div>
-                <br /><br /><br /><br /><br />
+                {/* <br /><br /><br /><br /><br /> */}
                 <div className="content" style={{
 
                 }}>
@@ -175,7 +192,7 @@ function Home(props) {
 
                             if (keys.id >= 1 && keys.id <= 10) return <Card sow={(i) => {
                                 sow(i);
-                            }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} add={(e) => { props.add(e) }} e={props.e} />
+                            }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                         })
                     }
 
@@ -186,7 +203,9 @@ function Home(props) {
                         {
                             Data.map((keys) => {
                                 if (keys.category.includes('Kids')) {
-                                    return <Card sow={(i) => { sow(i); }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
+                                    return <Card sow={(i) => {
+                                        sow(i);
+                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                                 }
 
                             })
@@ -200,7 +219,9 @@ function Home(props) {
                         {
                             Data.map((keys) => {
                                 if (keys.id >= 21 && keys.id <= 30) {
-                                    return <Card sow={(i) => { sow(i); }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
+                                    return <Card sow={(i) => {
+                                        sow(i);
+                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                                 }
 
                             })
@@ -214,7 +235,9 @@ function Home(props) {
                         {
                             Data.map((keys) => {
                                 if (keys.id >= 31 && keys.id <= 40) {
-                                    return <Card sow={(i) => { sow(i); }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
+                                    return <Card sow={(i) => {
+                                        sow(i);
+                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                                 }
 
                             })
@@ -230,8 +253,7 @@ function Home(props) {
                                 if (keys.category.includes('Superhero')) {
                                     return <Card sow={(i) => {
                                         sow(i);
-
-                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
+                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                                 }
                             })
                         }
@@ -244,7 +266,9 @@ function Home(props) {
                         {
                             Data.map((keys) => {
                                 if (keys.category.includes('Sci-Fi')) {
-                                    return <Card sow={(i) => { sow(i); }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
+                                    return <Card sow={(i) => {
+                                        sow(i);
+                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                                 }
                             })
                         }
@@ -257,7 +281,9 @@ function Home(props) {
                         {
                             Data.map((keys) => {
                                 if (keys.studio.includes('Netflix')) {
-                                    return <Card sow={(i) => { sow(i); }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
+                                    return <Card sow={(i) => {
+                                        sow(i);
+                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                                 }
                             })
                         }
@@ -270,7 +296,9 @@ function Home(props) {
                         {
                             Data.map((keys) => {
                                 if (keys.id >= 71 && keys.id <= 80) {
-                                    return <Card sow={(i) => { sow(i); }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
+                                    return <Card sow={(i) => {
+                                        sow(i);
+                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                                 }
                             })
                         }
@@ -290,7 +318,7 @@ function Home(props) {
             </div>
 
 
-            <Watch img={img} name={nameImg} yr={releaseYear} ua={Ua} season={Sea} lan={lang.length} desc={de} cat={cat} language={lang} />
+            <Watch img={img} name={nameImg} name2={Name2} yr={releaseYear} ua={Ua} season={Sea} lan={lang.length} desc={de} cat={cat} language={lang} />
 
 
 

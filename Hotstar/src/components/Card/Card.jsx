@@ -2,6 +2,8 @@ import React from 'react'
 import styles from './Card.module.css'
 import Watch from '../Watch/Watch'
 import { Data } from '../../content/movie'
+import { Link } from 'react-router-dom'
+import Movie from '../../pages/Movies/Movie'
 
 const Card = (props) => {
   const added = () => {
@@ -10,6 +12,7 @@ const Card = (props) => {
     // add.style.backgroundColor = add.style.backgroundColor == 'red' ? 'green' : 'red';
     add.value = add.value == '+' ? '✔' : '+';
   }
+  
   return (
     <div className={styles.card} style={{ backgroundImage: `url(${props.img}), linear-gradient(to top left,black,brown)` }}
     // {
@@ -34,7 +37,11 @@ const Card = (props) => {
 
         </div>
         <div className={styles.btn}>
-          <button className={styles.play}><i className="fa-solid fa-play"></i> Watch Now</button>
+          <Link to='/stream'>
+            <button className={styles.play} onClick={() => {
+              props.play(props.type === 'movie' ? `${props.type}/${props.tid}` : `${props.type}/${props.tid}/1/1`)
+            }}><i className="fa-solid fa-play"></i> Watch Now</button>
+          </Link>
           <input type='button' value='+' id='add' className={styles.add} onClick={() => {
             // alert(props.e)
             props.add(props.id);

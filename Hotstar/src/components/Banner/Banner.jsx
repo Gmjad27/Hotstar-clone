@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Banner.css'
 import { mediaData } from '../../content/contect'
+import { Link } from 'react-router-dom';
 
 // console.log(mediaData);
 
@@ -10,7 +11,6 @@ const arr = [];
 
 
 const Banner = (props) => {
-
 
     return (
         <>
@@ -23,24 +23,39 @@ const Banner = (props) => {
                     <span> {(props.lan)} Language </span>
                 </div><br />
                 <div className="desc">{props.desc}</div>
-                <br /><div className="info">
-                    {props.cat}
-                </div><br />
+                <br />
+                <div className="info">
+                    {props.cat?.map((key, index) => (
+                        <span key={index}>{key}</span>
+                    ))}
+                </div>
+                <br />
                 <div className="con2">
                     <div className="btn">
-                        <button className="watch">Watch Now</button>
-                        <button className="add">+</button>
+                        <Link to={'/stream'}>
+                            <button className="watch" onClick={() => {
+                                props.play(props.type === 'movie' ? `${props.type}/${props.tid}` : `${props.type}/${props.tid}/1/1`)
+
+                                console.log(props.tid);
+
+                            }}>Watch Now</button>
+                        </Link>
+                        <button className="add" onClick={() => {
+                            // alert('hello')
+                            props.add(props.id);
+                        }}>+</button>
                     </div>
                     <div className="sug">
                         {
                             mediaData.map((key) => {
-                                arr.push(key.img)
+                                arr.push(key.name)
                             })}
                         <div className="imgs" id='img1' style={{ backgroundImage: `url(${arr[0]})` }}></div>
                         <div className="imgs" id='img2' style={{ backgroundImage: `url(${arr[1]})` }}></div>
                         <div className="imgs" id='img3' style={{ backgroundImage: `url(${arr[2]})` }}></div>
                         <div className="imgs" id='img4' style={{ backgroundImage: `url(${arr[3]})` }}></div>
                         <div className="imgs" id='img5' style={{ backgroundImage: `url(${arr[4]})` }}></div>
+                        <div style={{ width: '180px' }}></div>
 
                     </div>
                 </div>

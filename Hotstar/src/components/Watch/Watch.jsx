@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './Watch.module.css'
 
-import Zotopia from '../../assets/zootopia.mp4'
+// import Zotopia from '../../assets/zootopia.mp4'
 
 
 
@@ -12,15 +12,24 @@ const close = () => {
 }
 
 const Watch = (props) => {
-    // const videoDiv = document.getElementById('video');
-    // setTimeout(() => {
-    //   videoDiv.play().then(() => {
-    //     // Fade the video in once it starts playing
-    //     videoDiv.style.opacity = "1";
-    //   }).catch(err => {
-    //     console.error("Video play failed:", err);
-    //   });
-    // }, 1000);
+
+
+    const [videoId, setVideoId] = useState(null);
+    const getTrailerId = async () => {
+        const res = await fetch(
+            // `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${props.name2}+trailer&type=video&key=AIzaSyAWkoWUtb540XbGGINhQQkLVl-WpHjXzfI&maxResults=1`
+        );
+
+        const data = await res.json();
+        // alert(data.items[0].id.videoId)
+        return data.items[0].id.videoId;
+    };
+
+    useEffect(() => {
+        // alert(props.name2)
+        getTrailerId().then(setVideoId);
+    }, [props.name2]);
+
     return (
         <div className={styles.con} id='watch'>
             <div className={styles.cl} onClick={() => {
@@ -30,9 +39,20 @@ const Watch = (props) => {
             <div className={styles.watch}>
 
                 <div className={styles.sec1} style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.51)), url('${props.img}')` }}>
+                    <div className={styles.trailer}>
+                        <iframe
+                            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&loop=0&playlist=${videoId}&modestbranding=0&showinfo=0&rel=0&iv_load_policy=0&fs=0&disablekb=0`}
+                            width="100%"
+                            height="500"
+                            frameBorder="0"
+                            allow="autoplay; encrypted-media"
+                            allowFullScreen={false}
+                        />
+
+                    </div>
                     {/* <video id='video' className={styles.video} playsInline poster={props.img}>
                         <source src={Zotopia} />
-                    </video> */}
+                        </video> */}
                     <div className={styles.psec}>
                         <img src={props.name} className={styles.name}></img>
                         <div className={styles.info}>

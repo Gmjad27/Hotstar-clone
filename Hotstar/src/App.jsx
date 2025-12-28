@@ -10,14 +10,15 @@ import Home from "./pages/Home/Home";
 import Movie from "./pages/Movies/Movie";
 import Tv from "./pages/TV/Tv";
 import Search from './pages/Search/Search'
-import Login from "./pages/Auth/Login";
+// import Login from "./pages/Auth/Login";
 // import Card2 from "./components/Card/Card2";
 import Studio from "./pages/Studio/Studio";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 
 import "./App.css";
-import Signup from "./pages/Auth/Signup";
+// import Signup from "./pages/Auth/Signup";
 import Profile from "./pages/Profile/Profile";
+import Stream from "./pages/Stream/Stream";
 
 // watch.style.display = 'block';
 
@@ -60,14 +61,44 @@ function App() {
     });
   };
 
-  const [Img, setImg] = useState('')
-  const [studio, setStudio] = useState('')
+  const [Img, setImg] = useState(() => {
+    const save = localStorage.getItem('IMG');
+    return save ? JSON.parse(save) : [];
+  })
+  const [studio, setStudio] = useState(() => {
+    const save = localStorage.getItem('STUDIO');
+    return save ? JSON.parse(save) : [];
+  })
+
+  useEffect(() => {
+    localStorage.setItem('IMG', JSON.stringify(Img));
+    localStorage.setItem('STUDIO', JSON.stringify(studio));
+  }, [Img, studio])
+
   const sow = (stud, img) => {
-    // alert(img);
+
     setStudio(stud)
     setImg(img)
   }
 
+
+
+  const [TID, setTID] = useState(() => {
+
+    const save = localStorage.getItem('TID');
+    return save ? JSON.parse(save) : [];
+
+  })
+
+  useEffect(() => {
+    localStorage.setItem('TID', JSON.stringify(TID))
+  }, [TID]);
+
+  // const [tid, setTid] = useState()
+  const play = (tid) => {
+    alert(tid);
+    setTID(tid);
+  }
 
   return (
     <>
@@ -81,19 +112,41 @@ function App() {
                 sow(stud, img)
               }} add={(e) => {
                 add(e);
-              }} />
+              }}
+                play={(tid) => {
+                  play(tid)
+                }} />
             </>
-          } e={El} />
+          } />
           <Route path="/movies" element={
             <>
               <Nav />
-              <Movie />
+              <Movie
+                tu={(stud, img) => {
+                  sow(stud, img)
+                }} add={(e) => {
+                  add(e);
+                }}
+                play={(tid) => {
+                  play(tid)
+                }}
+              />
             </>
           } />
           <Route path="/tv" element={
             <>
               <Nav />
-              <Tv />
+              <Tv
+                tu={(stud, img) => {
+                  sow(stud, img)
+                }}
+                add={(e) => {
+                  add(e);
+                }}
+                play={(tid) => {
+                  play(tid)
+                }}
+              />
               {/* <Login /> */}
             </>
           } />
@@ -101,21 +154,54 @@ function App() {
           <Route path="/search" element={
             <>
               <Nav />
-              <Search />
+              <Search
+                tu={(stud, img) => {
+                  sow(stud, img)
+                }} add={(e) => {
+                  add(e);
+                }}
+                play={(tid) => {
+                  play(tid)
+                }}
+              />
               {/* <Signup /> */}
             </>
           } />
           <Route path="/studio" element={
             <>
               <Nav />
-              <Studio studio={studio} img={Img} />
+              <Studio studio={studio} img={Img}
+                tu={(stud, img) => {
+                  sow(stud, img)
+                }}
+                add={(e) => {
+                  add(e);
+                }}
+                play={(tid) => {
+                  play(tid)
+                }}
+              />
             </>
           } />
           <Route path="/profile" element={
             <>
               <Nav />
-              <Profile E={El} />
+              <Profile
+                E={El}
+                tu={(stud, img) => {
+                  sow(stud, img)
+                }}
+                add={(e) => {
+                  add(e);
+                }}
+                play={(tid) => {
+                  play(tid)
+                }}
+              />
             </>
+          } />
+          <Route path="/stream" element={
+            <Stream tid={TID} />
           } />
 
           <Route path="*" element={<Navigate to="/" />} />

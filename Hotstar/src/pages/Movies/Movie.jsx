@@ -4,7 +4,7 @@ import Card from '../../components/Card/Card'
 import Watch from '../../components/Watch/Watch'
 import { Data } from '../../content/movie'
 
-const Movie = () => {
+const Movie = (props) => {
 
   const [img, setImg] = useState('https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/8834/808834-i')
   const [nameImg, setNameImg] = useState("https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/1202/1371202-t-8b12119920aa")
@@ -41,7 +41,9 @@ const Movie = () => {
 
         {
           Data.map((keys) => {
-            if (keys.type.includes('movie')) return <Card sow={(i) => { sow(i); }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
+            if (keys.type.includes('movie')) return <Card sow={(i) => {
+              sow(i);
+            }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
           })
         }
 

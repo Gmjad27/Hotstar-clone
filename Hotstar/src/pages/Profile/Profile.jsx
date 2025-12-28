@@ -27,7 +27,13 @@ const Profile = (props) => {
                         // console.log(props.E);
 
                         if (props.E.includes(keys.id)) {
-                            return <Card id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
+                            return (<Card sow={(i) => {
+                                sow(i);
+                            }} id={keys.id} img={keys.name} ry={keys.releaseYear}
+                                ua={keys.ua} lan={keys.language.length} desc={keys.desc}
+                                s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }}
+                                e={props.e} play={(tid) => { props.play(tid) }}
+                            />)
                         }
                     })
                 }

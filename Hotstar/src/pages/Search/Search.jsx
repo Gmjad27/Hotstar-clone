@@ -5,7 +5,7 @@ import styles from './search.module.css'
 import Watch from '../../components/Watch/Watch'
 
 
-const Search = () => {
+const Search = (props) => {
 
     const [img, setImg] = useState('https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/8834/808834-i')
     const [nameImg, setNameImg] = useState("https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/1202/1371202-t-8b12119920aa")
@@ -59,17 +59,15 @@ const Search = () => {
                 <div className={styles.section2}>
                     {
                         Data.map((keys) => {
-                            if (keys.name2.toLowerCase().includes(s)) return <Card sow={(i) => { sow(i); }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} />
+                            if (keys.name2.toLowerCase().includes(s)) return <Card sow={(i) => {
+                                sow(i);
+                            }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                         })
                     }
                 </div>
             </div>
             <Watch img={img} name={nameImg} yr={releaseYear} ua={Ua} season={Sea} lan={lang.length} desc={de} cat={cat} language={lang} />
-            {/* {
-                Data.map((key) => {
-                    return <p style={{color:'white'}}>{key.name2}</p>
-                })
-            } */}
+           
         </div>
     )
 }

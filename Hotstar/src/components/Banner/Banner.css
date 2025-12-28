@@ -5,14 +5,16 @@
     position: relative;
     /* padding-left: 6%; */
     margin-left: 20px;
-    padding-right: 6%;
+    /* padding-right: 6%; */
     /* padding-top: 5%; */
     /* margin-bottom: 60px; */
+    background-color: rgba(0, 0, 0, 0.237);
+    padding-bottom: 40px;
 
-
+    height: 90vh;
     background-position: center;
     background-size: cover;
-    height: 80vh;
+    /* height: 80vh; */
     width: 100%;
     color: white;
     font-size: large;
@@ -49,9 +51,10 @@
     border-radius: 4px;
     cursor: pointer;
 }
-.watch:hover{
+
+.watch:hover {
     background-color: #eb4802dc;
-    
+
 }
 
 .add {
@@ -65,7 +68,7 @@
     cursor: pointer;
 }
 
-.add:hover{
+.add:hover {
     background-color: rgba(0, 136, 255, 0.072);
 
 }
@@ -78,6 +81,7 @@
 .sug {
     display: flex;
     gap: 10px;
+    
 }
 
 .imgs {
@@ -88,4 +92,10 @@
     position: relative;
     background-image: url('https://img10.hotstar.com/image/upload/f_auto,q_90,w_1920/sources/r1/cms/prod/6737/1763663016737-i');
     background-size: cover;
+}
+
+
+.info{
+    display: flex;
+    gap: 30px;
 }
