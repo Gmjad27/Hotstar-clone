@@ -12,7 +12,6 @@ body {
 .body {
   width: 100%;
   height: 100vh;
-  /* display: flex; */
   position: sticky;
   background: linear-gradient(#0000009d), url('https://img10.hotstar.com/image/upload/f_auto,q_90,w_1920/sources/r1/cms/prod/6737/1763663016737-i');
   background-position: right;
@@ -26,58 +25,40 @@ body {
   position: fixed;
 }
 
-.title{
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  /* text-transform: uppercase; */
+.title {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: large;
   margin-left: 30px;
   color: rgb(228, 228, 228);
 }
 
-
 .content {
-  /* border: 1px solid rgb(255, 255, 255); */
   position: relative;
   display: flex;
-  /* top: -10px; */
   flex-wrap: nowrap;
-  /* flex-direction: row; */
-  /* justify-content: center; */
   align-items: center;
-  /* margin-left: 180px; */
-  /* margin-right: 300px; */
   padding-left: 30px;
   padding-right: 20px;
   gap: 10px;
-  /* z-index: 50; */
-  /* animation: fadeIn 0.5s ease; */
   width: 100%;
   height: 300px;
   overflow-y: hidden;
   overflow-x: auto;
   scroll-behavior: smooth;
-  /* -webkit-overflow-scrolling: touch; */
-  /* anchor-name: --con; */
-  /* box-shadow: 0 0 10px; */
   scrollbar-width: none;
   transition: all 0.3s ease-in;
   background-color: transparent;
 }
 
-
-
-.sections{
-  /* border: 1px solid red; */
+.sections {
   color: white;
   height: 200px;
-  /* z-index: 0; */
 }
 
-.sections2{
+.sections2 {
   padding-left: 30px;
   display: flex;
   flex-wrap: nowrap;
-  /* position: relative; */
   overflow-x: auto;
   scrollbar-width: none;
   gap: 20px;
@@ -85,10 +66,224 @@ body {
   align-items: center;
 }
 
-
-
-
-
 .bundle {
   padding-left: 130px;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .body {
+    height: 60vh;
+    min-height: 400px;
+    background-position: center;
+    box-shadow: inset 50px -50px 80px 50px rgb(0, 0, 0);
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  .title {
+    margin-left: 15px;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .content {
+    height: 220px;
+    padding-left: 15px;
+    padding-right: 15px;
+    gap: 8px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+
+  .sections {
+    height: 160px;
+    scroll-snap-align: start;
+  }
+
+  .sections2 {
+    height: 220px;
+    padding-left: 15px;
+    gap: 12px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+  }
+
+  .bundle {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* Improve scrolling on mobile */
+  .content::-webkit-scrollbar,
+  .sections2::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Card/item sizing for mobile */
+  .sections>*,
+  .sections2>* {
+    min-width: 120px;
+    max-width: 150px;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .body {
+    width: 100%;
+    height: 100vh;
+    /* min-height: 350px; */
+    box-shadow: inset 30px -30px 60px 30px rgb(0, 0, 0);
+  }
+
+  .title {
+    font-size: 14px;
+    position: relative;
+    top: 8px;
+    margin-left: 12px;
+  }
+
+  .content {
+    height: 140px;
+    width: 100%;
+    padding-left: 12px;
+    padding-right: 12px;
+    gap: 6px;
+  }
+
+  .sections {
+    width: 100%;
+    height: 100px;
+  }
+
+  .sections2 {
+    height: 180px;
+    padding-left: 12px;
+    gap: 8px;
+  }
+
+  /* Card/item sizing for small mobile */
+  .sections>*,
+  .sections2>* {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .body {
+    height: 45vh;
+    min-height: 300px;
+  }
+
+  .content {
+    height: 160px;
+  }
+
+  .sections {
+    height: 120px;
+  }
+
+  .sections2 {
+    height: 160px;
+    gap: 6px;
+  }
+
+  .sections>*,
+  .sections2>* {
+    min-width: 90px;
+    max-width: 110px;
+  }
+
+  .title {
+    font-size: 13px;
+    margin-left: 10px;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .body {
+    height: 70vh;
+  }
+
+  .title {
+    margin-left: 20px;
+  }
+
+  .content {
+    height: 250px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .sections {
+    height: 180px;
+  }
+
+  .sections2 {
+    height: 250px;
+    padding-left: 20px;
+  }
+
+  .bundle {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 600px) and (orientation: landscape) {
+  .body {
+    height: 80vh;
+  }
+
+  .content {
+    height: 180px;
+  }
+
+  .sections2 {
+    height: 180px;
+  }
+}
+
+/* Prevent horizontal scrolling on mobile */
+@media (max-width: 768px) {
+
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .content,
+  .sections2 {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .content::-webkit-scrollbar,
+  .sections2::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}
+
+/* Better touch targets for interactive elements */
+@media (max-width: 768px) {
+
+  .sections a,
+  .sections2 a,
+  .sections button,
+  .sections2 button {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }

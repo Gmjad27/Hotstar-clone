@@ -55,7 +55,7 @@ const Banner = (props) => {
                         <div className="imgs" id='img3' style={{ backgroundImage: `url(${arr[2]})` }}></div>
                         <div className="imgs" id='img4' style={{ backgroundImage: `url(${arr[3]})` }}></div>
                         <div className="imgs" id='img5' style={{ backgroundImage: `url(${arr[4]})` }}></div>
-                        <div style={{ width: '180px' }}></div>
+                        <div className='ex'></div>
 
                     </div>
                 </div>

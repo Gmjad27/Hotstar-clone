@@ -102,7 +102,9 @@ function Home(props) {
         })
         const watch = document.querySelector('#watch');
         watch.style.display = 'block';
-        // call(id);
+        // const trailer = document.getElementById('trailer');
+        // trailer.style.display = 'block';
+
 
     }
 
@@ -179,9 +181,11 @@ function Home(props) {
             <div className="bundle">
 
                 <div className="con">
+                    {/* <div className="body" id="body"> */}
 
                     <Banner id={ID} tid={TID} type={Type} name={Name} i={i} imgs={images} lan={Lan} ua={UA} ry={RY} cat={Cat} desc={Desc} season={Season} add={(e) => { props.add(e) }} play={(tid) => { props.play(tid) }} />
 
+                    {/* </div> */}
                 </div>
                 {/* <br /><br /><br /><br /><br /> */}
                 <div className="content" style={{
@@ -190,7 +194,7 @@ function Home(props) {
                     {
                         Data.map((keys) => {
 
-                            if (keys.id >= 1 && keys.id <= 10) return <Card sow={(i) => {
+                            if (keys.id >= 41 && keys.id <= 56) return <Card sow={(i) => {
                                 sow(i);
                             }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                         })

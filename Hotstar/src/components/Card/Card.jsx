@@ -12,7 +12,7 @@ const Card = (props) => {
     // add.style.backgroundColor = add.style.backgroundColor == 'red' ? 'green' : 'red';
     add.value = add.value == '+' ? '✔' : '+';
   }
-  
+
   return (
     <div className={styles.card} style={{ backgroundImage: `url(${props.img}), linear-gradient(to top left,black,brown)` }}
     // {

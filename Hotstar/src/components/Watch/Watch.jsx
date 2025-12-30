@@ -8,11 +8,14 @@ import styles from './Watch.module.css'
 
 const close = () => {
     const watch = document.getElementById('watch');
+    const trailer = document.getElementById('trailer');
     watch.style.display = 'none';
+    trailer.style.display = 'none';
 }
 
 const Watch = (props) => {
 
+    const [ID, setID] = useState();
 
     const [videoId, setVideoId] = useState(null);
     const getTrailerId = async () => {
@@ -27,8 +30,13 @@ const Watch = (props) => {
 
     useEffect(() => {
         // alert(props.name2)
+        setTimeout(() => {
+            const trailer = document.getElementById('trailer');
+            trailer.style.display = 'block';
+        }, [2000])
         getTrailerId().then(setVideoId);
     }, [props.name2]);
+    // setID(props.name2);
 
     return (
         <div className={styles.con} id='watch'>
@@ -38,10 +46,10 @@ const Watch = (props) => {
 
             <div className={styles.watch}>
 
-                <div className={styles.sec1} style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.51)), url('${props.img}')` }}>
-                    <div className={styles.trailer}>
-                        <iframe
-                            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&loop=0&playlist=${videoId}&modestbranding=0&showinfo=0&rel=0&iv_load_policy=0&fs=0&disablekb=0`}
+                <div className={styles.sec1} style={{ backgroundImage: `url('${props.img}')` }}>
+                    <div>
+                        <iframe id='trailer' className={styles.trailer}
+                            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&controls=0&loop=1&playlist=${videoId}&modestbranding=0&showinfo=0&rel=0&iv_load_policy=0&fs=0&disablekb=0`}
                             width="100%"
                             height="500"
                             frameBorder="0"
@@ -88,7 +96,7 @@ const Watch = (props) => {
                 {/* <iframe width="969" height="545" src="https://www.youtube.com/embed/PxjPg1C5V_8?list=RDdR9B_gPxjkk" title="Leo - Ordinary Person 8K/4K Video Song | Thalapathy Vijay | Trisha | Anirudh Ravichander" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> */}
             </div>
 
-        </div>
+        </div >
     )
 }
 

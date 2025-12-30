@@ -208,7 +208,7 @@ function App() {
         </Routes>
 
       </Router>
-      <h1 className="owner">Made by Girish</h1>
+      {/* <h1 className="owner">Made by Girish</h1> */}
     </>
   );
 }

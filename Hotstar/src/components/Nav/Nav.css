@@ -17,9 +17,7 @@
     font-weight: 600;
     left: 5px;
     top: 30px;
-    /* background-image: url('https://img.hotstar.com/image/upload/v1737554969/web-assets/prod/images/rebrand/logo.png'); */
     width: 70px;
-    /* height: 50px; */
     background-position: center;
     background-size: cover;
 }
@@ -34,7 +32,6 @@
     transition: all 0.3s ease-in;
     width: 90px;
     box-shadow: 10px 20px 30px 40px;
-    /* align-items: center; */
 }
 
 .logos button {
@@ -48,11 +45,11 @@
     font-weight: 100;
 }
 
-.logos button:hover{
+.logos button:hover {
     color: #ffffffe0;
 }
 
-.la{
+.la {
     position: relative;
     display: flex;
     left: 30px;
@@ -63,39 +60,219 @@
     color: #9f9f9fe0;
 }
 
-.la:hover ,.la button:hover{
-    color: #ffffffe0;
-}
-.la:hover button{
+.la:hover,
+.la button:hover {
     color: #ffffffe0;
 }
 
-.la p{
+.la:hover button {
+    color: #ffffffe0;
+}
+
+.la p {
     display: none;
     text-decoration: none;
-    /* color: aliceblue; */
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 20px;
 }
 
-.logos:hover .la>p{
+.logos:hover .la>p {
     display: block;
     transition: all 0.3s ease-in;
 }
 
-.logos:hover .la{
-    left:60px;
+.logos:hover .la {
+    left: 60px;
     transition: all 0.3s ease-in;
 }
 
-.logos:hover{
+.logos:hover {
     transition: all 0.3s ease-in;
     width: 190px;
 }
 
-.l{
+.l {
     text-decoration: none;
-    
 }
 
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        height: 70px;
+        background-color: rgba(0, 0, 0, 0.95);
+        flex-direction: row;
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    }
 
+
+    .logos {
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+        justify-content: space-around;
+        align-items: center;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0 10px;
+        gap: 0;
+    }
+
+    .logos:hover {
+        width: 100%;
+    }
+
+    .la {
+        position: relative;
+        left: 0;
+        flex-direction: column;
+        gap: 5px;
+        width: auto;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .logos:hover .la {
+        left: 0;
+    }
+
+    .la p {
+        display: block !important;
+        font-size: 10px;
+        text-align: center;
+        margin: 0;
+        color: #9f9f9fe0;
+    }
+
+    .la:hover p {
+        color: #ffffffe0;
+    }
+
+    .logos button {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .logos:hover .la>p {
+        display: block !important;
+    }
+
+    /* Active state for mobile */
+    .la.active {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .la.active p,
+    .la.active button {
+        color: #ffffff;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav {
+        height: 60px;
+    }
+
+    .la {
+        padding: 3px 8px;
+        gap: 3px;
+    }
+
+    .logos button {
+        width: 25px;
+        height: 25px;
+        font-size: 16px;
+    }
+
+    .la p {
+        font-size: 9px;
+    }
+
+    .logos {
+        padding: 0 5px;
+    }
+
+    .nav .img {
+        position: fixed;
+        top: 0px;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 360px) {
+    .nav {
+        height: 55px;
+    }
+
+    .la {
+        padding: 2px 5px;
+    }
+
+    .logos button {
+        width: 22px;
+        height: 22px;
+        font-size: 14px;
+    }
+
+    .la p {
+        font-size: 8px;
+    }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .nav {
+        width: 80px;
+        padding: 20px 15px;
+    }
+
+    .logos {
+        width: 70px;
+    }
+
+    .logos:hover {
+        width: 170px;
+    }
+
+    .nav .img {
+        left: 10px;
+        width: 60px;
+    }
+
+    .logos button {
+        width: 25px;
+        height: 30px;
+        font-size: 20px;
+    }
+
+    .la p {
+        font-size: 18px;
+    }
+}
+
+/* Ensure content doesn't get hidden behind fixed nav on mobile */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-bottom: 60px;
+    }
+}
