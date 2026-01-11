@@ -7,8 +7,15 @@ import { Data } from '../../content/movie'
 
 const Tv = (props) => {
 
+
   const [img, setImg] = useState('https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/8834/808834-i')
   const [nameImg, setNameImg] = useState("https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/1202/1371202-t-8b12119920aa")
+  const [Name2, setName2] = useState()
+  const [Tid, setTid] = useState()
+  const [Tp, setTp] = useState()
+  const [ep, setep] = useState()
+
+  const [Seasons, setSeasons] = useState()
   const [releaseYear, setReleaseYear] = useState(2016)
   const [Ua, setUa] = useState("U/A 7+")
   const [Sea, setSea] = useState("1h 48m")
@@ -21,27 +28,35 @@ const Tv = (props) => {
       if (keys.id === id) {
         setImg(keys.img)
         setNameImg(keys.nameImg)
+        setTid(keys.tmdbId)
+        setTp(keys.type)
+        setName2(keys.name2)
         setReleaseYear(keys.releaseYear)
         setUa(keys.ua)
         setSea(keys.season)
         setLang(keys.language)
         setDe(keys.desc)
         setCate(keys.category)
+        setSeasons(keys.episodes);
+        setep('s1')
 
       }
     })
     const watch = document.querySelector('#watch');
     watch.style.display = 'block';
-    // call(id);
+    // const trailer = document.getElementById('trailer');
+    // trailer.style.display = 'block';
+
 
   }
 
 
 
 
+
   return (
     <div className={styles.con}>
-      <h1 style={{ color: 'white', textAlign: 'center', fontSize: '54px' }}>TV</h1><br />
+      <h1 style={{ color: 'white', textAlign: 'center', fontSize: '54px', marginTop: '30px' }}>TV</h1><br />
       <div className={styles.con2}>
 
         {
@@ -54,7 +69,8 @@ const Tv = (props) => {
 
       </div>
 
-      <Watch img={img} name={nameImg} yr={releaseYear} ua={Ua} season={Sea} lan={lang.length} desc={de} cat={cat} language={lang} />
+      <Watch img={img} ep={ep} type={Tp} id={Tid} s={Seasons} mname={Name2} name={nameImg} name2={Name2} yr={releaseYear} ua={Ua} season={Sea} lan={lang.length} desc={de} cat={cat} language={lang} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
+
 
     </div>
   )

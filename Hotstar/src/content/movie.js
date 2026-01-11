@@ -98,7 +98,8 @@ export const Data = [
         desc: "A lone bounty hunter travels the galaxy protecting the mysterious Grogu.",
         category: ["Sci-Fi", "Adventure"],
         type: "tv",
-        studio: "Lucasfilm"
+        studio: "Lucasfilm",
+        episodes: { s1: 8, s2: 8, s3: 8 }
     },
 
     {
@@ -115,7 +116,8 @@ export const Data = [
         desc: "Loki sets out on a chaotic journey across timelines after stealing the Tesseract.",
         category: ["Superhero", "Sci-Fi"],
         type: "tv",
-        studio: "Marvel"
+        studio: "Marvel",
+        episodes: { s1: 6, s2: 6 }
     },
 
     {
@@ -132,7 +134,8 @@ export const Data = [
         desc: "Nick Fury uncovers a secret alien infiltration threatening Earth.",
         category: ["Superhero", "Thriller"],
         type: "tv",
-        studio: "Marvel"
+        studio: "Marvel",
+        episodes: { s1: 6 }
     },
 
     {
@@ -268,7 +271,8 @@ export const Data = [
         desc: "Wanda and Vision live an ideal suburban life until reality starts breaking.",
         category: ["Superhero", "Mystery", "Sci-Fi"],
         type: "tv",
-        studio: "Marvel"
+        studio: "Marvel",
+        episodes: { s1: 9 }
     },
 
     {
@@ -319,7 +323,8 @@ export const Data = [
         desc: "A former Jedi investigates emerging threats after the Empire’s fall.",
         category: ["Sci-Fi", "Adventure"],
         type: "tv",
-        studio: "Lucasfilm"
+        studio: "Lucasfilm",
+        episodes: { s1: 8 }
     },
     {
         id: 20,
@@ -927,7 +932,8 @@ export const Data = [
         desc: "A chemistry teacher turns to making meth to secure his family's future after a diagnosis.",
         category: ["Crime", "Drama", "Thriller"],
         type: "tv",
-        studio: "AMC"
+        studio: "AMC",
+        episodes: { s1: 7, s2: 13, s3: 13, s4: 13, s5: 16 }
     },
     {
         id: 58,
@@ -943,7 +949,8 @@ export const Data = [
         desc: "A New Jersey mafia boss balances family life with running a criminal organization.",
         category: ["Crime", "Drama"],
         type: "tv",
-        studio: "HBO"
+        studio: "HBO",
+        episodes: { s1: 13, s2: 13, s3: 13, s4: 13, s5: 21, s6: 21 }
     },
     {
         id: 59,
@@ -959,7 +966,8 @@ export const Data = [
         desc: "A group of kids confront supernatural forces in their small hometown.",
         category: ["Sci-Fi", "Horror", "Mystery"],
         type: "tv",
-        studio: "Netflix"
+        studio: "Netflix",
+        episodes: { s1: 8, s2: 9, s3: 8, s4: 9 }
     },
     {
         id: 60,
@@ -975,7 +983,8 @@ export const Data = [
         desc: "Standalone episodes exploring the dark side of technology and modern life.",
         category: ["Sci-Fi", "Drama"],
         type: "tv",
-        studio: "Netflix"
+        studio: "Netflix",
+        episodes: { s1: 3, s2: 3, s3: 6, s4: 6, s5: 3, s6: 5 }
     },
     {
         id: 61,
@@ -991,7 +1000,8 @@ export const Data = [
         desc: "A dramatized history of the British royal family from Elizabeth II onward.",
         category: ["Drama", "Historical"],
         type: "tv",
-        studio: "Netflix"
+        studio: "Netflix",
+        episodes: { s1: 10, s2: 10, s3: 10, s4: 10, s5: 10, s6: 10 }
     },
     {
         id: 62,
@@ -1135,7 +1145,8 @@ export const Data = [
         desc: "A miniseries examining the 1986 nuclear disaster and its aftermath.",
         category: ["Historical", "Drama"],
         type: "tv",
-        studio: "HBO"
+        studio: "HBO",
+        episodes: { s1: 5 }
     },
     {
         id: 71,
@@ -1151,7 +1162,8 @@ export const Data = [
         desc: "An anthology crime series following investigations with deeply flawed detectives.",
         category: ["Crime", "Drama", "Mystery"],
         type: "tv",
-        studio: "HBO"
+        studio: "HBO",
+        episodes: { s1: 8, s2: 8, s3: 8, s4: 6 }
     },
     {
         id: 72,
@@ -1167,7 +1179,8 @@ export const Data = [
         desc: "A futuristic theme park populated by androids becomes a battleground for consciousness.",
         category: ["Sci-Fi", "Drama"],
         type: "tv",
-        studio: "HBO"
+        studio: "HBO",
+        episodes: { s1: 10, s2: 10, s3: 8, s4: 8 }
     },
     {
         id: 73,
@@ -1183,7 +1196,8 @@ export const Data = [
         desc: "A brilliant psychiatrist and cannibalistic serial killer plays mind games with an investigator.",
         category: ["Crime", "Thriller"],
         type: "tv",
-        studio: "NBC"
+        studio: "NBC",
+        episodes: { s1: 13, s2: 13, s3: 13 }
     },
     {
         id: 74,
@@ -1199,7 +1213,8 @@ export const Data = [
         desc: "A mockumentary showing the daily lives of office employees at Dunder Mifflin.",
         category: ["Comedy"],
         type: "tv",
-        studio: "NBC"
+        studio: "NBC",
+        episodes: { s1: 6, s2: 22, s3: 25, s4: 19, s5: 28, s6: 26, s7: 26, s8: 24, s9: 25 }
     },
     {
         id: 75,
@@ -1215,7 +1230,8 @@ export const Data = [
         desc: "Six friends navigate life, love, and work in New York City.",
         category: ["Comedy", "Romance"],
         type: "tv",
-        studio: "NBC"
+        studio: "NBC",
+        episodes: { s1: 24, s2: 24, s3: 25, s4: 24, s5: 24, s6: 25, s7: 24, s8: 24, s9: 24, s10: 18 }
     },
     {
         id: 76,
@@ -1279,12 +1295,13 @@ export const Data = [
         desc: "In a dystopian future, a woman struggles to survive under a totalitarian regime that treats women as property.",
         category: ["Drama", "Sci-Fi"],
         type: "tv",
-        studio: "Hulu"
+        studio: "Hulu",
+        episodes: { s1: 10, s2: 13, s3: 13, s4: 10, s5: 10 }
     },
     {
         id: 80,
         tmdbId: 94997,
-        img: "https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/2846/1739497002846-i",
+        img: "https://m.media-amazon.com/images/S/pv-target-images/c721fcded1dad89537ddc5ab7f7e62fbba0e84ff299600bc219beaa62c7fc75f._SX1080_FMjpg_.jpg",
         nameImg: "https://img10.hotstar.com/image/upload/f_auto,h_124/sources/r1/cms/prod/1168/1739497021168-t",
         name: "https://img10.hotstar.com/image/upload/f_auto,q_90,w_384/sources/r1/cms/prod/2008/1739497092008-h",
         name2: "House of the Dragon",
@@ -1295,14 +1312,14 @@ export const Data = [
         desc: "Dragon, power, end, the Targaryen dynasty.",
         category: ["Fantasy ", " Action", "Drama"],
         type: "tv",
-        studio: "HBO"
+        studio: "HBO", episodes: { s1: 10 }
     },
     {
         id: 81,
         tmdbId: 1399,
-        img: "",
-        nameImg: "",
-        name: "",
+        img: "https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/5195/1739947245195-i",
+        nameImg: "https://img10.hotstar.com/image/upload/f_auto,h_124/sources/r1/cms/prod/8466/1739947268466-t",
+        name: "https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/3281/1739947253281-h",
         name2: "Game of Thrones",
         releaseYear: 2011,
         ua: "A",
@@ -1311,13 +1328,13 @@ export const Data = [
         desc: "Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns.",
         category: ["Fantasy", "Drama", "Action"],
         type: "tv",
-        studio: "HBO"
+        studio: "HBO", episodes: { s1: 10, s2: 10, s3: 10, s4: 10, s5: 10, s6: 10, s7: 7, s8: 6 }
     },
     {
         id: 82,
         tmdbId: 299534,
-        img: "",
-        nameImg: "",
+        img: "https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/6720/1366720-i-c30300a11e8d",
+        nameImg: "https://img10.hotstar.com/image/upload/f_auto,h_124/sources/r1/cms/prod/6722/1366722-t-48964025ccfe",
         name: "https://img10.hotstar.com/image/upload/f_auto,q_90,w_384/sources/r1/cms/prod/9885/1489885-h-cc7cbfc789b8",
         name2: "Avengers: Endgame",
         releaseYear: 2019,
@@ -1332,9 +1349,9 @@ export const Data = [
     {
         id: 83,
         tmdbId: 76479,
-        img: "",
+        img: "https://m.media-amazon.com/images/S/pv-target-images/b4c9871a6cff1c602d83407abe62ebb55b4b8eba22550f6e1b78e9a8fa28585a._SX1080_FMjpg_.jpg",
         nameImg: "",
-        name: "",
+        name: "https://static0.cbrimages.com/wordpress/wp-content/uploads/2024/07/the-boys-collage-featuring-starlight-homelander-and-billy-butcher.jpg?w=1600&h=900&fit=crop",
         name2: "The Boys",
         releaseYear: 2019,
         ua: "A",
@@ -1343,7 +1360,7 @@ export const Data = [
         desc: "A group of vigilantes sets out to take down corrupt superheroes who abuse their superpowers.",
         category: ["Superhero", "Action", "Dark Comedy"],
         type: "tv",
-        studio: "Amazon Studios"
+        studio: "Amazon Studios", episodes: { s1: 8, s2: 8, s3: 8, s4: 8 }
     },
     {
         id: 84,
@@ -1375,7 +1392,7 @@ export const Data = [
         desc: "The trials and tribulations of criminal lawyer Jimmy McGill before he becomes Saul Goodman.",
         category: ["Crime", "Drama", "Black Comedy"],
         type: "tv",
-        studio: "AMC"
+        studio: "AMC", episodes: { s1: 10, s2: 10, s3: 10, s4: 10, s5: 10, s6: 13 }
     },
     {
         id: 86,
@@ -1423,7 +1440,7 @@ export const Data = [
         desc: "Hundreds of cash-strapped players accept a strange invitation to compete in children's games for a tempting prize.",
         category: ["Thriller", "Drama", "Survival"],
         type: "tv",
-        studio: "Netflix"
+        studio: "Netflix", episodes: { s1: 9 }
     },
     {
         id: 89,
@@ -1503,7 +1520,7 @@ export const Data = [
         desc: "Amid the stark discord of twin cities Piltover and Zaun, two sisters fight on rival sides of a war.",
         category: ["Animation", "Sci-Fi", "Fantasy"],
         type: "tv",
-        studio: "Netflix"
+        studio: "Netflix", episodes: { s1: 9 }
     },
     {
         id: 94,
@@ -1535,7 +1552,7 @@ export const Data = [
         desc: "A hardened survivor takes charge of a 14-year-old girl who may be humanity's last hope after a global pandemic.",
         category: ["Drama", "Horror", "Adventure"],
         type: "tv",
-        studio: "HBO"
+        studio: "HBO", episodes: { s1: 9 }
     },
     {
         id: 96,
@@ -1551,7 +1568,7 @@ export const Data = [
         desc: "The Roy family is known for controlling the biggest media and entertainment company in the world.",
         category: ["Drama", "Black Comedy"],
         type: "tv",
-        studio: "HBO"
+        studio: "HBO", episodes: { s1: 10, s2: 10, s3: 9, s4: 10 }
     },
     {
         id: 97,
@@ -1903,7 +1920,7 @@ export const Data = [
         desc: "Matt Murdock and Wilson Fisk attempt to put their rivalry aside to help the people of New York.",
         category: ["Superhero", "Crime", "Action"],
         type: "tv",
-        studio: "Marvel"
+        studio: "Marvel", episodes: { s1: 9 }
     },
     {
         id: 119,
@@ -1919,7 +1936,7 @@ export const Data = [
         desc: "Genius inventor Riri Williams creates the most advanced suit of armor since Iron Man.",
         category: ["Superhero", "Sci-Fi", "Action"],
         type: "tv",
-        studio: "Marvel"
+        studio: "Marvel", episodes: { s1: 6 }
     },
     {
         id: 120,
@@ -1935,7 +1952,7 @@ export const Data = [
         desc: "A space vessel crash-lands on Earth, bringing a terrifying extraterrestrial threat to the planet.",
         category: ["Sci-Fi", "Horror", "Thriller"],
         type: "tv",
-        studio: "FX"
+        studio: "FX", episodes: { s1: 8 }
     },
     {
         id: 121,
@@ -2015,7 +2032,7 @@ export const Data = [
         desc: "A billionaire becomes a vigilante to protect his city.",
         category: ["Action", "Crime", "Superhero"],
         type: "tv",
-        studio: "DC"
+        studio: "DC", episodes: { s1: 23, s2: 23, s3: 23, s4: 23, s5: 23, s6: 23, s7: 22, s8: 10 }
     },
     {
         id: 126,
@@ -2031,7 +2048,7 @@ export const Data = [
         desc: "A legendary Norse warrior rises through raids and conquest.",
         category: ["Action", "Drama", "History"],
         type: "tv",
-        studio: "History Channel"
+        studio: "History Channel", episodes: { s1: 9, s2: 10, s3: 10, s4: 20, s5: 20, s6: 20 }
     },
     {
         id: 127,
@@ -2079,7 +2096,7 @@ export const Data = [
         desc: "Dark secrets unfold at a luxury resort.",
         category: ["Drama", "Satire"],
         type: "tv",
-        studio: "HBO"
+        studio: "HBO", episodes: { s1: 6, s2: 7 }
     },
     {
         id: 130,
@@ -2143,7 +2160,7 @@ export const Data = [
         desc: "A complex time-travel mystery spanning generations.",
         category: ["Sci-Fi", "Mystery", "Drama"],
         type: "tv",
-        studio: "Netflix"
+        studio: "Netflix", episodes: { s1: 10, s2: 8, s3: 8 }
     },
     {
         id: 134,
@@ -2175,7 +2192,7 @@ export const Data = [
         desc: "An alternate reality where the Axis powers won WWII.",
         category: ["Sci-Fi", "Drama"],
         type: "tv",
-        studio: "Amazon"
+        studio: "Amazon", episodes: { s1: 10, s2: 10, s3: 10, s4: 10 }
     },
     {
         id: 136,
@@ -2287,7 +2304,7 @@ export const Data = [
         desc: "Heroes rise to stop the cruel Skeksis from destroying their world.",
         category: ["Fantasy", "Adventure"],
         type: "tv",
-        studio: "Netflix"
+        studio: "Netflix", episodes: { s1: 10 }
     },
     {
         id: 143,
@@ -2319,7 +2336,7 @@ export const Data = [
         desc: "Soviet spies pose as a suburban American family during the Cold War.",
         category: ["Drama", "Thriller"],
         type: "tv",
-        studio: "FX"
+        studio: "FX", episodes: { s1: 13, s2: 13, s3: 13, s4: 13, s5: 13, s6: 10 }
     },
     {
         id: 145,
@@ -2351,7 +2368,7 @@ export const Data = [
         desc: "A man deliberately gets imprisoned to save his wrongly convicted brother.",
         category: ["Action", "Drama", "Thriller"],
         type: "tv",
-        studio: "Fox"
+        studio: "Fox", episodes: { s1: 22, s2: 22, s3: 13, s4: 22, s5: 9 }
     },
     {
         id: 147,
@@ -2383,7 +2400,7 @@ export const Data = [
         desc: "Doctors navigate life, love, and loss in a hospital.",
         category: ["Drama", "Medical"],
         type: "tv",
-        studio: "ABC"
+        studio: "ABC", episodes: { s1: 9, s2: 27, s3: 25, s4: 17, s5: 24 }
     },
     {
         id: 149,
@@ -2415,7 +2432,7 @@ export const Data = [
         desc: "A satirical look at an American family and society.",
         category: ["Animation", "Comedy"],
         type: "tv",
-        studio: "Fox"
+        studio: "Fox", episodes: { s1: 13, s2: 22, s3: 24 }
     },
     {
         id: 151,
@@ -2447,7 +2464,7 @@ export const Data = [
         desc: "FBI agents study serial killers to understand criminal psychology.",
         category: ["Crime", "Drama", "Thriller"],
         type: "tv",
-        studio: "Netflix"
+        studio: "Netflix", episodes: { s1: 10, s2: 9 }
     },
     {
         id: 153,
@@ -2479,7 +2496,7 @@ export const Data = [
         desc: "Corrupt cops blur the line between justice and crime.",
         category: ["Crime", "Drama"],
         type: "tv",
-        studio: "FX"
+        studio: "FX", episodes: { s1: 13, s2: 13, s3: 15, s4: 13, s5: 11, s6: 10, s7: 13 }
     },
     {
         id: 155,
@@ -2511,7 +2528,7 @@ export const Data = [
         desc: "A political figure rises during Prohibition-era America.",
         category: ["Crime", "Drama"],
         type: "tv",
-        studio: "HBO"
+        studio: "HBO", episodes: { s1: 12, s2: 12, s3: 12, s4: 12, s5: 8 }
     },
     {
         id: 157,
@@ -2543,7 +2560,7 @@ export const Data = [
         desc: "A dysfunctional family struggles through life in Chicago.",
         category: ["Drama", "Comedy"],
         type: "tv",
-        studio: "Showtime"
+        studio: "Showtime", episodes: { s1: 12, s2: 12, s3: 12, s4: 12, s5: 12, s6: 12, s7: 12, s8: 12, s9: 14, s10: 12, s11: 12 }
     },
     {
         id: 159,
@@ -2576,5 +2593,656 @@ export const Data = [
         category: ["Comedy", "Sport"],
         type: "movie",
         studio: "Columbia Pictures"
+    },
+    {
+        id: 161,
+        tmdbId: 71446,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Money Heist",
+        releaseYear: 2017,
+        ua: "A",
+        season: "5 seasons",
+        language: ["Spanish", "English", "Hindi"],
+        desc: "A criminal mastermind plans the biggest heist in history.",
+        category: ["Crime", "Thriller", "Drama"],
+        type: "tv",
+        studio: "Netflix", episodes: { s1: 15, s2: 9, s3: 8, s4: 8, s5: 10 }
+    },
+    {
+        id: 162,
+        tmdbId: 62688,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Narcos",
+        releaseYear: 2015,
+        ua: "A",
+        season: "3 seasons",
+        language: ["English", "Spanish"],
+        desc: "The rise and fall of Colombian drug lord Pablo Escobar.",
+        category: ["Crime", "Drama", "Biography"],
+        type: "tv",
+        studio: "Netflix", episodes: { s1: 10, s2: 10, s3: 10 }
+    },
+    {
+        id: 163,
+        tmdbId: 69740,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Ozark",
+        releaseYear: 2017,
+        ua: "A",
+        season: "4 seasons",
+        language: ["English"],
+        desc: "A family is forced to launder money for a Mexican cartel.",
+        category: ["Crime", "Drama", "Thriller"],
+        type: "tv",
+        studio: "Netflix", episodes: { s1: 10, s2: 10, s3: 10, s4: 14 }
+    },
+    {
+        id: 164,
+        tmdbId: 71912,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "The Witcher",
+        releaseYear: 2019,
+        ua: "A",
+        season: "3 seasons",
+        language: ["English"],
+        desc: "A monster hunter struggles to find his place in a brutal world.",
+        category: ["Fantasy", "Action", "Drama"],
+        type: "tv",
+        studio: "Netflix", episodes: { s1: 8, s2: 8, s3: 8 }
+    },
+    {
+        id: 165,
+        tmdbId: 83097,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "You",
+        releaseYear: 2018,
+        ua: "A",
+        season: "4 seasons",
+        language: ["English"],
+        desc: "A charming man becomes dangerously obsessed with women he loves.",
+        category: ["Thriller", "Drama", "Crime"],
+        type: "tv",
+        studio: "Netflix", episodes: { s1: 10, s2: 10, s3: 10, s4: 10 }
+    },
+    {
+        id: 166,
+        tmdbId: 75219,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "13 Reasons Why",
+        releaseYear: 2017,
+        ua: "A",
+        season: "4 seasons",
+        language: ["English"],
+        desc: "A teenager uncovers secrets behind a classmate’s suicide.",
+        category: ["Drama", "Mystery"],
+        type: "tv",
+        studio: "Netflix", episodes: { s1: 13, s2: 13, s3: 13, s4: 10 }
+    },
+    {
+        id: 167,
+        tmdbId: 93195,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "The Umbrella Academy",
+        releaseYear: 2019,
+        ua: "U/A 16+",
+        season: "3 seasons",
+        language: ["English"],
+        desc: "Adopted superheroes reunite to stop an apocalypse.",
+        category: ["Action", "Sci-Fi", "Drama"],
+        type: "tv",
+        studio: "Netflix", episodes: { s1: 10, s2: 10, s3: 10, s4: 6 }
+    },
+    {
+        id: 168,
+        tmdbId: 85271,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Sex Education",
+        releaseYear: 2019,
+        ua: "A",
+        season: "4 seasons",
+        language: ["English"],
+        desc: "Teenagers explore relationships and sexuality.",
+        category: ["Comedy", "Drama"],
+        type: "tv",
+        studio: "Netflix", episodes: { s1: 8, s2: 8, s3: 8, s4: 8 }
+    },
+    {
+        id: 169,
+        tmdbId: 81356,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Elite",
+        releaseYear: 2018,
+        ua: "A",
+        season: "7 seasons",
+        language: ["Spanish", "English"],
+        desc: "Three working-class teens enter an elite private school.",
+        category: ["Drama", "Crime", "Thriller"],
+        type: "tv",
+        studio: "Netflix",
+        episodes: { s1: 8, s2: 8, s3: 8, s4: 8, s5: 8, s6: 8, s7: 8 }
+    },
+    {
+        id: 170,
+        tmdbId: 63351,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Lucifer",
+        releaseYear: 2016,
+        ua: "U/A 13+",
+        season: "6 seasons",
+        language: ["English"],
+        desc: "The Devil leaves Hell to run a nightclub in Los Angeles.",
+        category: ["Fantasy", "Crime", "Drama"],
+        type: "tv",
+        studio: "Netflix",
+        episodes: { s1: 13, s2: 18, s3: 26, s4: 10, s5: 16, s6: 10 }
+    },
+
+    {
+        id: 171,
+        tmdbId: 76494,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "The Night Manager",
+        releaseYear: 2016,
+        ua: "A",
+        season: "1 season",
+        language: ["English"],
+        desc: "An ex-soldier infiltrates an international arms dealer's circle.",
+        category: ["Thriller", "Drama"],
+        type: "tv",
+        studio: "Amazon Prime", episodes: { s1: 6 }
+    },
+    {
+        id: 172,
+        tmdbId: 76479,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Jack Ryan",
+        releaseYear: 2018,
+        ua: "U/A 16+",
+        season: "4 seasons",
+        language: ["English"],
+        desc: "A CIA analyst is thrust into dangerous global missions.",
+        category: ["Action", "Thriller"],
+        type: "tv",
+        studio: "Amazon Prime", episodes: { s1: 8, s2: 8, s3: 8, s4: 6 }
+    },
+    {
+        id: 173,
+        tmdbId: 70796,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "The Man in the High Castle",
+        releaseYear: 2015,
+        ua: "A",
+        season: "4 seasons",
+        language: ["English"],
+        desc: "An alternate history where the Axis powers won WWII.",
+        category: ["Sci-Fi", "Drama"],
+        type: "tv",
+        studio: "Amazon Prime", episodes: {
+            s1: 10,
+            s2: 10,
+            s3: 10,
+            s4: 10
+        }
+    }
+    ,
+    {
+        id: 174,
+        tmdbId: 71914,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "The Marvelous Mrs. Maisel",
+        releaseYear: 2017,
+        ua: "U/A 13+",
+        season: "5 seasons",
+        language: ["English"],
+        desc: "A housewife discovers a talent for stand-up comedy.",
+        category: ["Comedy", "Drama"],
+        type: "tv",
+        studio: "Amazon Prime", episodes: { s1: 8, s2: 10, s3: 8, s4: 8, s5: 9 }
+    },
+    {
+        id: 175,
+        tmdbId: 83121,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Reacher",
+        releaseYear: 2022,
+        ua: "A",
+        season: "2 seasons",
+        language: ["English"],
+        desc: "A former military police officer battles corruption.",
+        category: ["Action", "Crime", "Thriller"],
+        type: "tv",
+        studio: "Amazon Prime", episodes: { s1: 8, s2: 8 }
+    },
+    {
+        id: 176,
+        tmdbId: 89009,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "The Terminal List",
+        releaseYear: 2022,
+        ua: "A",
+        season: "1 season",
+        language: ["English"],
+        desc: "A Navy SEAL uncovers a deadly conspiracy.",
+        category: ["Action", "Thriller"],
+        type: "tv",
+        studio: "Amazon Prime", episodes: { s1: 8 }
+    },
+    {
+        id: 177,
+        tmdbId: 507086,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Extraction",
+        releaseYear: 2020,
+        ua: "A",
+        season: "116m",
+        language: ["English", "Hindi"],
+        desc: "A mercenary embarks on a deadly rescue mission.",
+        category: ["Action", "Thriller"],
+        type: "movie",
+        studio: "Netflix"
+    },
+    {
+        id: 178,
+        tmdbId: 81005,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Bird Box",
+        releaseYear: 2018,
+        ua: "A",
+        season: "124m",
+        language: ["English"],
+        desc: "Survivors must blindfold themselves to avoid deadly creatures.",
+        category: ["Horror", "Thriller"],
+        type: "movie",
+        studio: "Netflix"
+    },
+    {
+        id: 179,
+        tmdbId: 581387,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "The Old Guard",
+        releaseYear: 2020,
+        ua: "A",
+        season: "125m",
+        language: ["English"],
+        desc: "Immortal warriors secretly protect humanity.",
+        category: ["Action", "Fantasy"],
+        type: "movie",
+        studio: "Netflix"
+    },
+    {
+        id: 180,
+        tmdbId: 512195,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Red Notice",
+        releaseYear: 2021,
+        ua: "U/A 13+",
+        season: "118m",
+        language: ["English"],
+        desc: "An FBI profiler hunts the world’s most wanted art thief.",
+        category: ["Action", "Comedy"],
+        type: "movie",
+        studio: "Netflix"
+    },
+
+    {
+        id: 181,
+        tmdbId: 449176,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "The Tomorrow War",
+        releaseYear: 2021,
+        ua: "U/A 13+",
+        season: "138m",
+        language: ["English"],
+        desc: "Soldiers travel to the future to fight aliens.",
+        category: ["Sci-Fi", "Action"],
+        type: "movie",
+        studio: "Amazon Prime"
+    },
+    {
+        id: 182,
+        tmdbId: 585244,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Without Remorse",
+        releaseYear: 2021,
+        ua: "A",
+        season: "109m",
+        language: ["English"],
+        desc: "A Navy SEAL seeks revenge for his murdered family.",
+        category: ["Action", "Thriller"],
+        type: "movie",
+        studio: "Amazon Prime"
+    },
+    {
+        id: 183,
+        tmdbId: 696374,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Army of the Dead",
+        releaseYear: 2021,
+        ua: "A",
+        season: "148m",
+        language: ["English"],
+        desc: "Mercenaries plan a heist during a zombie outbreak.",
+        category: ["Action", "Horror"],
+        type: "movie",
+        studio: "Netflix"
+    },
+    {
+        id: 184,
+        tmdbId: 667538,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "The Gray Man",
+        releaseYear: 2022,
+        ua: "A",
+        season: "129m",
+        language: ["English"],
+        desc: "A CIA operative becomes a target of his own agency.",
+        category: ["Action", "Thriller"],
+        type: "movie",
+        studio: "Netflix"
+    },
+    {
+        id: 185,
+        tmdbId: 615656,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Enola Holmes",
+        releaseYear: 2020,
+        ua: "U/A 7+",
+        season: "123m",
+        language: ["English"],
+        desc: "Sherlock Holmes’ sister solves her own mystery.",
+        category: ["Adventure", "Mystery"],
+        type: "movie",
+        studio: "Netflix"
+    },
+    {
+        id: 186,
+        tmdbId: 81188,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "The Platform",
+        releaseYear: 2019,
+        ua: "A",
+        season: "94m",
+        language: ["Spanish", "English"],
+        desc: "A vertical prison tests humanity and morality.",
+        category: ["Sci-Fi", "Thriller"],
+        type: "movie",
+        studio: "Netflix"
+    },
+    {
+        id: 187,
+        tmdbId: 87908,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Upload",
+        releaseYear: 2020,
+        ua: "U/A 13+",
+        season: "3 seasons",
+        language: ["English"],
+        desc: "People can upload themselves into a digital afterlife.",
+        category: ["Sci-Fi", "Comedy"],
+        type: "tv",
+        studio: "Amazon Prime", episodes: { s1: 10, s2: 7, s3: 8 }
+    },
+    {
+        id: 188,
+        tmdbId: 90669,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "The Peripheral",
+        releaseYear: 2022,
+        ua: "A",
+        season: "1 season",
+        language: ["English"],
+        desc: "A woman discovers a connection to a future reality.",
+        category: ["Sci-Fi", "Thriller"],
+        type: "tv",
+        studio: "Amazon Prime", episodes: { s1: 8 }
+    },
+    {
+        id: 189,
+        tmdbId: 97645,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Bodies",
+        releaseYear: 2023,
+        ua: "A",
+        season: "1 season",
+        language: ["English"],
+        desc: "Four detectives investigate the same murder across timelines.",
+        category: ["Crime", "Sci-Fi"],
+        type: "tv",
+        studio: "Netflix", episodes: { s1: 8 }
+    },
+    {
+        id: 190,
+        tmdbId: 96316,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Pain Hustlers",
+        releaseYear: 2023,
+        ua: "A",
+        season: "122m",
+        language: ["English"],
+        desc: "A woman climbs the ladder of a pharmaceutical company.",
+        category: ["Drama", "Crime"],
+        type: "movie",
+        studio: "Netflix"
+    },
+
+    {
+        id: 191,
+        tmdbId: 88164,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Citadel",
+        releaseYear: 2023,
+        ua: "A",
+        season: "1 season",
+        language: ["English"],
+        desc: "Spies battle a global threat after losing their memories.",
+        category: ["Action", "Thriller"],
+        type: "tv",
+        studio: "Amazon Prime", episodes: { s1: 6 }
+    },
+    {
+        id: 192,
+        tmdbId: 80867,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "The Wheel of Time",
+        releaseYear: 2021,
+        ua: "U/A 16+",
+        season: "2 seasons",
+        language: ["English"],
+        desc: "A woman searches for the Dragon Reborn.",
+        category: ["Fantasy", "Adventure"],
+        type: "tv",
+        studio: "Amazon Prime", episodes: { s1: 8, s2: 8 }
+    },
+    {
+        id: 193,
+        tmdbId: 83089,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "The Sandman",
+        releaseYear: 2022,
+        ua: "A",
+        season: "1 season",
+        language: ["English"],
+        desc: "The Lord of Dreams escapes imprisonment.",
+        category: ["Fantasy", "Drama"],
+        type: "tv",
+        studio: "Netflix", episodes: { s1: 11 }
+    },
+    {
+        id: 194,
+        tmdbId: 90176,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Beef",
+        releaseYear: 2023,
+        ua: "A",
+        season: "1 season",
+        language: ["English"],
+        desc: "A road rage incident spirals into chaos.",
+        category: ["Drama", "Comedy"],
+        type: "tv",
+        studio: "Netflix", episodes: { s1: 10 }
+    },
+    {
+        id: 195,
+        tmdbId: 82992,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Outer Banks",
+        releaseYear: 2020,
+        ua: "U/A 13+",
+        season: "3 seasons",
+        language: ["English"],
+        desc: "Teens search for treasure in North Carolina.",
+        category: ["Adventure", "Drama"],
+        type: "tv",
+        studio: "Netflix", episodes: { s1: 10, s2: 10, s3: 10 }
+    },
+    {
+        id: 196,
+        tmdbId: 72408,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "The Expanse",
+        releaseYear: 2015,
+        ua: "U/A 16+",
+        season: "6 seasons",
+        language: ["English"],
+        desc: "Humanity colonizes the solar system.",
+        category: ["Sci-Fi", "Drama"],
+        type: "tv",
+        studio: "Amazon Prime", episodes: { s1: 10, s2: 13, s3: 13, s4: 10, s5: 10, s6: 6 }
+    },
+    {
+        id: 197,
+        tmdbId: 94664,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "1899",
+        releaseYear: 2022,
+        ua: "A",
+        season: "1 season",
+        language: ["English", "German"],
+        desc: "Passengers uncover secrets aboard a migrant ship.",
+        category: ["Mystery", "Sci-Fi"],
+        type: "tv",
+        studio: "Netflix", episodes: { s1: 8 }
+    },
+    {
+        id: 198,
+        tmdbId: 71789,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "The Boys Presents: Diabolical",
+        releaseYear: 2022,
+        ua: "A",
+        season: "1 season",
+        language: ["English"],
+        desc: "Animated stories set in The Boys universe.",
+        category: ["Animation", "Action"],
+        type: "tv",
+        studio: "Amazon Prime", episodes: { s1: 8 }
+    },
+    {
+        id: 199,
+        tmdbId: 84008,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Wednesday",
+        releaseYear: 2022,
+        ua: "U/A 13+",
+        season: "1 season",
+        language: ["English"],
+        desc: "Wednesday Addams investigates murders at a strange academy.",
+        category: ["Mystery", "Fantasy"],
+        type: "tv",
+        studio: "Netflix", episodes: { s1: 8 }
+    },
+    {
+        id: 200,
+        tmdbId: 81650,
+        img: "",
+        nameImg: "",
+        name: "",
+        name2: "Lupin",
+        releaseYear: 2021,
+        ua: "U/A 13+",
+        season: "3 seasons",
+        language: ["French", "English"],
+        desc: "A gentleman thief seeks revenge inspired by Arsène Lupin.",
+        category: ["Crime", "Mystery"],
+        type: "tv",
+        studio: "Netflix", episodes: { s1: 5, s2: 5, s3: 7 }
     }
 ];

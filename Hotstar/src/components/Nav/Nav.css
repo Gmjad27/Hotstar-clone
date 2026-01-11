@@ -183,6 +183,7 @@
 @media (max-width: 480px) {
     .nav {
         height: 60px;
+        /* backdrop-filter: blur(10px); */
     }
 
     .la {
@@ -201,12 +202,14 @@
     }
 
     .logos {
+        /* backdrop-filter: blur(10%); */
         padding: 0 5px;
     }
 
     .nav .img {
         position: fixed;
         top: 0px;
+        backdrop-filter: blur(19px);
         text-align: center;
         width: 100%;
     }

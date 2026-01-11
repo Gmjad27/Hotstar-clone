@@ -52,9 +52,19 @@ function App() {
 
     setEl(prevEl => {
       if (prevEl.includes(e)) {
+        const alert = document.getElementById('alert-r');
+        alert.style.right = '0px';
+        setTimeout(() => {
+          alert.style.right = '-400px';
+        }, 2000);
         console.log('Removed:', e);
         return prevEl.filter(item => item !== e);
       } else {
+        const alert = document.getElementById('alert');
+        alert.style.right = '0px';
+        setTimeout(() => {
+          alert.style.right = '-400px';
+        }, 2000);
         console.log('Added:', e);
         return [...prevEl, e];
       }
@@ -209,6 +219,8 @@ function App() {
 
       </Router>
       {/* <h1 className="owner">Made by Girish</h1> */}
+      <div id="alert" className="alert"><i class="fa-solid fa-check"></i>Added to Watch List</div>
+      <div id="alert-r" className="alert" style={{backgroundColor:'#730000b5'}}>Removed to Watch List</div>
     </>
   );
 }

@@ -91,12 +91,12 @@
         width: 100%;
     }
     
-    .f1 {
+    /* .f1 {
         margin-top: 25px;
         flex-direction: column;
         gap: 15px;
         align-items: flex-start;
-    }
+    } */
     
     .footer h3 {
         margin-bottom: 15px;
@@ -140,15 +140,29 @@
         font-size: 12px;
         margin-bottom: 5px;
     }
-    
-    .f1 {
-        margin-top: 20px;
-        gap: 12px;
+
+    .sec1{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        /* padding-top: 50px; */
     }
     
+    .f1 {
+        display: flex;
+        /* justify-content: space-between; */
+        margin-top: 10px;
+        gap: 12px;
+    }
+    .f1 h1{
+        font-size: 20px;
+    }
+
+    
     .l {
-        width: 90px;
-        height: 28px;
+        display: flex;
+        width: 60px;
+        height: 20px;
     }
     
     /* Accordion-style footer sections for very small screens */
@@ -158,32 +172,7 @@
         padding-right: 25px;
     }
     
-    .footer h3::after {
-        content: '+';
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 18px;
-        color: rgba(255, 255, 255, 0.5);
-    }
     
-    .footer > div:first-child h3::after {
-        display: none;
-    }
-    
-    .footer > div:not(:first-child) .footer-content {
-        display: none;
-        padding-top: 10px;
-    }
-    
-    .footer > div.active .footer-content {
-        display: block;
-    }
-    
-    .footer > div.active h3::after {
-        content: '−';
-    }
 }
 
 /* For very small screens */
@@ -227,57 +216,7 @@
     }
 }
 
-/* Social media icons if added later */
-.social-icons {
-    display: flex;
-    gap: 15px;
-    margin-top: 20px;
-}
 
-.social-icons a {
-    color: gray;
-    font-size: 20px;
-    transition: color 0.3s ease;
-}
 
-.social-icons a:hover {
-    color: white;
-}
 
-@media (max-width: 768px) {
-    .social-icons {
-        justify-content: center;
-        margin-top: 25px;
-        gap: 20px;
-    }
-    
-    .social-icons a {
-        font-size: 24px;
-    }
-}
 
-/* Copyright section */
-.copyright {
-    text-align: center;
-    padding: 20px;
-    color: gray;
-    font-size: 12px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 20px;
-}
-
-@media (max-width: 768px) {
-    .copyright {
-        padding: 15px;
-        font-size: 11px;
-        margin-top: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .copyright {
-        padding: 12px;
-        font-size: 10px;
-        line-height: 1.4;
-    }
-}

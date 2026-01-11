@@ -22,3 +22,16 @@
     gap: 20px;
     margin-top: 70px;
 }
+
+
+@media (max-width: 480px) {
+    .con{
+        padding: 0;
+    }
+    .con2{
+        width: 100%;
+        gap: 5px;
+        margin-top: 10px;
+        /* border: 1px solid red */
+    }
+}

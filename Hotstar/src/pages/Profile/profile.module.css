@@ -1,4 +1,4 @@
-.con{
+.con {
     padding-top: 30px;
     /* border: 1px solid red; */
     /* text-align: center; */
@@ -7,7 +7,7 @@
     height: 100vh;
 }
 
-.p_img{
+.p_img {
     /* border: 1px  solid green; */
     border-radius: 50%;
     width: 80px;
@@ -17,7 +17,7 @@
     cursor: pointer;
 }
 
-.wraper{
+.wraper {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -25,7 +25,7 @@
     top: 60px;
 }
 
-.info{
+.info {
     position: relative;
     /* top: 20px; */
     left: -170px;
@@ -36,7 +36,7 @@
 
 }
 
-.log button{
+.log button {
     border: none;
     background-color: brown;
     color: white;
@@ -45,11 +45,20 @@
     font-weight: 900;
     cursor: pointer;
 }
-.log button:hover{
+
+.log button:hover {
     background-color: rgba(165, 42, 42, 0.877);
 }
 
-.wList{
+.wList {
     display: flex;
     gap: 10px;
+}
+
+
+@media (max-width: 480) {
+    .info{
+        position: relative;
+        left: -40px;
+    }
 }

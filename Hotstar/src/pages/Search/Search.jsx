@@ -7,8 +7,15 @@ import Watch from '../../components/Watch/Watch'
 
 const Search = (props) => {
 
+
     const [img, setImg] = useState('https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/8834/808834-i')
     const [nameImg, setNameImg] = useState("https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/1202/1371202-t-8b12119920aa")
+    const [Name2, setName2] = useState()
+    const [Tid, setTid] = useState()
+    const [Tp, setTp] = useState()
+    const [ep, setep] = useState()
+
+    const [Seasons, setSeasons] = useState()
     const [releaseYear, setReleaseYear] = useState(2016)
     const [Ua, setUa] = useState("U/A 7+")
     const [Sea, setSea] = useState("1h 48m")
@@ -21,20 +28,28 @@ const Search = (props) => {
             if (keys.id === id) {
                 setImg(keys.img)
                 setNameImg(keys.nameImg)
+                setTid(keys.tmdbId)
+                setTp(keys.type)
+                setName2(keys.name2)
                 setReleaseYear(keys.releaseYear)
                 setUa(keys.ua)
                 setSea(keys.season)
                 setLang(keys.language)
                 setDe(keys.desc)
                 setCate(keys.category)
+                setSeasons(keys.episodes);
+                setep('s1')
 
             }
         })
         const watch = document.querySelector('#watch');
         watch.style.display = 'block';
+        // const trailer = document.getElementById('trailer');
+        // trailer.style.display = 'block';
 
 
     }
+
 
     const [s, setS] = useState(null)
     // const search = (e) =>{
@@ -66,8 +81,14 @@ const Search = (props) => {
                     }
                 </div>
             </div>
-            <Watch img={img} name={nameImg} yr={releaseYear} ua={Ua} season={Sea} lan={lang.length} desc={de} cat={cat} language={lang} />
-           
+            <Watch img={img} ep={ep} type={Tp} id={Tid} s={Seasons} mname={Name2} name={nameImg} name2={Name2} yr={releaseYear} ua={Ua} season={Sea} lan={lang.length} desc={de} cat={cat} language={lang} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
+            {/* {
+                Data.map((keys) => {
+                    if (keys.type.includes('tv')) {
+                        return <p style={{ color: 'white' }}>{keys.name2}</p>
+                    }
+                })
+            } */}
         </div>
     )
 }

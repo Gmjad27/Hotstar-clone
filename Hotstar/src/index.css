@@ -6,3 +6,22 @@
     bottom: 0;
     background-color: aqua;
 }
+
+.alert {
+    position: fixed;
+    top: 3%;
+    right: -400px;
+    background-color: rgba(0, 90, 0, 0.66);
+    width: 400px;
+    padding-left: 20px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid rgba(176, 176, 176, 0.46);
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    font-size: 30px;
+    color: rgba(199, 228, 253, 0.791);
+    font-weight: 400;
+    transition: all 0.3s ease-in-out;
+}

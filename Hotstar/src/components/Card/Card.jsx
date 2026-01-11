@@ -1,20 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Card.module.css'
-import Watch from '../Watch/Watch'
-import { Data } from '../../content/movie'
+// import Watch from '../Watch/Watch'
+// import { Data } from '../../content/movie'
 import { Link } from 'react-router-dom'
-import Movie from '../../pages/Movies/Movie'
+// import Movie from '../../pages/Movies/Movie'
 
 const Card = (props) => {
+
+  const [add, setAdd] = useState("+")
   const added = () => {
-    alert('hello world.');
-    const add = document.getElementById('add');
-    // add.style.backgroundColor = add.style.backgroundColor == 'red' ? 'green' : 'red';
-    add.value = add.value == '+' ? '✔' : '+';
+    setAdd(add === "+" ? "✓" : "+");
+
   }
 
   return (
-    <div className={styles.card} style={{ backgroundImage: `url(${props.img}), linear-gradient(to top left,black,brown)` }}
+    <div className={styles.card} style={{ backgroundImage: `url(${props.img}), linear-gradient(to top left,#1119,#1119)` }}
     // {
     // props.sow
 
@@ -30,19 +30,20 @@ const Card = (props) => {
     // watch.style.display = 'block';
 
     // }
+    onClick={() => { props.sow(props.id) }}
     >
 
       <div className={styles.info}>
-        <div className={styles.img} style={{ backgroundImage: `url(${props.img}),linear-gradient(to top left,black,brown)`, marginBottom: '5px' }} onClick={() => { props.sow(props.id) }}>
+        <div className={styles.img} style={{ backgroundImage: `url(${props.img}),linear-gradient(to top left,#1119,#1119)`, marginBottom: '5px' }} onClick={() => { props.sow(props.id) }}>
 
         </div>
         <div className={styles.btn}>
-          <Link to='/stream'>
+          <Link to={`/stream?gm_${props.type === 'movie' ? `${props.type}/${props.name}` : `${props.type}/${props.name}/1/1`}`}>
             <button className={styles.play} onClick={() => {
               props.play(props.type === 'movie' ? `${props.type}/${props.tid}` : `${props.type}/${props.tid}/1/1`)
             }}><i className="fa-solid fa-play"></i> Watch Now</button>
           </Link>
-          <input type='button' value='+' id='add' className={styles.add} onClick={() => {
+          <input type='button' value={add} id='add' className={styles.add} onClick={() => {
             // alert(props.e)
             props.add(props.id);
             // added();

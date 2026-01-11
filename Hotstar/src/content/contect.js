@@ -92,6 +92,12 @@ export const studio = [
     studio: 'disney'
   },
   {
+    img: 'https://www.whats-on-netflix.com/wp-content/uploads/2025/06/netflix-release-schedule-2025-whats-still-to-come.jpg',
+    himg: 'https://mir-s3-cdn-cf.behance.net/project_modules/hd/fb762791877129.5e3cb3903fb67.gif',
+    bg: 'https://images.ctfassets.net/y2ske730sjqp/1aONibCke6niZhgPxuiilC/2c401b05a07288746ddf3bd3943fbc76/BrandAssets_Logos_01-Wordmark.jpg?w=940',
+    studio: 'netflix'
+  },
+  {
     img: 'https://cdn.europosters.eu/image/hp/47626.jpg',
     himg: 'https://usagif.com/wp-content/uploads/gifs/gif-marvel-91.gif',
     bg: 'https://img10.hotstar.com/image/upload/f_auto,q_90,w_1920/sources/r1/cms/prod/5224/1535224-a-1d1cfe20ffa3',

@@ -30,7 +30,7 @@ function Home(props) {
     const tid = mediaData.map(item => item.tmdbId);
     const images = mediaData.map(item => item.img);
     const name = mediaData.map(item => item.nameImg);
-    // const name2 = Data.map(item => item.name2);
+    // const mname = Data.map(item => item.name2);
     const I = mediaData.map(item => item.name)
     const lan = mediaData.map(item => item.language);
     const ua = mediaData.map(item => item.ua);
@@ -77,7 +77,11 @@ function Home(props) {
     const [img, setImg] = useState('https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/8834/808834-i')
     const [nameImg, setNameImg] = useState("https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/1202/1371202-t-8b12119920aa")
     const [Name2, setName2] = useState()
+    const [Tid, setTid] = useState()
+    const [Tp, setTp] = useState()
+    const [ep, setep] = useState()
 
+    const [Seasons, setSeasons] = useState()
     const [releaseYear, setReleaseYear] = useState(2016)
     const [Ua, setUa] = useState("U/A 7+")
     const [Sea, setSea] = useState("1h 48m")
@@ -90,6 +94,8 @@ function Home(props) {
             if (keys.id === id) {
                 setImg(keys.img)
                 setNameImg(keys.nameImg)
+                setTid(keys.tmdbId)
+                setTp(keys.type)
                 setName2(keys.name2)
                 setReleaseYear(keys.releaseYear)
                 setUa(keys.ua)
@@ -97,6 +103,8 @@ function Home(props) {
                 setLang(keys.language)
                 setDe(keys.desc)
                 setCate(keys.category)
+                setSeasons(keys.episodes);
+                setep('s1')
 
             }
         })
@@ -119,7 +127,7 @@ function Home(props) {
     }, [images.length]);
 
     useEffect(() => {
-        const body = document.querySelector(".body");
+        const body = document.querySelector("#body");
         const d1 = document.getElementById('img1');
         const d2 = document.getElementById('img2');
         const d3 = document.getElementById('img3');
@@ -173,43 +181,56 @@ function Home(props) {
 
 
     return (
-        <div className="body" id="body">
+        <div className="body">
 
 
             {/* <Nav /> */}
 
             <div className="bundle">
 
-                <div className="con">
+                <div className="con" id="body">
                     {/* <div className="body" id="body"> */}
 
                     <Banner id={ID} tid={TID} type={Type} name={Name} i={i} imgs={images} lan={Lan} ua={UA} ry={RY} cat={Cat} desc={Desc} season={Season} add={(e) => { props.add(e) }} play={(tid) => { props.play(tid) }} />
 
                     {/* </div> */}
                 </div>
+
                 {/* <br /><br /><br /><br /><br /> */}
-                <div className="content" style={{
+                <section className="sections">
 
-                }}>
+                    <div className="content" style={{
+
+                    }}>
+                        {
+                            Data.map((keys, index) => {
+
+                                if (keys.id >= 41 && keys.id <= 56) return <Card key={index} sow={(i) => {
+                                    sow(i);
+                                }} id={keys.id} img={keys.name} name={keys.name2} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
+                            })
+                        }
+
+                    </div>
+                </section>
+                <section className="sections2">
                     {
-                        Data.map((keys) => {
-
-                            if (keys.id >= 41 && keys.id <= 56) return <Card sow={(i) => {
-                                sow(i);
-                            }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
+                        studio.map((key, index) => {
+                            return <Card2 key={index} bg={key.bg} himg={key.himg} img={key.img} studio={key.studio} stu={() => {
+                                props.stu(key.studio, key.img)
+                            }} />
                         })
                     }
-
-                </div>
+                </section>
                 <section className="sections">
                     <h2 className="title">Kids</h2>
                     <div className="content">
                         {
-                            Data.map((keys) => {
+                            Data.map((keys, index) => {
                                 if (keys.category.includes('Kids')) {
-                                    return <Card sow={(i) => {
+                                    return <Card key={index} sow={(i) => {
                                         sow(i);
-                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
+                                    }} id={keys.id} img={keys.name} name={keys.name2} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                                 }
 
                             })
@@ -221,11 +242,11 @@ function Home(props) {
                     <h2 className="title">For You</h2>
                     <div className="content">
                         {
-                            Data.map((keys) => {
+                            Data.map((keys, index) => {
                                 if (keys.id >= 21 && keys.id <= 30) {
-                                    return <Card sow={(i) => {
+                                    return <Card key={index} sow={(i) => {
                                         sow(i);
-                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
+                                    }} id={keys.id} img={keys.name} name={keys.name2} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                                 }
 
                             })
@@ -237,11 +258,11 @@ function Home(props) {
                     <h2 className="title">Action</h2>
                     <div className="content">
                         {
-                            Data.map((keys) => {
+                            Data.map((keys, index) => {
                                 if (keys.id >= 31 && keys.id <= 40) {
-                                    return <Card sow={(i) => {
+                                    return <Card key={index} sow={(i) => {
                                         sow(i);
-                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
+                                    }} id={keys.id} img={keys.name} name={keys.name2} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                                 }
 
                             })
@@ -253,11 +274,11 @@ function Home(props) {
                     <h2 className="title">Shuperhero</h2>
                     <div className="content">
                         {
-                            Data.map((keys) => {
+                            Data.map((keys, index) => {
                                 if (keys.category.includes('Superhero')) {
-                                    return <Card sow={(i) => {
+                                    return <Card key={index} sow={(i) => {
                                         sow(i);
-                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
+                                    }} id={keys.id} img={keys.name} name={keys.name2} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                                 }
                             })
                         }
@@ -268,11 +289,11 @@ function Home(props) {
                     <h2 className="title">Sci-fi</h2>
                     <div className="content">
                         {
-                            Data.map((keys) => {
+                            Data.map((keys, index) => {
                                 if (keys.category.includes('Sci-Fi')) {
-                                    return <Card sow={(i) => {
+                                    return <Card key={index} sow={(i) => {
                                         sow(i);
-                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
+                                    }} id={keys.id} img={keys.name} name={keys.name2} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                                 }
                             })
                         }
@@ -283,11 +304,11 @@ function Home(props) {
                     <h2 className="title">Netflix</h2>
                     <div className="content">
                         {
-                            Data.map((keys) => {
+                            Data.map((keys, index) => {
                                 if (keys.studio.includes('Netflix')) {
-                                    return <Card sow={(i) => {
+                                    return <Card key={index} sow={(i) => {
                                         sow(i);
-                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
+                                    }} id={keys.id} img={keys.name} name={keys.name2} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                                 }
                             })
                         }
@@ -295,34 +316,26 @@ function Home(props) {
                     </div>
                 </section>
                 <section className="sections">
-                    {/* <h2 className="title">Kids</h2> */}
+                    <h2 className="title">Thriller</h2>
                     <div className="content">
                         {
-                            Data.map((keys) => {
-                                if (keys.id >= 71 && keys.id <= 80) {
-                                    return <Card sow={(i) => {
+                            Data.map((keys, index) => {
+                                if (keys.category.includes('Thriller')) {
+                                    return <Card key={index} sow={(i) => {
                                         sow(i);
-                                    }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
+                                    }} id={keys.id} img={keys.name} name={keys.name2} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
                                 }
                             })
                         }
 
                     </div>
                 </section>
-                <section className="sections2">
-                    {
-                        studio.map((key) => {
-                            return <Card2 bg={key.bg} himg={key.himg} img={key.img} studio={key.studio} stu={() => {
-                                props.stu(key.studio, key.img)
-                            }} />
-                        })
-                    }
-                </section>
+
                 <Footer />
             </div>
 
 
-            <Watch img={img} name={nameImg} name2={Name2} yr={releaseYear} ua={Ua} season={Sea} lan={lang.length} desc={de} cat={cat} language={lang} />
+            <Watch img={img} ep={ep} type={Tp} id={Tid} s={Seasons} mname={Name2} name={nameImg} name2={Name2} yr={releaseYear} ua={Ua} season={Sea} lan={lang.length} desc={de} cat={cat} language={lang} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
 
 
 
