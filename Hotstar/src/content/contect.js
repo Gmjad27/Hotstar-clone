@@ -86,7 +86,7 @@ export const mediaData = [
 
 export const studio = [
   {
-    img: 'https://iconstyle.al/wp-content/uploads/2024/05/disney.webp',
+    img: 'https://d23.com/app/uploads/2025/07/Hero_Image_00.jpg',
     himg: 'https://i.pinimg.com/originals/9d/86/a0/9d86a09a09219d6997944f1c35df65b8.gif',
     bg: 'https://img10.hotstar.com/image/upload/f_auto,q_90,w_1920/sources/r1/cms/prod/3703/1747996723703-a',
     studio: 'disney'
@@ -104,19 +104,19 @@ export const studio = [
     studio: 'marvel'
   },
   {
-    img: 'https://www.designyourway.net/blog/wp-content/uploads/2025/07/HBO-Featured.jpg',
+    img: 'https://static.cdn.turner.com/styles/header_image_1500x500_cropped/s3/2025-07/hbo_max_dark_radial_gradient_overlay_example.png?h=3e0fb435&itok=bdvXWIwq',
     himg: 'https://digiday.com/wp-content/uploads/sites/3/2014/10/hbo.gif?w=1030&h=451&crop=1',
     bg: 'https://img10.hotstar.com/image/upload/f_auto,q_90,w_1920/sources/r1/cms/prod/5731/1739780835731-a',
     studio: 'hbo'
   },
   {
-    img: 'https://img10.hotstar.com/image/upload/f_auto,q_90,w_1920/sources/r1/cms/prod/7816/1739359307816-a',
+    img: 'https://www.androidheadlines.com/wp-content/uploads/2023/12/PeacockTV.jpg',
     himg: 'https://gifdb.com/images/high/peacock-tv-logo-animated-text-f2yz5g667kzsu0ej.gif',
     bg: 'https://img10.hotstar.com/image/upload/f_auto,q_90,w_1920/sources/r1/cms/prod/7816/1739359307816-a',
     studio: 'peacock'
   },
   {
-    img: 'https://img10.hotstar.com/image/upload/f_auto,q_90,w_1920/sources/r1/cms/prod/583/1739358280583-a',
+    img: 'https://www.mitchellandbrown.co.uk/wp-content/uploads/2023/06/ParamountHeader.jpg',
     himg: 'https://i.makeagif.com/media/8-23-2016/CAph_f.gif',
     bg: 'https://img10.hotstar.com/image/upload/f_auto,q_90,w_1920/sources/r1/cms/prod/583/1739358280583-a',
     studio: 'paramount'

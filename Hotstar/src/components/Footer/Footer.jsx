@@ -11,6 +11,7 @@ const Footer = () => {
                 <p>About Us</p>
                 <p>Careers</p><br /><br />
                 <p>&copy; 2026 GIRISH JADAV M. All Rights Reserved.</p>
+                <p>Just a College Project. Not promoting piracy.</p>
                 <p>Terms Of Use Privacy Policy FAQ</p>
             </div>
             <div className="sec">

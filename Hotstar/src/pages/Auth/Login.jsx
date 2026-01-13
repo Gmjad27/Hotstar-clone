@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Login.css'; // Importing the CSS file
 
 const Login = () => {
@@ -6,19 +7,46 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleLogin = (e) => {
+    const navigate = useNavigate()
+
+    const handleLogin = async (e) => {
         e.preventDefault();
 
-        // Simple Validation
         if (!email || !password) {
             setError('Please enter both email and password.');
             return;
         }
 
-        // Reset error and simulate login
+
+        const res = await fetch("http://localhost:5000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email,
+                password
+            })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            console.log(data.user); // MongoDB user data
+            alert("Login successful");
+            navigate("/");
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
+
+        } else {
+            alert(data.user.name);
+        }
+
+
         setError('');
         console.log('Logging in with:', { email, password });
         alert('Login Successful! (Simulated)');
+
     };
 
     return (
@@ -67,9 +95,9 @@ const Login = () => {
                     </div>
                 </form>
 
-                {/* Footer / Sign Up Area */}
+
                 <div className="login-footer">
-                    <p>New to Cineflix? <a href="#" className="signup-link">Sign up now</a>.</p>
+                    <p>New to Cineflix? <Link to={'/signup'} className="signup-link">Sign up now</Link>.</p>
                     <p className="recaptcha-text">
                         This page is protected by Google reCAPTCHA to ensure you're not a bot.
                     </p>

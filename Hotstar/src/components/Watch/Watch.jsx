@@ -12,6 +12,7 @@ const Watch = (props) => {
     const [showTrailer, setShowTrailer] = useState(false);
     const iframeRef = useRef(null);
     const [ep, setep] = useState('s1')
+    const [season, setSeason] = useState(1);
     // setep()
     // iframeRef.current.src = '';
     const closeWatch = () => {
@@ -96,6 +97,11 @@ const Watch = (props) => {
     return (
         <div className={styles.con} id='watch'>
             <div className={styles.cl} onClick={closeWatch}></div>
+            <div className={styles.close} onClick={() => {
+                closeWatch();
+            }}>
+                <i className="fa-solid fa-xmark"></i>
+            </div>
 
             <div className={styles.watch}>
                 <div className={styles.sec1} style={{ backgroundImage: `url('${props.img}')` }}>
@@ -151,8 +157,9 @@ const Watch = (props) => {
                             // return (
                             // {setep()}
                             <>
-                                <select  name="" onChange={(e) => {
+                                <select name="" onChange={(e) => {
                                     setep(e.target.value);
+                                    setSeason(e.target.value.split('s')[1]);
                                 }} className={styles.select}>
                                     {
 
@@ -167,11 +174,18 @@ const Watch = (props) => {
                                 {ep && (
                                     <>
                                         <p className={styles.pa}>Episodes: {props.s[ep]}</p>
+                                        {/* {
+                                            alert(`tv/${props.id}/${season}/`)
+                                            
+                                        } */}
 
 
                                         {
                                             Array.from({ length: props.s[ep] }).map((_, i) => (
-                                                <div className={styles.epi} key={i}>EPISODE {i + 1}</div>
+                                                <div className={styles.epi} key={i} onClick={() => {
+                                                    props.play(`${props.type}/${props.id}/${season}/${i + 1}`);
+                                                    navigate(`/stream?${props.mname} ${props.id}/${season}/${i + 1}`)
+                                                }}>EPISODE {i + 1}</div>
                                             ))
                                         }
 
@@ -181,7 +195,7 @@ const Watch = (props) => {
                             // )
                             :
                             <section className="sections">
-                                <h2 className="title">More like</h2>
+                                <h2 className="title">More like that</h2>
                                 <div className="content">{
                                     Data.map((keys, index) => {
 

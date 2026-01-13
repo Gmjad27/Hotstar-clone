@@ -2,21 +2,23 @@ import { useEffect, useState } from "react";
 // import Banner from "./components/Banner/Banner";
 // import { mediaData } from "./content/contect";
 // import Card from "./components/Card/Card";
+// import Nav from "./components/Nav/Nav";
 import Nav from "./components/Nav/Nav";
 // import Watch from "./components/Watch/Watch";
 // import Footer from "./components/Footer/Footer";
 // import { Data } from './content/movie'
+import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home/Home";
 import Movie from "./pages/Movies/Movie";
 import Tv from "./pages/TV/Tv";
 import Search from './pages/Search/Search'
-// import Login from "./pages/Auth/Login";
+import Login from "./pages/Auth/Login";
 // import Card2 from "./components/Card/Card2";
 import Studio from "./pages/Studio/Studio";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 
 import "./App.css";
-// import Signup from "./pages/Auth/Signup";
+import Signup from "./pages/Auth/Signup";
 import Profile from "./pages/Profile/Profile";
 import Stream from "./pages/Stream/Stream";
 
@@ -48,7 +50,7 @@ function App() {
 
 
   const add = (e) => {
-    alert('added to ' + e);
+    // alert('added to ' + e);
 
     setEl(prevEl => {
       if (prevEl.includes(e)) {
@@ -106,121 +108,141 @@ function App() {
 
   // const [tid, setTid] = useState()
   const play = (tid) => {
-    alert(tid);
+    // alert(tid);
     setTID(tid);
   }
 
   return (
     <>
+
       <Router>
-
         <Routes>
-          <Route path='/' element={
-            <>
-              <Nav />
-              <Home stu={(stud, img) => {
-                sow(stud, img)
-              }} add={(e) => {
-                add(e);
-              }}
-                play={(tid) => {
-                  play(tid)
-                }} />
-            </>
-          } />
-          <Route path="/movies" element={
-            <>
-              <Nav />
-              <Movie
-                tu={(stud, img) => {
-                  sow(stud, img)
-                }} add={(e) => {
-                  add(e);
-                }}
-                play={(tid) => {
-                  play(tid)
-                }}
-              />
-            </>
-          } />
-          <Route path="/tv" element={
-            <>
-              <Nav />
-              <Tv
-                tu={(stud, img) => {
-                  sow(stud, img)
-                }}
-                add={(e) => {
-                  add(e);
-                }}
-                play={(tid) => {
-                  play(tid)
-                }}
-              />
-              {/* <Login /> */}
-            </>
-          } />
 
-          <Route path="/search" element={
-            <>
-              <Nav />
-              <Search
-                tu={(stud, img) => {
-                  sow(stud, img)
-                }} add={(e) => {
-                  add(e);
-                }}
-                play={(tid) => {
-                  play(tid)
-                }}
-              />
-              {/* <Signup /> */}
-            </>
-          } />
-          <Route path="/studio" element={
-            <>
-              <Nav />
-              <Studio studio={studio} img={Img}
-                tu={(stud, img) => {
-                  sow(stud, img)
-                }}
-                add={(e) => {
-                  add(e);
-                }}
-                play={(tid) => {
-                  play(tid)
-                }}
-              />
-            </>
-          } />
-          <Route path="/profile" element={
-            <>
-              <Nav />
-              <Profile
-                E={El}
-                tu={(stud, img) => {
-                  sow(stud, img)
-                }}
-                add={(e) => {
-                  add(e);
-                }}
-                play={(tid) => {
-                  play(tid)
-                }}
-              />
-            </>
-          } />
-          <Route path="/stream" element={
-            <Stream tid={TID} />
-          } />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+
+
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Nav />
+                  <Home
+                    stu={(stud, img) => sow(stud, img)}
+                    add={(e) => add(e)}
+                    play={(tid) => play(tid)}
+                  />
+                </>
+              </ProtectedRoute>
+            }
+          />
+
+
+          <Route
+            path="/movies"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Nav />
+                  <Movie
+                    tu={(stud, img) => sow(stud, img)}
+                    add={(e) => add(e)}
+                    play={(tid) => play(tid)}
+                  />
+                </>
+              </ProtectedRoute>
+            }
+          />
+
+
+          <Route
+            path="/tv"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Nav />
+                  <Tv
+                    tu={(stud, img) => sow(stud, img)}
+                    add={(e) => add(e)}
+                    play={(tid) => play(tid)}
+                  />
+                </>
+              </ProtectedRoute>
+            }
+          />
+
+
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Nav />
+                  <Search
+                    tu={(stud, img) => sow(stud, img)}
+                    add={(e) => add(e)}
+                    play={(tid) => play(tid)}
+                  />
+                </>
+              </ProtectedRoute>
+            }
+          />
+
+
+          <Route
+            path="/studio"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Nav />
+                  <Studio
+                    studio={studio}
+                    img={Img}
+                    tu={(stud, img) => sow(stud, img)}
+                    add={(e) => add(e)}
+                    play={(tid) => play(tid)}
+                  />
+                </>
+              </ProtectedRoute>
+            }
+          />
+
+
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <>
+                  <Nav />
+                  <Profile
+                    E={El}
+                    tu={(stud, img) => sow(stud, img)}
+                    add={(e) => add(e)}
+                    play={(tid) => play(tid)}
+                  />
+                </>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/stream"
+            element={
+              <ProtectedRoute>
+                <Stream tid={TID} />
+              </ProtectedRoute>
+            }
+          />
+
 
           <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
 
+        </Routes>
       </Router>
       {/* <h1 className="owner">Made by Girish</h1> */}
-      <div id="alert" className="alert"><i class="fa-solid fa-check"></i>Added to Watch List</div>
-      <div id="alert-r" className="alert" style={{backgroundColor:'#730000b5'}}>Removed to Watch List</div>
+      <div id="alert" className="alert">Added to Watch List</div>
+      <div id="alert-r" className="alert" style={{ backgroundColor: '#730000b5' }}>Removed to Watch List</div>
     </>
   );
 }

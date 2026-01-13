@@ -13,25 +13,33 @@ const Card = (props) => {
 
   }
 
+  const md = window.matchMedia("(max-width: 768px)");
+
+
   return (
     <div className={styles.card} style={{ backgroundImage: `url(${props.img}), linear-gradient(to top left,#1119,#1119)` }}
-    // {
-    // props.sow
+      // {
+      // props.sow
 
-    // alert('hello')
-    // const watch = document.querySelector('#watch');
-    // Data.map((keys) => {
-    //   if (keys.id == props.id) {
-    //     console.log(keys);
+      // alert('hello')
+      // const watch = document.querySelector('#watch');
+      // Data.map((keys) => {
+      //   if (keys.id == props.id) {
+      //     console.log(keys);
 
-    //     return <Watch img={keys.img} name={keys.nameImg} yr={keys.releaseYear} ua={keys.ua} season={keys.season} lan={keys.language.length} desc={keys.desc} cat={keys.category} language={keys.language} />
-    //   }
-    // })
-    // watch.style.display = 'block';
+      //     return <Watch img={keys.img} name={keys.nameImg} yr={keys.releaseYear} ua={keys.ua} season={keys.season} lan={keys.language.length} desc={keys.desc} cat={keys.category} language={keys.language} />
+      //   }
+      // })
+      // watch.style.display = 'block';
 
-    // }
-    onClick={() => { props.sow(props.id) }}
+      // }
+      onClick={() => { md.matches ? props.sow(props.id) : '' }}
     >
+
+      {
+        props.img === '' ? <h1 className={styles.mname}>{props.name}</h1> : ''
+      }
+
 
       <div className={styles.info}>
         <div className={styles.img} style={{ backgroundImage: `url(${props.img}),linear-gradient(to top left,#1119,#1119)`, marginBottom: '5px' }} onClick={() => { props.sow(props.id) }}>

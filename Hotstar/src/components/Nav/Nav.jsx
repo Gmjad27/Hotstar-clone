@@ -4,6 +4,9 @@ import './Nav.css'
 import { Link } from 'react-router-dom'
 
 const Nav = () => {
+
+    const username = JSON.parse(localStorage.getItem('user'));
+
     return (
         <div className='nav'>
             <div className="logos">
@@ -30,7 +33,7 @@ const Nav = () => {
                         <button><i className="fa-solid fa-clapperboard"></i></button><p>MOVIE</p>
                     </div>
                 </Link>
-                <Link to='/profile' className='l'>
+                <Link to={`/profile?${username.id}user=${username.name}`} className='l'>
                     <div className="la">
                         <button><i className="fa-brands fa-product-hunt"></i></button><p>Profile</p>
                     </div>

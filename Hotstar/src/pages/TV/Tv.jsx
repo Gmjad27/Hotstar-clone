@@ -63,7 +63,7 @@ const Tv = (props) => {
           Data.map((keys) => {
             if (keys.type.includes('tv')) return <Card sow={(i) => {
               sow(i);
-            }} id={keys.id} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
+            }} id={keys.id} name={keys.name2} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
           })
         }
 

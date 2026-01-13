@@ -10,11 +10,11 @@
     
     /* border: 1px solid green; */
     /* position: fixed; */
-    height: 450px;
+    height: 600px;
     background-image: url('https://cdn.europosters.eu/image/hp/47626.jpg');
     background-position: center;
     background-size: cover;
-    box-shadow: inset -1px -10px 10px 10px rgb(0, 0, 0);
+    box-shadow: inset -1px -1px 3px 1px rgb(0, 0, 0);
 }
 
 .sec2{
@@ -22,4 +22,21 @@
     flex-wrap: wrap;
     margin-top: 90px;
     gap: 10px;
+}
+
+
+@media (max-width:480px) {
+    .con{
+        padding: 0;
+        padding-top: 40px;
+
+    }
+    .sec1{
+        height: 200px;
+    }
+    .sec2{
+        justify-content: center;
+        gap: 0px;
+        /* margin-top: 20px; */
+    }
 }

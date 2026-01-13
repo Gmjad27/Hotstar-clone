@@ -1,51 +1,80 @@
 import React, { useState } from 'react';
-import './Login.css'; // We can reuse the same CSS file!
+import './Login.css';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
-  
+  // const [formData, setFormData] = useState({
+  //   name: '',
+  //   email: '',
+  //   password: '',
+  //   confirmPassword: ''
+  // });
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const navigate = useNavigate('')
+  // const [name, setName] = useState()
+
   const [error, setError] = useState('');
 
   // Handle input changes
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  // const handleChange = (e) => {
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.name]: e.target.value
+  //   });
+  // };
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    const { name, email, password, confirmPassword } = formData;
+    // const { name, email, password, confirmPassword } = formData;
 
-    // 1. Basic Empty Check
+
+
+
+
     if (!name || !email || !password || !confirmPassword) {
       setError('Please fill in all fields.');
       return;
     }
 
-    // 2. Password Match Check
+
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
       return;
     }
 
-    // 3. Password Length Check
+
     if (password.length < 6) {
       setError('Password must be at least 6 characters.');
       return;
     }
 
-    // Reset error and simulate signup
+
+    const res = await fetch("http://localhost:5000/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password
+      })
+    });
+
+    const data = await res.json();
+    alert(data.message);
+    navigate("/login");
+
     setError('');
-    console.log('Registering User:', formData);
     alert(`Welcome to Cineflix, ${name}! Account created.`);
   };
+
+
+  // console.log('Registering User:', formData);
 
   return (
     <div className="login-page">
@@ -58,46 +87,56 @@ const Signup = () => {
 
         <form className="login-form" onSubmit={handleSignup}>
           <h2>Sign Up</h2>
-          
+
           {error && <div className="error-message">{error}</div>}
 
           <div className="input-group">
-            <input 
-              type="text" 
+            <input
+              type="text"
               name="name"
-              placeholder="Full Name" 
-              value={formData.name}
-              onChange={handleChange}
+              placeholder="Full Name"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value)
+              }}
             />
           </div>
 
           <div className="input-group">
-            <input 
-              type="email" 
+            <input
+              type="email"
               name="email"
-              placeholder="Email address" 
-              value={formData.email}
-              onChange={handleChange}
+              placeholder="Email address"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value)
+              }}
             />
           </div>
 
           <div className="input-group">
-            <input 
-              type="password" 
+            <input
+              type="password"
               name="password"
-              placeholder="Password" 
-              value={formData.password}
-              onChange={handleChange}
+              placeholder="Password"
+              value={password}
+              onChange={
+                (e) => {
+                  setPassword(e.target.value)
+                }
+              }
             />
           </div>
 
           <div className="input-group">
-            <input 
-              type="password" 
+            <input
+              type="password"
               name="confirmPassword"
-              placeholder="Confirm Password" 
-              value={formData.confirmPassword}
-              onChange={handleChange}
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value)
+              }}
             />
           </div>
 
@@ -113,6 +152,7 @@ const Signup = () => {
       </div>
     </div>
   );
+
 };
 
 export default Signup;
