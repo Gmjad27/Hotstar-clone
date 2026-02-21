@@ -1,167 +1,167 @@
 .card {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    position: relative;
-    /* background-image:linear-gradient() ; */
-    top: -60px;
-    flex: 0 0 auto;
-    border-radius: 5px;
-    width: 240px;
-    height: 130px;
-    background-size: cover;
-    background-position: center;
-    transition: all 0.4s ease-in-out;
-    cursor: pointer;
+  position: relative;
+  bottom: 130px;
+  flex: 0 0 auto;
+  width: 230px;
+  height: 130px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
 }
 
-.card2 {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    position: relative;
-    flex: 0 0 auto;
-    border-radius: 5px;
-    width: 300px;
-    height: 180px;
-    background-color: rgba(29, 29, 29, 0.471);
-    background-image: url('https://img10.hotstar.com/image/upload/f_auto,q_90,w_1920/sources/r1/cms/prod/5224/1535224-a-1d1cfe20ffa3');
-    background-size: cover;
-    background-position: center;
-    transition: all 0.4s ease-in-out;
-    cursor: pointer;
-}
-
-.card2:hover {
-    background-image: url('https://usagif.com/wp-content/uploads/gifs/gif-marvel-91.gif');
-    scale: 1.2;
-    z-index: 90000;
-}
-
-.mname{
-    position: absolute;
-    text-align: center;
-    color: white;
-    font-size: small;
-    width: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%)
-    
+.mname {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  font-size: 0.86rem;
+  padding: 8px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.2));
+  border-radius: 8px;
 }
 
 .info {
-    display: none;
-    border-radius: 5px;
-    height: 240px;
-    background-color: rgb(23, 23, 23);
-    transition: all 0.4s ease-in-out;
-}
-
-.card:hover .info {
-    display: block;
+  display: none;
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  min-height: 228px;
+  border-radius: 8px;
+  background: #17181c;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
 }
 
 .card:hover {
-    z-index: 1001;
-    scale: 1.2;
+  z-index: 1200;
+  transform: scale(1.12);
+}
+
+.card:hover .info {
+  display: block;
 }
 
 .img {
-    width: 240px;
-    height: 130px;
-    background-position: center;
-    background-size: cover;
-    transition: all 0.4s ease-in-out;
+  width: 100%;
+  height: 128px;
+  background-position: center;
+  background-size: cover;
 }
 
 .btn {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 5px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  padding: 10px;
 }
 
 .play {
-    border: none;
-    border-radius: 2px;
-    padding: 5px 40px;
-    cursor: pointer;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: #fff;
+  color: #111;
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
 }
 
 .play:hover {
-    background-color: rgba(255, 255, 255, 0.863);
+  background: #f0f0f0;
 }
 
 .add {
-    padding: 0 20px;
-    border-radius: 2px;
-    color: white;
-    background-color: red;
-    border: none;
-    cursor: pointer;
-    font-size: large;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 6px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  width: 44px;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 .info2 {
-    color: white;
-    display: flex;
-    font-size: 13px;
-    justify-content: space-between;
-    padding: 0 10px;
+  color: rgba(255, 255, 255, 0.86);
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: space-evenly;
+  gap: 6px;
+  font-size: 0.72rem;
+  padding: 0 10px;
+}
+
+.info2 span {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  /* padding: 2px 7px; */
 }
 
 .desc2 {
-    color: gray;
-    font-size: small;
-    padding: 5px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.76rem;
+  padding: 8px 10px 10px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* mobile me */
+.card2 {
+  position: relative;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  width: 300px;
+  height: 180px;
+  background-color: rgba(29, 29, 29, 0.5);
+  background-image: url('https://img10.hotstar.com/image/upload/f_auto,q_90,w_1920/sources/r1/cms/prod/5224/1535224-a-1d1cfe20ffa3');
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.card2:hover {
+  transform: scale(1.12);
+  z-index: 90000;
+}
+
 @media (max-width: 768px) {
+  .card {
+    width: 170px;
+    height: 95px;
+    bottom: 15%;
+  }
 
+  .card:hover {
+    transform: none;
+    z-index: auto;
+  }
 
-    /* Remove hover effects on mobile */
-    .card:hover {
-        scale: 1;
-        z-index: 1001;
-        /* z-index: 1; */
-    }
+  .card:hover .info {
+    display: none;
+  }
 
-    .card:hover .info {
-        scale: 1;
-        /* display: none; */
-    }
-
-    .card2:hover {
-        scale: 1;
-        /* background-image: url('https://img10.hotstar.com/image/upload/f_auto,q_90,w_1920/sources/r1/cms/prod/5224/1535224-a-1d1cfe20ffa3'); */
-    }
+  .card2:hover {
+    transform: none;
+  }
 }
 
 @media (max-width: 480px) {
-    .card {
-        width: 130px;
-        height:70px;
-        margin-top: 60px;
-    }
+  .card {
+    width: 130px;
+    height: 72px;
+  }
 
-    .card2 {
-        width: 130px;
-        height: 85px;
-        margin-top: 55px;
-    }
-
-    .card:hover {
-        scale: 1;
-        z-index: 1001;
-        /* z-index: 1; */
-    }
-
-    .card:hover .info {
-        /* scale: 1; */
-        display: none;
-    }
-
-    .card2:hover {
-        scale: 1;
-        /* background-image: url('https://img10.hotstar.com/image/upload/f_auto,q_90,w_1920/sources/r1/cms/prod/5224/1535224-a-1d1cfe20ffa3'); */
-    }
-
+  .card2 {
+    width: 130px;
+    height: 85px;
+  }
 }

@@ -1,110 +1,117 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './Login.css'; // Importing the CSS file
+import './Login.css';
 
 const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
-    const navigate = useNavigate()
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    setError('');
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
+    if (!email || !password) {
+      setError('Please enter both email and password.');
+      return;
+    }
 
-        if (!email || !password) {
-            setError('Please enter both email and password.');
-            return;
-        }
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('https://backend-f7cf.vercel.app/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
+      const data = await res.json();
 
-        const res = await fetch("http://localhost:5000/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email,
-                password
-            })
-        });
+      if (!res.ok) {
+        setError(data?.message || 'Login failed.');
+        return;
+      }
 
-        const data = await res.json();
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      navigate('/');
+    } catch (networkError) {
+      setError('Unable to connect to server. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-        if (res.ok) {
-            console.log(data.user); // MongoDB user data
-            alert("Login successful");
-            navigate("/");
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify(data.user));
+  return (
+    <div className="login-page">
+      <div className="background-overlay"></div>
 
-        } else {
-            alert(data.user.name);
-        }
+      <div className="auth-shell">
+        <aside className="auth-side">
+          <h1 className="logo-text">CINE<span className="logo-highlight">FLIX</span></h1>
+          <p className="side-title">Unlimited stories, one account.</p>
+          <p className="side-text">
+            Stream movies and series across genres. Build your list and jump right in.
+          </p>
+        </aside>
 
+        <div className="login-container auth-card">
+          <div className="logo-area">
+            <h1 className="logo-text mobile-logo">CINE<span className="logo-highlight">FLIX</span></h1>
+          </div>
 
-        setError('');
-        console.log('Logging in with:', { email, password });
-        alert('Login Successful! (Simulated)');
+          <form className="login-form" onSubmit={handleLogin}>
+            <h2>Sign In</h2>
+            {error && <div className="error-message">{error}</div>}
 
-    };
-
-    return (
-        <div className="login-page">
-            {/* Background Overlay */}
-            <div className="background-overlay"></div>
-
-            <div className="login-container">
-                {/* Logo Area */}
-                <div className="logo-area">
-                    <h1 className="logo-text">CINE<span className="logo-highlight">FLIX</span></h1>
-                </div>
-
-                {/* Login Form */}
-                <form className="login-form" onSubmit={handleLogin}>
-                    <h2>Sign In</h2>
-
-                    {error && <div className="error-message">{error}</div>}
-
-                    <div className="input-group">
-                        <input
-                            type="email"
-                            placeholder="Email or mobile number"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="input-group">
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div>
-
-                    <button type="submit" className="signin-btn">Sign In</button>
-
-                    <div className="form-help">
-                        <div className="remember-me">
-                            <input type="checkbox" id="remember" />
-                            <label htmlFor="remember">Remember me</label>
-                        </div>
-                        <a href="#">Need help?</a>
-                    </div>
-                </form>
-
-
-                <div className="login-footer">
-                    <p>New to Cineflix? <Link to={'/signup'} className="signup-link">Sign up now</Link>.</p>
-                    <p className="recaptcha-text">
-                        This page is protected by Google reCAPTCHA to ensure you're not a bot.
-                    </p>
-                </div>
+            <div className="input-group">
+              <input
+                type="email"
+                placeholder="Email or mobile number"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                autoComplete="email"
+              />
             </div>
+
+            <div className="input-group">
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                autoComplete="current-password"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className={`signin-btn ${isSubmitting ? 'loading' : ''}`}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Signing In...' : 'Sign In'}
+            </button>
+
+            <div className="form-help">
+              <div className="remember-me">
+                <input type="checkbox" id="remember" />
+                <label htmlFor="remember">Remember me</label>
+              </div>
+              <Link to="/signup">Need help?</Link>
+            </div>
+          </form>
+
+          <div className="login-footer">
+            <p>New to Cineflix? <Link to="/signup" className="signup-link">Sign up now</Link>.</p>
+            <p className="recaptcha-text">
+              This page is protected by Google reCAPTCHA to ensure you are not a bot.
+            </p>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default Login;

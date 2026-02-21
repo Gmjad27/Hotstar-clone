@@ -1,79 +1,124 @@
-import React, { useState } from 'react'
-import styles from './Tv.module.css'
-import Card from '../../components/Card/Card'
-import Watch from '../../components/Watch/Watch'
-import { Data } from '../../content/movie'
+import React, { useMemo, useState } from 'react';
+import styles from './Tv.module.css';
+import Card from '../../components/Card/Card';
+import Watch from '../../components/Watch/Watch';
+import { Data } from '../../content/movie';
 
+const DEFAULT_WATCH_ITEM = Data[0];
 
 const Tv = (props) => {
+  const [watchItem, setWatchItem] = useState(DEFAULT_WATCH_ITEM);
+  const series = useMemo(() => Data.filter((item) => item.type === 'tv'), []);
 
+  const featured = useMemo(() => {
+    if (series.length === 0) return null;
+    return [...series].sort((a, b) => b.releaseYear - a.releaseYear)[0];
+  }, [series]);
 
-  const [img, setImg] = useState('https://img10.hotstar.com/image/upload/f_auto,q_auto/sources/r1/cms/prod/8834/808834-i')
-  const [nameImg, setNameImg] = useState("https://img10.hotstar.com/image/upload/f_auto/sources/r1/cms/prod/1202/1371202-t-8b12119920aa")
-  const [Name2, setName2] = useState()
-  const [Tid, setTid] = useState()
-  const [Tp, setTp] = useState()
-  const [ep, setep] = useState()
+  const sections = useMemo(
+    () => [
+      { title: 'Trending Series', items: series.slice(0, 20) },
+      { title: 'Crime & Mystery', items: series.filter((item) => item.category.includes('Crime') || item.category.includes('Mystery')) },
+      { title: 'Drama Picks', items: series.filter((item) => item.category.includes('Drama')) },
+      { title: 'Sci-Fi & Fantasy', items: series.filter((item) => item.category.includes('Sci-Fi') || item.category.includes('Fantasy')) },
+      { title: 'Action & Adventure', items: series.filter((item) => item.category.includes('Action') || item.category.includes('Adventure')) },
+    ],
+    [series]
+  );
 
-  const [Seasons, setSeasons] = useState()
-  const [releaseYear, setReleaseYear] = useState(2016)
-  const [Ua, setUa] = useState("U/A 7+")
-  const [Sea, setSea] = useState("1h 48m")
-  const [lang, setLang] = useState(["English", "Hindi", "Spanish", " German", "Japanese", "Tamil", "Korean"])
-  const [de, setDe] = useState("Judy Hopps, the first rabbit police officer, is determined to solve a dangerous case.",)
-  const [cat, setCate] = useState(["Kids", "Family"])
-
-  const sow = (id) => {
-    Data.map((keys) => {
-      if (keys.id === id) {
-        setImg(keys.img)
-        setNameImg(keys.nameImg)
-        setTid(keys.tmdbId)
-        setTp(keys.type)
-        setName2(keys.name2)
-        setReleaseYear(keys.releaseYear)
-        setUa(keys.ua)
-        setSea(keys.season)
-        setLang(keys.language)
-        setDe(keys.desc)
-        setCate(keys.category)
-        setSeasons(keys.episodes);
-        setep('s1')
-
-      }
-    })
+  const openWatch = (id) => {
+    const selected = Data.find((item) => item.id === id);
+    if (!selected) return;
+    setWatchItem(selected);
     const watch = document.querySelector('#watch');
-    watch.style.display = 'block';
-    // const trailer = document.getElementById('trailer');
-    // trailer.style.display = 'block';
+    if (watch) watch.style.display = 'block';
+  };
 
+  const playFeatured = () => {
+    if (!featured) return;
+    const streamId = `${featured.type}/${featured.tmdbId}/1/1`;
+    props.play(streamId);
+    window.location.href = '/stream';
+  };
 
-  }
-
-
-
-
+  const renderCard = (item) => (
+    <Card
+      key={item.id}
+      sow={openWatch}
+      id={item.id}
+      name={item.name2}
+      img={item.name}
+      ry={item.releaseYear}
+      ua={item.ua}
+      lan={item.language.length}
+      desc={item.desc}
+      s={item.season}
+      type={item.type}
+      tid={item.tmdbId}
+      add={props.add}
+      e={props.e}
+      play={props.play}
+    />
+  );
 
   return (
-    <div className={styles.con}>
-      <h1 style={{ color: 'white', textAlign: 'center', fontSize: '54px', marginTop: '30px' }}>TV</h1><br />
-      <div className={styles.con2}>
+    <div className={styles.page}>
+      {featured && (
+        <section className={styles.hero} style={{ backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.88), rgba(0,0,0,0.25)), url(${featured.img || featured.name})` }}>
+          <div className={styles.heroContent}>
+            <p className={styles.badge}>TV SHOW</p>
+            {/* <h1 className={styles.heading}>{featured.nameImg}</h1> */}
+            <img className={styles.heading} src={featured.nameImg} alt={featured.name2} />
+            <p className={styles.meta}>{featured.releaseYear} • {featured.ua} • {featured.season}</p>
+            <p className={styles.desc}>{featured.desc}</p>
+            <div className={styles.actions}>
+              <button type="button" className={styles.playBtn} onClick={playFeatured}>
+                <i className="fa-solid fa-play"></i> Play
+              </button>
+              <button
+                type="button"
+                className={styles.moreBtn}
+                onClick={() => openWatch(featured.id)}
+              >
+                More Info
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
 
-        {
-          Data.map((keys) => {
-            if (keys.type.includes('tv')) return <Card sow={(i) => {
-              sow(i);
-            }} id={keys.id} name={keys.name2} img={keys.name} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
-          })
-        }
-
+      <div className={styles.rails}>
+        {sections.map((section) => (
+          <section key={section.title} className={styles.section}>
+            <h2 className={styles.title}>{section.title}</h2>
+            <div className={styles.track}>{section.items.map(renderCard)}</div>
+          </section>
+        ))}
       </div>
 
-      <Watch img={img} ep={ep} type={Tp} id={Tid} s={Seasons} mname={Name2} name={nameImg} name2={Name2} yr={releaseYear} ua={Ua} season={Sea} lan={lang.length} desc={de} cat={cat} language={lang} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
-
-
+      <Watch
+        sid={watchItem?.id}
+        El={Array.isArray(props.e) && props.e.includes(watchItem?.id) ? 'ADDED' : '+'}
+        img={watchItem?.img}
+        type={watchItem?.type}
+        id={watchItem?.tmdbId}
+        s={watchItem?.episodes}
+        mname={watchItem?.name2}
+        name={watchItem?.nameImg}
+        name2={watchItem?.name2}
+        yr={watchItem?.releaseYear}
+        ua={watchItem?.ua}
+        season={watchItem?.season}
+        lan={watchItem?.language?.length || 0}
+        desc={watchItem?.desc}
+        cat={watchItem?.category}
+        language={watchItem?.language}
+        add={props.add}
+        e={props.e}
+        play={props.play}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default Tv
+export default Tv;

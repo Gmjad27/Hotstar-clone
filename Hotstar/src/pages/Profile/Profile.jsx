@@ -1,61 +1,159 @@
-// import React from 'react'
-import styles from './profile.module.css'
-import { Data } from '../../content/movie'
-import Card from '../../components/Card/Card'
-import { useState } from 'react'
+import { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styles from './profile.module.css';
+import { Data } from '../../content/movie';
+import Card from '../../components/Card/Card';
+import Footer from '../../components/Footer/Footer';
+import Watch from '../../components/Watch/Watch';
+
+const DEFAULT_WATCH_ITEM = Data[0];
 
 const Profile = (props) => {
-    // const [username, setusername] = useState(()=>{
-    //     return localStorage.getItem("user")
-    // });
+  const navigate = useNavigate();
+  const [watchItem, setWatchItem] = useState(DEFAULT_WATCH_ITEM);
 
-    // setusername(username.name)
+  const username = useMemo(() => {
+    try {
+      return JSON.parse(localStorage.getItem('user') || '{}');
+    } catch (error) {
+      return {};
+    }
+  }, []);
 
-    const username = JSON.parse(localStorage.getItem('user'));
+  const watchListItems = useMemo(() => {
+    if (!Array.isArray(props.E)) return [];
+    return Data.filter((item) => props.E.includes(item.id));
+  }, [props.E]);
 
-    return (
-        <div className={styles.con}>
-            {/* <h1>Profile</h1> */}
-            <div className={styles.wraper}>
+  const movieItems = watchListItems.filter((item) => item.type === 'movie');
+  const seriesItems = watchListItems.filter((item) => item.type === 'tv');
 
-                <div className={styles.info}>
+  const openWatch = (id) => {
+    const selected = Data.find((item) => item.id === id);
+    if (!selected) return;
 
-                    <div className={styles.p_img}></div>
-                    <h3>{username.name.toUpperCase()}</h3>
-                </div>
-                <div className={styles.log}>
-                    <button onClick={() => {
+    setWatchItem(selected);
+    const watch = document.querySelector('#watch');
+    if (watch) watch.style.display = 'block';
+  };
 
-                        localStorage.clear();
-                        window.location.href = "/login";
+  const logout = () => {
+    localStorage.clear();
+    window.location.href = '/login';
+  };
 
+  const renderRail = (items) => (
+    <div className={styles.track}>
+      {items.map((item) => (
+        <Card
+          key={item.id}
+          sow={openWatch}
+          id={item.id}
+          name={item.name2}
+          img={item.name}
+          ry={item.releaseYear}
+          ua={item.ua}
+          lan={item.language.length}
+          desc={item.desc}
+          s={item.season}
+          type={item.type}
+          tid={item.tmdbId}
+          add={props.add}
+          e={props.E}
+          play={props.play}
+        />
+      ))}
+    </div>
+  );
 
-                    }}>LOGOUT</button>
-                </div>
-            </div><br /><br /><br /><br /><br /><br /><br /><br />
-            <h1>Watch List</h1>
-            <br /><br /><br /><br />
-            <div className={styles.wList}>
-
-                {
-                    Data.map((keys) => {
-                        // console.log(props.E);
-
-                        if (props.E.includes(keys.id)) {
-                            return (<Card sow={(i) => {
-                                sow(i);
-                            }} id={keys.id} name={keys.name2} img={keys.name} ry={keys.releaseYear}
-                                ua={keys.ua} lan={keys.language.length} desc={keys.desc}
-                                s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }}
-                                e={props.e} play={(tid) => { props.play(tid) }}
-                            />)
-                        }
-                    })
-                }
+  return (
+    <>
+      <div className={styles.page}>
+        <section className={styles.hero}>
+          <div className={styles.info}>
+            <div className={styles.p_img}></div>
+            <div>
+              <p className={styles.label}>PROFILE</p>
+              <h1 className={styles.name}>{String(username?.name || 'Guest')}</h1>
+              <p className={styles.sub}>Manage your saved titles and continue watching.</p>
             </div>
+          </div>
 
-        </div>
-    )
-}
+          <div className={styles.actions}>
+            <div className={styles.stat}>
+              <span>{watchListItems.length}</span>
+              <p>Watchlist</p>
+            </div>
+            <div className={styles.stat}>
+              <span>{movieItems.length}</span>
+              <p>Movies</p>
+            </div>
+            <div className={styles.stat}>
+              <span>{seriesItems.length}</span>
+              <p>Series</p>
+            </div>
+            <button type="button" className={styles.logout} onClick={logout}>
+              Logout
+            </button>
+          </div>
+        </section>
 
-export default Profile
+        {watchListItems.length === 0 ? (
+          <section className={styles.empty}>
+            <h2>Your watchlist is empty</h2>
+            <p>Add titles from Home, Movies, TV, or Search to see them here.</p>
+            <button type="button" onClick={() => navigate('/search')}>
+              Explore Titles
+            </button>
+          </section>
+        ) : (
+          <div className={styles.rails}>
+            {movieItems.length > 0 && (
+              <section className={styles.section}>
+                <h2 className={styles.heading}>Saved Movies</h2>
+                {renderRail(movieItems)}
+              </section>
+            )}
+
+            {seriesItems.length > 0 && (
+              <section className={styles.section}>
+                <h2 className={styles.heading}>Saved Series</h2>
+                {renderRail(seriesItems)}
+              </section>
+            )}
+
+            <section className={styles.section}>
+              <h2 className={styles.heading}>All Watchlist</h2>
+              {renderRail(watchListItems)}
+            </section>
+          </div>
+        )}
+
+        <Watch
+          sid={watchItem?.id}
+          El={Array.isArray(props.E) && props.E.includes(watchItem?.id) ? 'ADDED' : '+'}
+          img={watchItem?.img}
+          type={watchItem?.type}
+          id={watchItem?.tmdbId}
+          s={watchItem?.episodes}
+          mname={watchItem?.name2}
+          name={watchItem?.nameImg}
+          name2={watchItem?.name2}
+          yr={watchItem?.releaseYear}
+          ua={watchItem?.ua}
+          season={watchItem?.season}
+          lan={watchItem?.language?.length || 0}
+          desc={watchItem?.desc}
+          cat={watchItem?.category}
+          language={watchItem?.language}
+          add={props.add}
+          e={props.E}
+          play={props.play}
+        />
+      </div>
+      <Footer />
+    </>
+  );
+};
+
+export default Profile;

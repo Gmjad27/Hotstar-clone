@@ -1,3 +1,8 @@
+body {
+    background-color: #000000;
+    overflow-x: hidden;
+}
+
 .owner {
     position: fixed;
     right: 0;
@@ -7,33 +12,92 @@
     background-color: aqua;
 }
 
-.alert {
+.applogo{
+    width: 160px;
+}
+.img {
+    z-index: 10005;
     position: fixed;
-    top: 3%;
-    right: -400px;
-    background-color: rgba(0, 90, 0, 0.66);
-    width: 400px;
-    padding-left: 20px;
-    height: 40px;
-    border-radius: 5px;
-    border: 1px solid rgba(176, 176, 176, 0.46);
-    display: flex;
-    /* justify-content: center; */
-    align-items: center;
-    font-size: 30px;
-    color: rgba(199, 228, 253, 0.791);
-    font-weight: 400;
-    transition: all 0.3s ease-in-out;
+    height: 50px;
+    color: white;
+    /* font-size: 30px; */
+    /* font-weight: 600; */
+    left: 5px;
+    top: 10px;
+    width: 70px;
 }
 
 
+/* Base Alert Styling 
+  Includes a glassmorphism effect and dynamic sizing
+*/
+.alert {
+    position: fixed;
+    z-index: 10005;
+    top: 20px;
+    right: 20px;
+    
+    /* Replaces 'right: -425px'. Translates it completely off-screen to the right */
+    transform: translateX(120%); 
+    
+    /* Modern semi-transparent green with a background blur */
+    background-color: rgba(20, 83, 45, 0.85); 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    
+    /* Dynamic sizing instead of fixed widths/heights */
+    min-width: 250px;
+    max-width: 400px;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    
+    /* Smoother borders and a subtle shadow for depth */
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    
+    /* Layout */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    
+    /* Typography */
+    font-size: 16px;
+    font-weight: 500;
+    color: #e0f2fe; /* Clean, legible light blue */
+    font-family: system-ui, -apple-system, sans-serif;
+    
+    /* Bouncy, smooth transition for the slide-in */
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-@media (max-width:480px) {
+/* Trigger Class 
+  Add this class via JavaScript (e.g., element.classList.add('show')) to slide it in 
+*/
+.alert.show {
+    transform: translateX(0);
+}
+
+/* Mobile Responsiveness 
+*/
+@media (max-width: 480px) {
     .alert {
-        top: 6%;
-        padding-left: 5px;
-        font-size: small;
-        width: 140px;
-        height: 20px;
+        /* Pushes the alert to the top center, spanning the screen width */
+        top: 15px;
+        right: 15px;
+        left: 15px;
+        max-width: calc(100% - 30px);
+        min-width: auto;
+        
+        /* Slide in from the top instead of the right on mobile for better UX */
+        transform: translateY(-150%);
+        
+        padding: 12px 16px;
+        font-size: 14px;
+        justify-content: center; /* Centers the text on mobile */
+    }
+
+    .alert.show {
+        transform: translateY(0);
     }
 }

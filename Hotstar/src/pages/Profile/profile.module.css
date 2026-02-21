@@ -1,64 +1,199 @@
-.con {
-    padding-top: 30px;
-    /* border: 1px solid red; */
-    /* text-align: center; */
-    color: white;
-    padding-left: 150px;
-    height: 100vh;
+.page {
+  min-height: 100vh;
+  color: #fff;
+  background: radial-gradient(circle at 20% 0%, #1a1a1d 0%, #0a0a0b 45%, #060607 100%);
+  padding: 24px 18px 24px 150px;
 }
 
-.p_img {
-    /* border: 1px  solid green; */
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    background-image: url('https://png.pngtree.com/png-vector/20230420/ourmid/pngtree-dc-batman-logo-symbol-of-superhero-comic-cartoon-symbol-vector-png-image_51620966.jpg');
-    background-size: cover;
-    cursor: pointer;
-}
-
-.wraper {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: relative;
-    top: 60px;
+.hero {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
 .info {
-    position: relative;
-    /* top: 20px; */
-    left: -170px;
-    display: flex;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.p_img {
+  border-radius: 50%;
+  width: 76px;
+  height: 76px;
+  background-image: url('https://png.pngtree.com/png-vector/20230420/ourmid/pngtree-dc-batman-logo-symbol-of-superhero-comic-cartoon-symbol-vector-png-image_51620966.jpg');
+  background-size: cover;
+  background-position: center;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+.label {
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 1.2px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.name {
+  margin: 2px 0 6px;
+  font-size: clamp(1.4rem, 3.4vw, 2rem);
+  text-transform: capitalize;
+}
+
+.sub {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.stat {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  min-width: 92px;
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.stat span {
+  display: block;
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.stat p {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.logout {
+  border: none;
+  border-radius: 10px;
+  background: #b81f1f;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.logout:hover {
+  background: #d52525;
+}
+
+.rails {
+  margin-top: 20px;
+}
+
+.section {
+  margin-top: 10px;
+  height: 200px;
+}
+
+.heading {
+  margin: 0 0 8px;
+  font-size: 1.08rem;
+  letter-spacing: 0.4px;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  height: 400px;
+  position: relative;
+  bottom: 10%;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  padding: 10px 0 8px;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.empty {
+  margin-top: 20px;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 26px 20px;
+}
+
+.empty h2 {
+  margin: 0 0 8px;
+}
+
+.empty p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.empty button {
+  margin-top: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #fff;
+  color: #0a0a0b;
+  padding: 10px 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 14px 10px 86px;
+  }
+
+  .hero {
     flex-direction: column;
-    align-items: center;
-    width: fit-content;
+    align-items: flex-start;
+    padding: 14px;
+    gap: 12px;
+  }
 
-}
+  .p_img {
+    width: 58px;
+    height: 58px;
+  }
 
-.log button {
-    border: none;
-    background-color: brown;
-    color: white;
-    padding: 10px 40px;
-    border-radius: 10px;
-    font-weight: 900;
-    cursor: pointer;
-}
+  .sub {
+    font-size: 0.84rem;
+  }
 
-.log button:hover {
-    background-color: rgba(165, 42, 42, 0.877);
-}
+  .actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
 
-.wList {
-    display: flex;
-    gap: 10px;
-}
+  .stat {
+    min-width: 80px;
+  }
 
+  .heading {
+    font-size: 0.95rem;
+  }
 
-@media (max-width: 480) {
-    .info{
-        position: relative;
-        left: -40px;
-    }
+  .section{
+    height: 120px;
+  }
+  .track{
+    height: 120px;
+    position: relative;
+    bottom: 10%;
+  }
 }

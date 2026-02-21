@@ -1,62 +1,62 @@
-import React, { useState } from 'react'
-import './Banner.css'
-import { mediaData } from '../../content/contect'
+import React, { useMemo } from 'react';
+import './Banner.css';
+import { mediaData } from '../../content/contect';
 import { Link } from 'react-router-dom';
 
-// console.log(mediaData);
-
-const arr = [];
-
-
-
-
 const Banner = (props) => {
+    const previewImages = useMemo(
+        () => mediaData.slice(0, 5).map((item) => item.name),
+        []
+    );
+
+    const languageLabel = props.lan > 1 ? 'Languages' : 'Language';
+    const streamId =
+        props.type === 'movie'
+            ? `${props.type}/${props.tid}`
+            : `${props.type}/${props.tid}/1/1`;
 
     return (
         <>
             <div className="con">
                 <div className="information">
 
-                    <img src={props.name} className="name" />
+                    <img src={props.name} className="name" alt={props.desc ? `${props.desc.slice(0, 32)}...` : 'Title'} />
                     <div className="info">
                         <span> {props.ry} </span>
                         <span> {props.ua} </span>
                         <span> {props.season} </span>
-                        <span> {(props.lan)} Language </span>
+                        <span> {props.lan} {languageLabel} </span>
                     </div><br />
                     <div className="desc">{props.desc}</div>
                     <br />
                     <div className="info">
                         {props.cat?.map((key, index) => (
-                            <span key={index}>{key}</span>
+                            <span key={`${key}-${index}`}>{key}</span>
                         ))}
                     </div>
                     <br />
                     <div className="con2">
                         <div className="btn">
                             <Link to={'/stream'}>
-                                <button className="watch" onClick={() => {
-                                    props.play(props.type === 'movie' ? `${props.type}/${props.tid}` : `${props.type}/${props.tid}/1/1`)
-
-                                    console.log(props.tid);
-
-                                }}>Watch Now</button>
+                                <button className="watch" onClick={() => props.play(streamId)}>Watch Now</button>
                             </Link>
-                            <button className="add" onClick={() => {
-                                // alert('hello')
-                                props.add(props.id);
-                            }}>+</button>
+                            <button
+                                className="add"
+                                onClick={() => props.add(props.id)}
+                                aria-label="Add to watch list"
+                            >
+                                +
+                            </button>
                         </div>
                         <div className="sug">
-                            {
-                                mediaData.map((key) => {
-                                    arr.push(key.name)
-                                })}
-                            <div className="imgs" id='img1' style={{ backgroundImage: `url(${arr[0]})` }}></div>
-                            <div className="imgs" id='img2' style={{ backgroundImage: `url(${arr[1]})` }}></div>
-                            <div className="imgs" id='img3' style={{ backgroundImage: `url(${arr[2]})` }}></div>
-                            <div className="imgs" id='img4' style={{ backgroundImage: `url(${arr[3]})` }}></div>
-                            <div className="imgs" id='img5' style={{ backgroundImage: `url(${arr[4]})` }}></div>
+                            {previewImages.map((image, index) => (
+                                <div
+                                    key={index}
+                                    className={`imgs ${props.activePreviewIndex === index ? 'active-img' : ''}`}
+                                    id={`img${index + 1}`}
+                                    style={{ backgroundImage: `url(${image})` }}
+                                ></div>
+                            ))}
                             <div className='ex'></div>
 
                         </div>
@@ -65,7 +65,7 @@ const Banner = (props) => {
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default Banner
+export default Banner;

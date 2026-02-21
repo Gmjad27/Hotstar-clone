@@ -4,6 +4,7 @@ export const mediaData = [
     id: 80,
     tmdbId: 94997,
     img: "https://m.media-amazon.com/images/S/pv-target-images/c721fcded1dad89537ddc5ab7f7e62fbba0e84ff299600bc219beaa62c7fc75f._SX1080_FMjpg_.jpg",
+    mimg:"https://hips.hearstapps.com/hmg-prod/images/key-art-5-666c91cc12e22.jpg?crop=0.987xw:0.667xh;0.00160xw,0&resize=1200:*",
     nameImg: "https://img10.hotstar.com/image/upload/f_auto,h_124/sources/r1/cms/prod/1168/1739497021168-t",
     name: "https://img10.hotstar.com/image/upload/f_auto,q_90,w_384/sources/r1/cms/prod/2008/1739497092008-h",
     name2: "House of the Dragon",
@@ -20,6 +21,8 @@ export const mediaData = [
     id: 59,
     tmdbId: 66732,
     img: "https://occ-0-8407-2219.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABYWAcd9ZirxhTYn9PA6M5GWhbAXQNkVz0rxsTmseonoCHch1-efcTW5blCJ7mAg9a8yVSktoPIdDyx2lAiNjRYGHVceMBO4WXcyJ.jpg?r=8be",
+    mimg:"https://i.guim.co.uk/img/media/344f3917f3e40dbb745e498dd31ab84e4b098981/0_901_3000_2400/master/3000.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=cdadb2f0061a9d1671d268efdd5a572d",
+    
     nameImg: "https://image.tmdb.org/t/p/original/uyVM5qGksUzCgwo6UU0UrHex8Oj.png",
     name: "https://deadline.com/wp-content/uploads/2025/10/stranger-things-season-5-volume-1-episodes.jpg?w=681&h=383&crop=1",
     name2: "Stranger Things",
@@ -36,6 +39,8 @@ export const mediaData = [
     id: 61,
     tmdbId: 65494,
     img: "https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABYSZm4PV_00bGPdQPIvuhydEHANcFn_-JXX04n4uHkI357GJePBtuKKWkJluk7dLU0ivWJmSyzBedgKpGQ8OZDeXdecLZhSYoXqr.jpg?r=ae3",
+    
+    mimg:"https://images.hindustantimes.com/rf/image_size_630x354/HT/p2/2019/11/15/Pictures/_7c5e44ac-0796-11ea-9981-1b3e40a63bbf.jpg",
     nameImg: "https://occ-0-4875-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABfOtkswo7qobt204Rav41Sd4jt-9slDDScd5E5Ngc63MNxXe0dA-GlBTivawdu8l30WnZkrTS28CkUDj4D2LMWIJDFbty7rUvg.webp?r=3b9",
     name: "https://i.ytimg.com/vi/IISm8eHw9e0/maxresdefault.jpg",
     name2: "The Crown",
@@ -52,6 +57,8 @@ export const mediaData = [
     id: 64,
     tmdbId: 313369,
     img: "https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABe0k0-UurHVbx9fm2hTVfoTVYElSw7GWMcvc1JAfGPsqraunVJBWewzMWxs8GmB4an5YQM1BPv3Y37wubHYKAJZ50hBn0oEfpX-m.jpg?r=ada",
+    
+    mimg:"https://media.newyorker.com/photos/59097c742179605b11ad90e2/master/pass/Brody-La-La-Land.jpg",
     nameImg: "https://occ-0-4875-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABR5iJQNCkLMVp2jgHD4bqa3Q5BPzl_8JvXax3RF49uoWZTdk9jH9R05lY_LtcoY9PDqMCZR-lqISGZmoGfxorR2YWE3QZ_Q3bQ.webp?r=4d9",
     name: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxTRhOnYAv-ePVlcqeNIERRyX_QM8GFONep8LRpk7pOHR2pFvGzZdkz_jvsridSFFkoKE&usqp=CAU",
     name2: "La La Land",
@@ -68,6 +75,8 @@ export const mediaData = [
     id: 75,
     tmdbId: 1668,
     img: "https://m.media-amazon.com/images/S/pv-target-images/6451855fcae787c6b98621cb5e3ac41b295e2d7dd619f5a4ee2ca5033266d2b1._SX1080_FMjpg_.jpg",
+    
+    mimg:"https://resizing.flixster.com/G6YrlqcUM_3poAJiN3QDopTjlEU=/fit-in/705x460/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p183931_i_v9_ag.jpg",
     nameImg: "https://image.tmdb.org/t/p/original/blVfE2u4uytU0f8yUO2XvhNSS2Y.png",
     name: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMvjdqxSY1pTG-es6BElI1fw89NjRtc_1wVw&s",
     name2: "Friends",

@@ -1,48 +1,63 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styles from './stream.module.css';
 
 const Stream = (props) => {
-    // const id = `https://www.vidking.net/embed/${props.tid}?color=e50914&autoPlay=true&nextEpisode=true&episodeSelector=true`
-    // const id = `https://stream.techinmind.space/embed/${props.tid}?key=e11a7debaaa4f5d25b671706ffe4d2acb56efbd4`
-    const id = `https://vidsrc.cc/v2/embed/${props.tid}`
-    return (
-        <div style={{ height: '100vh', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            {/* <h1 style={{ color: 'white' }}>hello</h1> */}
-            {/* <iframe
-                src={id}
-                width="100%"
-                height="900"
-                frameBorder="0"
-                allow="fullscreen; autoplay"
-                allowFullScreen
-                title="Video Player"
-            /> */}
+  const mediaQuery = window.matchMedia('(min-width: 480px)');
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
+  const streamId = props.tid || '';
+  const src = useMemo(() => (streamId ? `https://vidsrc.cc/v2/embed/${streamId}` : ''), [streamId]);
+  const streamType = streamId ? String(streamId).split('/')[0].toUpperCase() : '';
 
-            <iframe src={id} class="w-full h-full" width="100%"
-                height="750"
-                frameborder="0" allowfullscreen="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                sandbox="allow-same-origin allow-scripts allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation-by-user-activation"
-                title="VidsrcCC">
-            </iframe>
+  return (
+    <div className={styles.container}>
+      {/* <br /><br /> */}
+      <header className={styles.topBar}>
+        <button type="button" className={styles.navBtn} onClick={() => navigate(-1)}>
+          <i className="fa-solid fa-chevron-left"></i> Back
+        </button>
 
-            {/* <iframe src="https://vidsrc.cc/v2/embed/movie/310307"
-                className="w-full h-full" frameborder="0" allowfullscreen=""
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                sandbox="allow-same-origin allow-scripts allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation-by-user-activation" title="VidsrcCC"></iframe> */}
-
-            {/* <iframe style={{ height: '100%', width: '100%', overflow: 'hidden', alignItems: 'center' }} src={id}
-                frameborder="0" scrolling="no" allow="autoplay; encrypted-media" allowfullscreen="">
-            </iframe> */}
-
-
-            {/* <iframe id="vidFreme" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-scripts allow-top-navigation-by-user-activation" allowfullscreen="">
-            </iframe> */}
-
-
-
-            {/* </iframe> */}
-            {/* <iframe src="https://www.vidking.net/embed/movie/1078605" width="100%" height="800" frameborder="0" allowfullscreen='true'> </iframe> */}
+        <div className={styles.meta}>
+          <p className={styles.title}>{streamType ? `${streamType} STREAM` : 'STREAM'}</p>
+          {streamId ? <span className={styles.streamTag}>{streamId}</span> : null}
         </div>
-    )
-}
 
-export default Stream
+        <div className={styles.actions}>
+          <button type="button" className={styles.navBtn} onClick={() => window.location.reload()}>
+            <i className="fa-solid fa-rotate-right"></i> Reload
+          </button>
+          <button type="button" className={styles.navBtn} onClick={() => navigate('/')}>
+            <i className="fa-solid fa-house"></i> Home
+          </button>
+        </div>
+      </header>
+
+      {src ? (
+        <div className={styles.playerFrame}>
+          <iframe
+            src={src}
+            className={styles.player}
+            width="100%"
+            height={mediaQuery.matches ? "770" : "270"}
+            frameBorder="0"
+            allowFullScreen
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            sandbox="allow-same-origin allow-scripts allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation-by-user-activation"
+            title="VidsrcCC"
+            onLoad={() => setIsLoading(false)}
+          ></iframe>
+        </div>
+      ) : (
+        <div className={styles.emptyWrap}>
+          <p className={styles.empty}>No stream selected.</p>
+          <button type="button" className={styles.goHome} onClick={() => navigate('/')}>
+            Browse Home
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Stream;

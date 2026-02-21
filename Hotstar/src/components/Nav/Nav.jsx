@@ -1,48 +1,56 @@
-import React from 'react'
+import React from 'react';
 // import pop from '../../assets/popcorn.svg'
-import './Nav.css'
-import { Link } from 'react-router-dom'
+import './Nav.css';
+import { NavLink } from 'react-router-dom';
 
 const Nav = () => {
+    const rawUser = localStorage.getItem('user');
+    let username = null;
 
-    const username = JSON.parse(localStorage.getItem('user'));
+    try {
+        username = rawUser ? JSON.parse(rawUser) : null;
+    } catch (error) {
+        username = null;
+    }
+
+    const profilePath =
+        username?.id && username?.name
+            ? `/profile?user=${encodeURIComponent(username.name)}`
+            : '/profile';
+
+    const navItems = [
+        { to: '/', icon: 'fa-solid fa-house', label: 'HOME' },
+        { to: '/search', icon: 'fa-solid fa-magnifying-glass', label: 'SEARCH' },
+        { to: '/tv', icon: 'fa-solid fa-tv', label: 'TV' },
+        { to: '/movies', icon: 'fa-solid fa-clapperboard', label: 'MOVIE' },
+        { to: profilePath, icon: 'fa-brands fa-product-hunt', label: 'Profile' },
+    ];
 
     return (
         <div className='nav'>
             <div className="logos">
-                <div className="img">CINE<span style={{ color: 'red' }}>FLIX</span></div>
-                <Link to='/' className='l'>
-                    <div className="la">
-                        <button><i className="fa-solid fa-house"></i></button><p>HOME</p>
-                    </div>
-                </Link>
-
-                <Link to='/search' className='l'>
-                    <div className="la">
-                        <button><i className="fa-solid fa-magnifying-glass"></i></button><p>SEARCH</p>
-                    </div>
-                </Link>
-
-                <Link to='/tv' className='l'>
-                    <div className="la">
-                        <button><i className="fa-solid fa-tv"></i></button><p>TV</p>
-                    </div>
-                </Link>
-                <Link to='/movies' className='l'>
-                    <div className="la">
-                        <button><i className="fa-solid fa-clapperboard"></i></button><p>MOVIE</p>
-                    </div>
-                </Link>
-                <Link to={`/profile?${username.id}user=${username.name}`} className='l'>
-                    <div className="la">
-                        <button><i className="fa-brands fa-product-hunt"></i></button><p>Profile</p>
-                    </div>
-                </Link>
+                {navItems.map((item) => (
+                    <NavLink
+                        key={item.label}
+                        to={item.to}
+                        className={({ isActive }) => `l ${isActive ? 'active' : ''}`}
+                        end={item.to === '/'}
+                    >
+                        <div className="la">
+                            {/* <button type="button" tabIndex={-1}> */}
+                            <p className='button'>
+                                <i className={item.icon}></i>
+                            </p>
+                            {/* </button> */}
+                            <p className='name button'>{item.label}</p>
+                        </div>
+                    </NavLink>
+                ))}
 
             </div>
 
         </div>
-    )
-}
+    );
+};
 
-export default Nav
+export default Nav;

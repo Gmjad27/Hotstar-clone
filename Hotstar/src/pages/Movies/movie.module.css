@@ -1,24 +1,155 @@
-.con {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* border: 1px solid red; */
-    position: relative;
-    padding: 30px;
-    /* left: 6%; */
-    width: 100%;
-    height: 100vh;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    scrollbar-width: none;
-    scroll-behavior: smooth;
+.page {
+  min-height: 100vh;
+  width: 100%;
+  color: #fff;
+  background: radial-gradient(circle at 20% 0%, #1c1c1f 0%, #0a0a0b 45%, #050506 100%);
+  padding-left: 140px;
+  padding-bottom: 20px;
 }
 
-.con2 {
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 70px;
+.hero {
+  min-height: 80vh;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px 28px;
+  box-shadow: inset 0 -120px 100px rgba(0, 0, 0, 0.75);
+}
+
+.heroContent {
+  max-width: 620px;
+}
+
+.badge {
+  margin: 0 0 10px;
+  letter-spacing: 1.3px;
+  font-size: 0.78rem;
+  color: #f1f1f1;
+  opacity: 0.9;
+}
+
+.heading {
+  width: 30%;
+}
+
+.meta {
+  margin: 12px 0;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.desc {
+  margin: 0;
+  max-width: 95%;
+  color: rgba(255, 255, 255, 0.84);
+  line-height: 1.45;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+}
+
+.playBtn,
+.moreBtn {
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.playBtn {
+  background: #fff;
+  color: #0b0b0d;
+}
+
+.moreBtn {
+  background: rgba(109, 109, 110, 0.78);
+  color: #fff;
+}
+
+.rails {
+  padding: 12px 20px 0;
+}
+
+.section {
+  height: 200px;
+  margin-top: 8px;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+  letter-spacing: 0.4px;
+}
+
+.track {
+  display: flex;
+  position: relative;
+  bottom: 10%;
+  height: 400px;
+  align-items: center;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  padding: 12px 0 8px;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding-left: 0;
+    padding-bottom: 84px;
+  }
+
+  .hero {
+    min-height: 46vh;
+    padding: 20px 12px 18px;
+    box-shadow: inset 0 -90px 80px rgba(0, 0, 0, 0.75);
+  }
+
+  .meta {
+    font-size: 0.85rem;
+  }
+
+  .desc {
+    font-size: 0.9rem;
+  }
+
+  .actions {
+    margin-top: 14px;
+  }
+
+  .playBtn,
+  .moreBtn {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .rails {
+    padding: 6px 10px 0;
+  }
+  .section{
+    height: 120px;
+  }
+
+  .title {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .track {
+    gap: 8px;
+    padding-top: 8px;
+    height: 120px;
+    position: relative;
+    bottom: 10%;
+    /* border: 1px solid red; */
+  }
 }

@@ -1,240 +1,190 @@
-import React, { useState, useEffect, useRef } from 'react'
-import styles from './Watch.module.css'
+import React, { useEffect, useMemo, useState } from 'react';
+import styles from './Watch.module.css';
 import { useNavigate } from 'react-router-dom';
 import { Data } from '../../content/movie';
 import Card from '../Card/Card';
 
+const getSeasonNumber = (seasonKey) => {
+  const parsed = Number(String(seasonKey).replace('s', ''));
+  return Number.isNaN(parsed) || parsed <= 0 ? 1 : parsed;
+};
+
 const Watch = (props) => {
-    let i = 0;
-    const navigate = useNavigate();
-    // const [seasonKey, setSeasonKey] = useState("");
-    const [videoId, setVideoId] = useState(null);
-    const [showTrailer, setShowTrailer] = useState(false);
-    const iframeRef = useRef(null);
-    const [ep, setep] = useState('s1')
-    const [season, setSeason] = useState(1);
-    // setep()
-    // iframeRef.current.src = '';
-    const closeWatch = () => {
-        setep('s1')
-        // console.log('s1');
+  const navigate = useNavigate();
+  const seasonKeys = Object.keys(props.s || {});
+  const [ep, setEp] = useState(seasonKeys[0] || 's1');
 
-        const watch = document.getElementById('watch');
-        const trailer = document.getElementById('trailer');
+  useEffect(() => {
+    setEp(seasonKeys[0] || 's1');
+  }, [props.mname, seasonKeys.join(',')]);
 
-        // Stop the video by removing and re-adding the iframe
-        if (iframeRef.current) {
-            const src = iframeRef.current.src;
-            // alert("video stoped.")
-            iframeRef.current.src = '';
-            iframeRef.current.src = src.replace('autoplay=1', 'autoplay=0');
-        }
+  const closeWatch = () => {
+    setEp(seasonKeys[0] || 's1');
 
-        watch.style.display = 'none';
-        trailer.style.display = 'none';
-    }
+    const watch = document.getElementById('watch');
+    const trailer = document.getElementById('trailer');
 
-    const getTrailerId = async () => {
-        const res = await fetch(
-            // `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${props.name2}+trailer&type=video&key=AIzaSyAWkoWUtb540XbGGINhQQkLVl-WpHjXzfI&maxResults=1`
-        );
+    if (watch) watch.style.display = 'none';
+    if (trailer) trailer.style.display = 'none';
+  };
 
-        const data = await res.json();
-        return data.items[0].id.videoId;
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') closeWatch();
     };
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            const src = iframeRef.current.src;
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
 
-            iframeRef.current.src = src.replace('autoplay=0', 'autoplay=1');
-            setTimeout(() => {
-                const trailer = document.getElementById('trailer');
-                if (trailer) {
-                    trailer.style.display = 'block';
-                }
-            }, [3000]);
-        }, 3000);
+  const handlePlayNow = () => {
+    const streamId =
+      props.type === 'movie'
+        ? `${props.type}/${props.id}`
+        : `${props.type}/${props.id}/1/1`;
 
-        getTrailerId().then(setVideoId);
+    props.play(streamId);
+    navigate(`/stream?name=${props.mname}&tmdb=${props.id}`);
+  };
 
-        // Cleanup function
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [props.name2]);
+  const onSelectSeason = (event) => {
+    setEp(event.target.value);
+  };
 
-    // Handle iframe load and add event listener for video end
-    useEffect(() => {
-        if (!videoId || !showTrailer) return;
+  const selectedSeason = getSeasonNumber(ep);
+  const episodeCount = props.s?.[ep] || 0;
 
-        const handleMessage = (event) => {
-            if (event.origin !== 'https://www.youtube.com') return;
+  const related = useMemo(() => {
+    const mainCategory = props.cat?.[0];
+    if (!mainCategory) return [];
 
-            let data;
-            try {
-                data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
-            } catch (e) {
-                return;
-            }
+    return Data.filter(
+      (item) =>
+        item.name2 !== props.mname &&
+        Array.isArray(item.category) &&
+        item.category.includes(mainCategory)
+    ).slice(0, 18);
+  }, [props.cat, props.mname]);
 
-            // Listen for state change events
-            if (data.event === 'onStateChange') {
-                // State 0 = video ended
-                if (data.info === 0) {
-                    setShowTrailer(false);
-                }
-            }
-        };
+  const renderMoreLikeThis = () => (
+    <section className={styles.relatedSection}>
+      <h2 className={styles.relatedTitle}>More Like This</h2>
+      <div className={styles.relatedTrack}>
+        {related.map((item) => (
+          <Card
+            key={item.id}
+            sow={props.sow || (() => { })}
+            id={item.id}
+            img={item.name}
+            name={item.name2}
+            ry={item.releaseYear}
+            ua={item.ua}
+            lan={item.language.length}
+            desc={item.desc}
+            s={item.season}
+            type={item.type}
+            tid={item.tmdbId}
+            add={(value) => props.add(value)}
+            e={props.e}
+            play={(tid) => props.play(tid)}
+          />
+        ))}
+      </div>
+    </section>
+  );
 
-        window.addEventListener('message', handleMessage);
+  return (
+    <div className={styles.con} id="watch">
 
-        return () => {
-            window.removeEventListener('message', handleMessage);
-        };
-    }, [videoId, showTrailer]);
+      <div className={styles.cl} onClick={closeWatch}></div>
+      <button type="button" className={styles.close} onClick={closeWatch} aria-label="Close">
+        <i className="fa-solid fa-xmark"></i>
+      </button>
 
-    return (
-        <div className={styles.con} id='watch'>
-            <div className={styles.cl} onClick={closeWatch}></div>
-            <div className={styles.close} onClick={() => {
-                closeWatch();
-            }}>
-                <i className="fa-solid fa-xmark"></i>
+      <div className={styles.watch}>
+        <div
+          className={styles.sec1}
+          style={{ backgroundImage: `url('${props.img}')` }}
+        >
+          <div className={styles.psec}>
+            <img src={props.name} className={styles.name} alt={props.mname} />
+            <div className={styles.info}>
+              <span>{props.yr}</span>
+              <span>{props.ua}</span>
+              <span>{props.season}</span>
+              <span>{props.lan} Languages</span>
+            </div>
+            <div className={styles.desc}>{props.desc}</div>
+
+            <div className={styles.cat}>
+              {props.cat?.map((key) => (
+                <span key={key}>{key}</span>
+              ))}
+            </div>
+            <div className={styles.lan}>
+              {props.language?.map((key) => (
+                <span key={key} className={styles.lang}>
+                  {key}
+                </span>
+              ))}
             </div>
 
-            <div className={styles.watch}>
-                <div className={styles.sec1} style={{ backgroundImage: `url('${props.img}')` }}>
-                    {/* <div>
-                        <iframe
-                            id='trailer'
-                            ref={iframeRef}
-                            className={styles.trailer}
-                            src={`https://www.youtube.com/embed/${videoId}?autoplay=0&loop=1&mute=0&controls=0&enablejsapi=1&modestbranding=1&showinfo=0&rel=0&iv_load_policy=3&fs=1&disablekb=0`}
-                            width="100%"
-                            height="500"
-                            frameBorder="0"
-                            allow="autoplay; encrypted-media"
-                            allowFullScreen={true}
-                        />
-                    </div> */}
-
-                    <div className={styles.psec}>
-                        <img src={props.name} className={styles.name} alt={props.mname} />
-                        <div className={styles.info}>
-                            <span>{props.yr}</span>
-                            <span>{props.ua}</span>
-                            <span>{props.season}</span>
-                            <span>{props.lan} Languages</span>
-                        </div>
-                        <div className={styles.desc}>{props.desc}</div>
-
-                        <div className={styles.cat}>
-                            {props.cat?.map((key, index) => (
-                                <span key={index}>{key}</span>
-                            ))}
-                        </div>
-                        <div className={styles.lan}>
-                            {props.language?.map((key, index) => (
-                                <span key={index} className={styles.lang}>{key}</span>
-                            ))}
-                        </div>
-
-                        <div className={styles.btns}>
-                            <button className={styles.play} onClick={() => {
-                                props.play(props.type === 'movie' ? `${props.type}/${props.id}` : `${props.type}/${props.id}/1/1`);
-                                navigate(`/stream?${props.mname}`)
-                            }}>Watch Now</button>
-                            <button className={styles.add}>+</button>
-                        </div>
-                    </div>
-                </div>
-                <div className={styles.con2}>
-                    {
-
-                        props.type === 'tv' ?
-
-                            // return (
-                            // {setep()}
-                            <>
-                                <select name="" onChange={(e) => {
-                                    setep(e.target.value);
-                                    setSeason(e.target.value.split('s')[1]);
-                                }} className={styles.select}>
-                                    {
-
-                                        Object.keys(props.s || {}).map((key, index) => (
-                                            <option key={key} value={key}>
-                                                SEASON-{index + 1}
-                                            </option>
-                                        ))
-                                    }
-
-                                </select>
-                                {ep && (
-                                    <>
-                                        <p className={styles.pa}>Episodes: {props.s[ep]}</p>
-                                        {/* {
-                                            alert(`tv/${props.id}/${season}/`)
-                                            
-                                        } */}
-
-
-                                        {
-                                            Array.from({ length: props.s[ep] }).map((_, i) => (
-                                                <div className={styles.epi} key={i} onClick={() => {
-                                                    props.play(`${props.type}/${props.id}/${season}/${i + 1}`);
-                                                    navigate(`/stream?${props.mname} ${props.id}/${season}/${i + 1}`)
-                                                }}>EPISODE {i + 1}</div>
-                                            ))
-                                        }
-
-                                    </>
-                                )}
-                            </>
-                            // )
-                            :
-                            <section className="sections">
-                                <h2 className="title">More like that</h2>
-                                <div className="content">{
-                                    Data.map((keys, index) => {
-
-                                        if (props.mname !== keys.name2) {
-
-                                            if (keys.category.includes(props.cat[0])) {
-                                                return (
-
-                                                    <Card key={index} sow={(i) => {
-                                                        sow(i);
-                                                    }} id={keys.id} img={keys.name} name={keys.name2} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
-                                                )
-                                            }
-                                        }
-                                        // else {
-                                        //     if (keys.category.includes(props.cat[0])) {
-                                        //         return (
-                                        //             <Card sow={(i) => {
-                                        //                 sow(i);
-                                        //             }} id={keys.id} img={keys.name} name={keys.name2} ry={keys.releaseYear} ua={keys.ua} lan={keys.language.length} desc={keys.desc} s={keys.season} type={keys.type} tid={keys.tmdbId} add={(e) => { props.add(e) }} e={props.e} play={(tid) => { props.play(tid) }} />
-                                        //         )
-                                        //     }
-                                        // }
-
-                                    })
-                                }
-                                </div>
-                            </section>
-                    }
-                    {
-                        // Object.keys(props.s || {}).map((keys, index) => {
-                        // console.log(ep)
-
-                        // })
-                    }
-                </div>
+            <div className={styles.btns}>
+              <button className={styles.play} onClick={handlePlayNow}>
+                Watch Now
+              </button>
+              <button
+                className={styles.add}
+                style={{
+                  backgroundColor: props.El === 'ADDED' ? 'green' : '#48484878',
+                }}
+                onClick={() => props.add(props.sid)}
+                aria-label={
+                  props.El === 'ADDED' ? 'Added to list' : 'Add to list'
+                }
+              >
+                {props.El === 'ADDED' ? <i className="fa-solid fa-check"></i> : '+'}
+              </button>
             </div>
+          </div>
         </div>
-    )
-}
 
-export default Watch
+        <div className={styles.con2}>
+          {props.type === 'tv' && seasonKeys.length > 0 && (
+            <>
+              <h3 className={styles.episodeTitle}>Episodes</h3>
+              <select value={ep} onChange={onSelectSeason} className={styles.select}>
+                {seasonKeys.map((key, index) => (
+                  <option className={styles.option} key={key} value={key}>
+                    SEASON-{index + 1}
+                  </option>
+                ))}
+              </select>
+
+              <div className={styles.episods}>
+                {Array.from({ length: episodeCount }).map((_, index) => (
+                  <div
+                    className={styles.epi}
+                    key={index}
+                    onClick={() => {
+                      const streamId = `${props.type}/${props.id}/${selectedSeason}/${index + 1}`;
+                      props.play(streamId);
+                      navigate(
+                        `/stream?name=${props.mname}&tmdb=${props.id}/${selectedSeason}/${index + 1}`
+                      );
+                    }}
+                  >
+                    EPISODE {index + 1}
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+          {renderMoreLikeThis()}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Watch;

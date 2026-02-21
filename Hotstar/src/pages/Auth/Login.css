@@ -1,169 +1,292 @@
-/* General Reset */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
 
-/* Find this class in your CSS and update min-height */
-.login-container {
-    /* ... previous styles ... */
-    min-height: auto;
-    /* Allow box to grow based on content */
-    padding-bottom: 60px;
-    /* Add padding at bottom for breathing room */
-}
-
-/* Background Setup */
 .login-page {
-    width: 100%;
-    min-height: 100vh;
-    /* Use a URL to a movie poster collage or a dark texture */
-    background-image: url('https://d3ghupt9z9s6o0.cloudfront.net/app/uploads/2017/04/13100509/Netflix-Background.jpg');
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  overflow-y: hidden;
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #09090b;
+  overflow: hidden;
 }
 
-/* Dark Gradient Overlay */
 .background-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    /* Darkens the image */
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%);
-    z-index: 0;
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(192, 24, 24, 0.3) 0%, rgba(192, 24, 24, 0) 45%),
+    radial-gradient(circle at 80% 82%, rgba(255, 116, 0, 0.18) 0%, rgba(255, 116, 0, 0) 45%),
+    linear-gradient(145deg, #0d0d10 0%, #070709 55%, #040405 100%);
 }
 
-/* Main Container */
-.login-container {
-    z-index: 1;
-    background-color: rgba(0, 0, 0, 0.75);
-    /* Semi-transparent black */
-    padding: 60px 68px 40px;
-    border-radius: 4px;
-    width: 100%;
-    max-width: 450px;
-    color: white;
-    min-height: 600px;
+.auth-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1060px, 94vw);
+  min-height: 620px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
 }
 
-/* Logo Styling */
+.auth-side {
+  padding: 52px 46px;
+  background:
+    linear-gradient(130deg, rgba(168, 22, 28, 0.88), rgba(84, 15, 14, 0.86));
+    /* url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1400&q=80'); */
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.side-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  margin: 26px 0 12px;
+  line-height: 1.16;
+}
+
+.side-text {
+  margin: 0;
+  font-size: 1.02rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 420px;
+  line-height: 1.5;
+}
+
+.login-container.auth-card {
+  background: rgba(13, 13, 15, 0.9);
+  color: #fff;
+  padding: 44px 42px 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.signup-container.auth-card {
+  min-height: 620px;
+}
+
 .logo-area {
-    margin-bottom: 20px;
-    text-align: center;
+  margin-bottom: 12px;
 }
 
 .logo-text {
-    color: #e50914;
-    /* Netflix Red */
-    font-size: 2.5rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+  color: #f41f2b;
+  font-size: 2rem;
+  letter-spacing: 1.4px;
+  margin: 0;
 }
 
 .logo-highlight {
-    color: white;
+  color: #fff;
 }
 
-/* Form Elements */
+.mobile-logo {
+  display: none;
+}
+
 .login-form h2 {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 28px;
+  margin: 6px 0 18px;
+  font-size: 1.95rem;
 }
 
 .input-group {
-    margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .input-group input {
-    width: 100%;
-    height: 50px;
-    background: #333;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    padding: 16px 20px;
-    font-size: 16px;
-    outline: none;
+  width: 100%;
+  height: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  padding: 0 14px;
+  font-size: 0.98rem;
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .input-group input:focus {
-    background: #454545;
+  border-color: rgba(244, 31, 43, 0.72);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-/* Error Message */
 .error-message {
-    color: #e87c03;
-    font-size: 13px;
-    margin-bottom: 15px;
+  color: #ffadad;
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+  padding: 9px 11px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 131, 131, 0.4);
+  background: rgba(141, 13, 13, 0.2);
 }
 
-/* Button */
 .signin-btn {
-    width: 100%;
-    padding: 16px;
-    background-color: #e50914;
-    /* Brand Red */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    font-weight: 700;
-    margin-top: 24px;
-    cursor: pointer;
-    transition: background 0.2s;
+  width: 100%;
+  margin-top: 8px;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: linear-gradient(90deg, #f41f2b, #d41520);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .signin-btn:hover {
-    background-color: #f40612;
+  transform: translateY(-1px);
 }
 
-/* Helpers (Remember me, Need help) */
+.signin-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.signin-btn.loading {
+  position: relative;
+  padding-right: 40px;
+}
+
+.signin-btn.loading::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-top-color: transparent;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  animation: spin 0.8s linear infinite;
+}
+
 .form-help {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    color: #b3b3b3;
-    margin-top: 10px;
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .form-help a {
-    color: #b3b3b3;
-    text-decoration: none;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
 }
 
-.form-help a:hover {
-    text-decoration: underline;
+.remember-me {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-/* Footer Area */
+.remember-me input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+}
+
 .login-footer {
-    margin-top: 50px;
-    color: #737373;
-    font-size: 16px;
+  margin-top: 22px;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.9rem;
 }
 
 .signup-link {
-    color: white;
-    text-decoration: none;
-    margin-left: 5px;
-}
-
-.signup-link:hover {
-    text-decoration: underline;
+  color: #fff;
+  text-decoration: none;
 }
 
 .recaptcha-text {
-    font-size: 13px;
-    margin-top: 15px;
-    text-align: left;
+  margin-top: 10px;
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+@keyframes spin {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+@media (max-width: 900px) {
+  .auth-shell {
+    width: min(560px, 94vw);
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .auth-side {
+    display: none;
+  }
+
+  .login-container.auth-card {
+    padding: 24px 18px 20px;
+    min-height: auto;
+  }
+
+  .mobile-logo {
+    display: block;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-page {
+    align-items: stretch;
+  }
+
+  .auth-shell {
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    min-height: 100vh;
+  }
+
+  .login-container.auth-card {
+    padding: 18px 12px 82px;
+    background: rgba(10, 10, 12, 0.95);
+  }
+
+  .login-form h2 {
+    font-size: 1.5rem;
+    margin-bottom: 14px;
+  }
+
+  .input-group input {
+    height: 46px;
+    font-size: 0.92rem;
+  }
+
+  .signin-btn {
+    font-size: 0.92rem;
+  }
+
+  .form-help {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .login-footer {
+    margin-top: 16px;
+    font-size: 0.82rem;
+  }
 }

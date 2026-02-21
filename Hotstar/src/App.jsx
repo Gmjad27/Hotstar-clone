@@ -55,17 +55,21 @@ function App() {
     setEl(prevEl => {
       if (prevEl.includes(e)) {
         const alert = document.getElementById('alert-r');
-        alert.style.right = '0px';
+        // alert.style.right = '0px';
+        alert.classList.add('show');
         setTimeout(() => {
-          alert.style.right = '-400px';
+          alert.classList.remove('show');
+          // alert.style.right = '-425px'
         }, 2000);
         console.log('Removed:', e);
         return prevEl.filter(item => item !== e);
       } else {
         const alert = document.getElementById('alert');
-        alert.style.right = '0px';
+        // alert.style.right = '0px';
+        alert.classList.add('show');
         setTimeout(() => {
-          alert.style.right = '-400px';
+          // alert.style.right = '-425px';
+          alert.classList.remove('show');
         }, 2000);
         console.log('Added:', e);
         return [...prevEl, e];
@@ -114,7 +118,7 @@ function App() {
 
   return (
     <>
-
+      <div className="img"><img className="applogo" src="src\assets\logo.svg" alt="cineflix" /></div>
       <Router>
         <Routes>
 
@@ -131,6 +135,7 @@ function App() {
                   <Home
                     stu={(stud, img) => sow(stud, img)}
                     add={(e) => add(e)}
+                    e={El}
                     play={(tid) => play(tid)}
                   />
                 </>
@@ -146,8 +151,8 @@ function App() {
                 <>
                   <Nav />
                   <Movie
-                    tu={(stud, img) => sow(stud, img)}
                     add={(e) => add(e)}
+                    e={El}
                     play={(tid) => play(tid)}
                   />
                 </>
@@ -163,8 +168,9 @@ function App() {
                 <>
                   <Nav />
                   <Tv
-                    tu={(stud, img) => sow(stud, img)}
+
                     add={(e) => add(e)}
+                    e={El}
                     play={(tid) => play(tid)}
                   />
                 </>
@@ -180,8 +186,9 @@ function App() {
                 <>
                   <Nav />
                   <Search
-                    tu={(stud, img) => sow(stud, img)}
+
                     add={(e) => add(e)}
+                    e={El}
                     play={(tid) => play(tid)}
                   />
                 </>
@@ -199,8 +206,9 @@ function App() {
                   <Studio
                     studio={studio}
                     img={Img}
-                    tu={(stud, img) => sow(stud, img)}
+
                     add={(e) => add(e)}
+                    e={El}
                     play={(tid) => play(tid)}
                   />
                 </>
@@ -219,6 +227,7 @@ function App() {
                     E={El}
                     tu={(stud, img) => sow(stud, img)}
                     add={(e) => add(e)}
+                    e={El}
                     play={(tid) => play(tid)}
                   />
                 </>

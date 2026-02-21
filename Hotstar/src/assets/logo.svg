@@ -1,0 +1,60 @@
+<svg width="800" height="250" viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="yellowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#FFEA00" />
+            <stop offset="50%" stop-color="#FFB300" />
+            <stop offset="100%" stop-color="#FF8F00" />
+        </linearGradient>
+
+        <linearGradient id="redGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#FF1744" />
+            <stop offset="50%" stop-color="#D50000" />
+            <stop offset="100%" stop-color="#8E0000" />
+        </linearGradient>
+
+        <linearGradient id="reelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#F5F5F5" />
+            <stop offset="100%" stop-color="#9E9E9E" />
+        </linearGradient>
+
+        <linearGradient id="beamGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#FFF59D" stop-opacity="0.6" />
+            <stop offset="100%" stop-color="#FFF59D" stop-opacity="0" />
+        </linearGradient>
+
+        <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="3" dy="5" stdDeviation="4" flood-color="#000000" flood-opacity="0.5" />
+        </filter>
+    </defs>
+
+    <polygon points="110,115 380,60 380,170" fill="url(#beamGrad)" style="mix-blend-mode: screen;" />
+
+    <text x="40" y="160" font-family="'Arial Black', Impact, sans-serif" font-size="120" font-weight="900"
+        filter="url(#shadow)" stroke="#222222" stroke-width="6" stroke-linejoin="round" letter-spacing="2">
+        <tspan fill="url(#yellowGrad)">CINE</tspan>
+        <tspan fill="url(#redGrad)">FLIX</tspan>
+    </text>
+
+    <text x="40" y="160" font-family="'Arial Black', Impact, sans-serif" font-size="120" font-weight="900"
+        letter-spacing="2">
+        <tspan fill="url(#yellowGrad)">CINE</tspan>
+        <tspan fill="url(#redGrad)">FLIX</tspan>
+    </text>
+
+    <g transform="translate(90, 118) scale(0.95)" filter="url(#shadow)">
+        <circle cx="0" cy="0" r="38" fill="url(#reelGrad)" stroke="#333" stroke-width="2" />
+
+        <circle cx="0" cy="-24" r="6.5" fill="#111" />
+        <circle cx="0" cy="24" r="6.5" fill="#111" />
+        <circle cx="-24" cy="0" r="6.5" fill="#111" />
+        <circle cx="24" cy="0" r="6.5" fill="#111" />
+        <circle cx="-17" cy="-17" r="6.5" fill="#111" />
+        <circle cx="17" cy="17" r="6.5" fill="#111" />
+        <circle cx="-17" cy="17" r="6.5" fill="#111" />
+        <circle cx="17" cy="-17" r="6.5" fill="#111" />
+
+        <circle cx="0" cy="0" r="16" fill="#111" stroke="#F5F5F5" stroke-width="2" />
+
+        <polygon points="-4,-7 8,0 -4,7" fill="url(#redGrad)" />
+    </g>
+</svg>
