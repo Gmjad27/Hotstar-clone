@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { mediaData, studio } from '../../content/contect';
 import Card from '../../components/Card/Card';
 import Watch from '../../components/Watch/Watch';
@@ -14,6 +14,7 @@ function Home(props) {
   const media = window.matchMedia('(max-width: 480px)');
 
   const navigate = useNavigate();
+  const location = useLocation();
   const [heroIndex, setHeroIndex] = useState(0);
   const [watchItem, setWatchItem] = useState(DEFAULT_WATCH_ITEM);
 
@@ -33,8 +34,34 @@ function Home(props) {
 
     setWatchItem(selected);
     const watch = document.querySelector('#watch');
+    // const home = document.querySelector('#homepage');
     if (watch) watch.style.display = 'block';
+    // if (watch) document.body.style.overflow = 'hidden';
+    // if (watch) document.body.classList.add("stop");
+
+    // if (watch) home.style.overflow = 'hidden';
+
+    navigate(`${location.pathname}?watch/id=${selected.id}&name=${selected.name2}`);
   };
+
+  const clearWatchFromUrl = () => {
+    navigate(location.pathname);
+  };
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const watchId = Number(params.get('watch'));
+    if (!watchId) return;
+
+    const selected = Data.find((item) => item.id === watchId);
+    if (!selected) return;
+
+    setWatchItem(selected);
+    const watch = document.querySelector('#watch');
+    if (watch) watch.style.display = 'block';
+    // if (watch) document.body.classList.add("stop");
+
+  }, [location.search]);
 
   const playHero = () => {
     if (!currentHero) return;
@@ -81,7 +108,7 @@ function Home(props) {
   );
 
   return (
-    <div className="homePage">
+    <div className="homePage" id="homepage">
       <section
         className="heroBanner"
         style={{
@@ -96,7 +123,7 @@ function Home(props) {
             className="heroTitleImage"
           />
           <p className="heroMeta">
-            {currentHero?.releaseYear} • {currentHero?.ua} • {currentHero?.season}
+            • {currentHero?.releaseYear} • {currentHero?.ua} • {currentHero?.season}
           </p>
           <p className="heroDescription">{currentHero?.desc}</p>
           <div className="heroActions">
@@ -156,6 +183,8 @@ function Home(props) {
       </div>
 
       <Watch
+        sow={openWatch}
+        onClose={clearWatchFromUrl}
         sid={watchItem?.id}
         El={Array.isArray(props.e) && props.e.includes(watchItem?.id) ? 'ADDED' : '+'}
         img={watchItem?.img}

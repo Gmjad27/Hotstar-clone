@@ -7,6 +7,10 @@
   background: radial-gradient(circle at 20% 0%, #1b1b1e 0%, #0a0a0b 45%, #050506 100%);
 }
 
+body.stop {
+  overflow: hidden;
+}
+
 .heroBanner {
   min-height: 82vh;
   background-size: cover;

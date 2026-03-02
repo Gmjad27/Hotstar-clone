@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './profile.module.css';
 import { Data } from '../../content/movie';
@@ -35,7 +35,26 @@ const Profile = (props) => {
     setWatchItem(selected);
     const watch = document.querySelector('#watch');
     if (watch) watch.style.display = 'block';
+    navigate(`${location.pathname}?watch/id=${selected.id}&name=${selected.name2}`);
   };
+
+  const clearWatchFromUrl = () => {
+    navigate(location.pathname);
+  };
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const watchId = Number(params.get('watch'));
+    if (!watchId) return;
+
+    const selected = Data.find((item) => item.id === watchId);
+    if (!selected) return;
+
+    setWatchItem(selected);
+    const watch = document.querySelector('#watch');
+    if (watch) watch.style.display = 'block';
+  }, [location.search]);
+
 
   const logout = () => {
     localStorage.clear();
@@ -49,8 +68,8 @@ const Profile = (props) => {
           key={item.id}
           sow={openWatch}
           id={item.id}
-          name={item.name2}
           img={item.name}
+          name={item.name2}
           ry={item.releaseYear}
           ua={item.ua}
           lan={item.language.length}
@@ -59,7 +78,7 @@ const Profile = (props) => {
           type={item.type}
           tid={item.tmdbId}
           add={props.add}
-          e={props.E}
+          e={props.e}
           play={props.play}
         />
       ))}
@@ -130,8 +149,10 @@ const Profile = (props) => {
         )}
 
         <Watch
+          sow={openWatch}
+          onClose={clearWatchFromUrl}
           sid={watchItem?.id}
-          El={Array.isArray(props.E) && props.E.includes(watchItem?.id) ? 'ADDED' : '+'}
+          El={Array.isArray(props.e) && props.e.includes(watchItem?.id) ? 'ADDED' : '+'}
           img={watchItem?.img}
           type={watchItem?.type}
           id={watchItem?.tmdbId}
@@ -147,7 +168,7 @@ const Profile = (props) => {
           cat={watchItem?.category}
           language={watchItem?.language}
           add={props.add}
-          e={props.E}
+          e={props.e}
           play={props.play}
         />
       </div>

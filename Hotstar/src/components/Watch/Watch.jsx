@@ -26,6 +26,10 @@ const Watch = (props) => {
 
     if (watch) watch.style.display = 'none';
     if (trailer) trailer.style.display = 'none';
+    // if (watch) document.body.style.overflow = 'auto';
+    // if (watch) document.body.classList.remove("stop");
+
+    if (typeof props.onClose === 'function') props.onClose();
   };
 
   useEffect(() => {
@@ -71,23 +75,31 @@ const Watch = (props) => {
       <h2 className={styles.relatedTitle}>More Like This</h2>
       <div className={styles.relatedTrack}>
         {related.map((item) => (
-          <Card
+          <div
             key={item.id}
-            sow={props.sow || (() => { })}
-            id={item.id}
-            img={item.name}
-            name={item.name2}
-            ry={item.releaseYear}
-            ua={item.ua}
-            lan={item.language.length}
-            desc={item.desc}
-            s={item.season}
-            type={item.type}
-            tid={item.tmdbId}
-            add={(value) => props.add(value)}
-            e={props.e}
-            play={(tid) => props.play(tid)}
-          />
+            onClick={() => {
+              if (typeof props.sow === 'function') {
+                props.sow(item.id);
+              }
+            }}
+          >
+            <Card
+              sow={props.sow || (() => { })}
+              id={item.id}
+              img={item.name}
+              name={item.name2}
+              ry={item.releaseYear}
+              ua={item.ua}
+              lan={item.language.length}
+              desc={item.desc}
+              s={item.season}
+              type={item.type}
+              tid={item.tmdbId}
+              add={(value) => props.add(value)}
+              e={props.e}
+              play={(tid) => props.play(tid)}
+            />
+          </div>
         ))}
       </div>
     </section>
@@ -104,7 +116,7 @@ const Watch = (props) => {
       <div className={styles.watch}>
         <div
           className={styles.sec1}
-          style={{ backgroundImage: `url('${props.img}')` }}
+          style={{ backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.88), rgba(0,0,0,0.2)),url('${props.img}')` }}
         >
           <div className={styles.psec}>
             <img src={props.name} className={styles.name} alt={props.mname} />
@@ -131,12 +143,12 @@ const Watch = (props) => {
 
             <div className={styles.btns}>
               <button className={styles.play} onClick={handlePlayNow}>
-                Watch Now
+                {props.type === 'movie' ? 'Play Now' : 'Play First Episode'}
               </button>
               <button
                 className={styles.add}
                 style={{
-                  backgroundColor: props.El === 'ADDED' ? 'green' : '#48484878',
+                  backgroundColor: props.El === 'ADDED' ? '#ff27e242' : '#48484878',
                 }}
                 onClick={() => props.add(props.sid)}
                 aria-label={

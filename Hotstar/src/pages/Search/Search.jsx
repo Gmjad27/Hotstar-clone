@@ -1,10 +1,12 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import Card from '../../components/Card/Card';
 import { Data } from '../../content/movie';
 import styles from './search.module.css';
 import Watch from '../../components/Watch/Watch';
+import { data, useNavigate } from 'react-router-dom';
 
 const DEFAULT_WATCH_ITEM = Data[0];
+// const [WatchItem, setWatchItem] = useState(second)
 const TRENDING_QUERIES = [
   'Action',
   'Sci-Fi',
@@ -31,8 +33,18 @@ const scoreItem = (item, value) => {
 
 const Search = (props) => {
   const [query, setQuery] = useState('');
+  const navigate = useNavigate();
   const [watchItem, setWatchItem] = useState(DEFAULT_WATCH_ITEM);
 
+  // const openWatch = (id) => {
+  //   const selected = Data.find((item) => item.id === id);
+  //   if (!selected) return;
+
+  //   setWatchItem(selected);
+  //   const watch = document.querySelector('#watch');
+  //   if (watch) watch.style.display = 'block';
+  // };
+  /////////////////////////////////////////////////////////////////
   const openWatch = (id) => {
     const selected = Data.find((item) => item.id === id);
     if (!selected) return;
@@ -40,7 +52,26 @@ const Search = (props) => {
     setWatchItem(selected);
     const watch = document.querySelector('#watch');
     if (watch) watch.style.display = 'block';
+    navigate(`${location.pathname}?watch/id=${selected.id}&name=${selected.name2}`);
   };
+
+  const clearWatchFromUrl = () => {
+    navigate(location.pathname);
+  };
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const watchId = Number(params.get('watch'));
+    if (!watchId) return;
+
+    const selected = Data.find((item) => item.id === watchId);
+    if (!selected) return;
+
+    setWatchItem(selected);
+    const watch = document.querySelector('#watch');
+    if (watch) watch.style.display = 'block';
+  }, [location.search]);
+  ////////////////////////////////////////////////////////////////////////////
 
   const normalizedQuery = query.trim().toLowerCase();
 
@@ -64,8 +95,8 @@ const Search = (props) => {
           key={item.id}
           sow={openWatch}
           id={item.id}
-          name={item.name2}
           img={item.name}
+          name={item.name2}
           ry={item.releaseYear}
           ua={item.ua}
           lan={item.language.length}
@@ -148,7 +179,16 @@ const Search = (props) => {
         )}
       </div>
 
+      {
+        Data.map((key) => {
+          <p>,</p>
+          return `, ${key.name2} `
+        })
+      }
+
       <Watch
+        sow={openWatch}
+        onClose={clearWatchFromUrl}
         sid={watchItem?.id}
         El={Array.isArray(props.e) && props.e.includes(watchItem?.id) ? 'ADDED' : '+'}
         img={watchItem?.img}

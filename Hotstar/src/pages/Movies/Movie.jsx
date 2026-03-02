@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useMemo, useState,useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './movie.module.css';
 import Card from '../../components/Card/Card';
 import Watch from '../../components/Watch/Watch';
@@ -9,6 +9,7 @@ const DEFAULT_WATCH_ITEM = Data[0];
 
 const Movie = (props) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [watchItem, setWatchItem] = useState(DEFAULT_WATCH_ITEM);
   const movies = useMemo(() => Data.filter((item) => item.type === 'movie'), []);
 
@@ -28,6 +29,15 @@ const Movie = (props) => {
     [movies]
   );
 
+  // const openWatch = (id) => {
+  //   const selected = Data.find((item) => item.id === id);
+  //   if (!selected) return;
+
+  //   setWatchItem(selected);
+  //   const watch = document.querySelector('#watch');
+  //   if (watch) watch.style.display = 'block';
+  // };
+  ////////////////////////////////////////////////////////////////////////////////////
   const openWatch = (id) => {
     const selected = Data.find((item) => item.id === id);
     if (!selected) return;
@@ -35,7 +45,26 @@ const Movie = (props) => {
     setWatchItem(selected);
     const watch = document.querySelector('#watch');
     if (watch) watch.style.display = 'block';
+    navigate(`${location.pathname}?watch/id=${selected.id}&name=${selected.name2}`);
   };
+
+  const clearWatchFromUrl = () => {
+    navigate(location.pathname);
+  };
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const watchId = Number(params.get('watch'));
+    if (!watchId) return;
+
+    const selected = Data.find((item) => item.id === watchId);
+    if (!selected) return;
+
+    setWatchItem(selected);
+    const watch = document.querySelector('#watch');
+    if (watch) watch.style.display = 'block';
+  }, [location.search]);
+  //////////////////////////////////////////////////////////////////////////////
 
   const playFeatured = () => {
     if (!featured) return;
@@ -49,8 +78,8 @@ const Movie = (props) => {
       key={item.id}
       sow={openWatch}
       id={item.id}
-      name={item.name2}
       img={item.name}
+      name={item.name2}
       ry={item.releaseYear}
       ua={item.ua}
       lan={item.language.length}
@@ -107,6 +136,8 @@ const Movie = (props) => {
       </div>
 
       <Watch
+        sow={openWatch}
+        onClose={clearWatchFromUrl}
         sid={watchItem?.id}
         El={Array.isArray(props.e) && props.e.includes(watchItem?.id) ? 'ADDED' : '+'}
         img={watchItem?.img}
