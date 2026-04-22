@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './Tv.module.css';
 import Card from '../../components/Card/Card';

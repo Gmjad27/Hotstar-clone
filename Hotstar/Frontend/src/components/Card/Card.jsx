@@ -26,7 +26,7 @@ const Card = (props) => {
       className={styles.card}
       style={{ backgroundImage: `url(${poster}), linear-gradient(to top left,#1119,#1119)` }}
       onClick={() => {
-        // openWatch();
+        openWatch();
         // navigate(`/watch?id=${props.id}&type=${props.type}`);
       }}
       title={props.name}

@@ -1,4 +1,4 @@
-import { useEffect, useState, lazy, Suspense } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import Nav from "./components/Nav/Nav";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';

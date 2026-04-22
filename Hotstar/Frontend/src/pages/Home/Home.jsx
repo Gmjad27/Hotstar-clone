@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, lazy, Suspense } from 'react';
+import React, { useEffect, useMemo, useState, lazy, Suspense, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 // import Card from '../../components/Card/Card';
 import Watch from '../../components/Watch/Watch';
@@ -9,7 +9,6 @@ const Footer = lazy(() => import("../../components/Footer/Footer"));
 // import Card2 from '../../components/Card/Card2';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import { STUDIO_COLLECTIONS, filterByStudioCollection } from '../../content/studios.js';
-import { useRef } from "react";
 
 import './Home.css';
 
