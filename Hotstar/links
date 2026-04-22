@@ -1,18 +1,31 @@
-
 <!-- video src -->
 <iframe src="https://vidsrc.cc/v2/embed/movie/310307" class="w-full h-full" frameborder="0" allowfullscreen=""
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     sandbox="allow-same-origin allow-scripts allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-presentation allow-top-navigation-by-user-activation"
     title="VidsrcCC"></iframe>
 
+<iframe id="video-iframe" class="aspect-video !w-full !h-auto rounded-lg" width="1280" height="720"
+    src="https://player.videasy.net/movie/338952?color=2ed573" title="Video player" frameborder="0" allowfullscreen=""
+    allowtransparency=""></iframe>
 
+
+<video crossorigin="" aria-hidden="true" preload=""
+    src="blob:https://hubstream.art/b84c1838-b994-47df-9d59-4292b1db3638" playsinline="">
+    <source src="https://shkn.omnivoracatering.sbs/v4/hz/n3n8al/cf-master.1768578932.txt" type="application/x-mpegurl"
+        data-vds="">
+    <track id="" src="/a-0ssHXIExd5ydfjD9AMPA/hz/unjaodja/nwbr38/en.vtt#en" label="en" kind="subtitles" default=""
+        srclang="en">
+</video>
 
 
 <!-- net mirror -->
 <iframe class="player-iframe"
     src="https://net51.cc/play.php?id=70212841&amp;in=38d1b9287ae048a542d87b9bf7d70e02::ec83025b1ad85cc2782e0ad8d757fdae::1768635169::ni"
-    allowfullscreen=""></iframe>
+    allowfullscreen="">
+</iframe>
 
+<!-- source links -->
+https://www.vidking.net/embed/movie/1078605
 
 
 <!-- plateform links -->

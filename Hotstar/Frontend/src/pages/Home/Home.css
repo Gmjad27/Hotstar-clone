@@ -1,0 +1,463 @@
+/* =========================================
+   Theme Variables (Matches the Modal)
+   ========================================= */
+:root {
+  --bg-dark: #050506;
+  --bg-mid: #0a0a0b;
+  --bg-light: #1b1b1e;
+  --text-main: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.75);
+  --text-dim: rgba(255, 255, 255, 0.5);
+  --accent: #e50914;
+  /* Netflix Red */
+  --accent-glow: rgba(229, 9, 20, 0.4);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-hover: rgba(255, 255, 255, 0.2);
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================
+   Base & Layout
+   ========================================= */
+body.stop {
+  overflow: hidden;
+}
+
+.homePage {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  color: var(--text-main);
+  background: radial-gradient(circle at 20% 0%, var(--bg-light) 0%, var(--bg-mid) 45%, var(--bg-dark) 100%);
+  overflow-x: hidden;
+}
+
+/* =========================================
+   Hero Banner Section
+   ========================================= */
+.heroBanner {
+  height: 90vh;
+  background-size: cover;
+  background-position: center top;
+  display: flex;
+  align-items: flex-end;
+  /* Smooth bottom fade into the background */
+  background-image: linear-gradient(to bottom,
+      rgba(10, 10, 11, 0) 50%,
+      var(--bg-dark) 100%);
+  transition: background-image var(--transition);
+}
+
+.heroContent {
+  padding: 40px 40px 40px 40px;
+  max-width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.heroBadge {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.heroTitleImage {
+  width: min(450px, 90%);
+  max-height: 200px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
+}
+
+.heroMeta {
+  margin: 16px 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.heroDescription {
+  width: 70%;
+  margin: 0;
+  color: var(--text-main);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Action Buttons */
+.heroActions {
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
+}
+
+.playAction,
+.infoAction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 12px 24px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--transition), background var(--transition);
+}
+
+.playAction {
+  background: var(--text-main);
+  color: #000;
+}
+
+.playAction:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(1.05);
+}
+
+.infoAction {
+  color: var(--text-main);
+  background: rgba(109, 109, 110, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.infoAction:hover {
+  background: rgba(109, 109, 110, 0.9);
+  transform: scale(1.05);
+}
+
+/* Hero Thumbnails */
+.heroThumbs {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+}
+
+.thumb {
+  width: 70px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  border: 2px solid transparent;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all var(--transition);
+}
+
+.thumb:hover {
+  opacity: 1;
+}
+
+.thumbActive {
+  border-color: var(--text-main);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* =========================================
+   Movie Rails & Track Sections
+   ========================================= */
+.homeShell {
+  position: relative;
+  overflow: hidden;
+  padding: 2px 0 40px 30px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* margin-bottom: -20px; */
+  /* padding-right: 4%; */
+}
+
+.homeTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+}
+
+.trackBtns {
+  display: flex;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.scrollBtn {
+  pointer-events: auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-bg);
+  color: var(--text-main);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+
+.scrollBtn:hover {
+  background: var(--text-main);
+  color: #000;
+  transform: scale(1.1);
+}
+
+.homeTrack,
+.studioTrack {
+  display: flex;
+  /* overflow: hidden; */
+  align-items: center;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  /* Firefox */
+  padding: 16px 4% 32px 0;
+  /* Extra bottom padding for hover effects */
+  scroll-behavior: smooth;
+}
+
+.homeTrack::-webkit-scrollbar,
+.studioTrack::-webkit-scrollbar {
+  display: none;
+  /* Chrome/Safari */
+}
+
+/* =========================================
+   Top 10 Rankings Cards
+   ========================================= */
+.cardrank {
+  display: flex;
+  width: 300px;
+  height: 320px;
+  align-items: center;
+  /* position: relative; */
+  /* overflow: hidden; */
+  /* border: 1px solid red; */
+}
+
+.rank {
+  /* border: 1px solid var(--text-dim); */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  width: 60px;
+  height: 50px;
+  /* Give it a bit more breathing room */
+  left: 10px;
+  /* top: 103px; */
+  font-size: 160px;
+  font-weight: 900;
+  letter-spacing: -15px;
+  color: transparent;
+  
+  -webkit-text-stroke: 3px var(--text-dim);
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+  z-index: 3;
+  transition: all var(--transition);
+}
+
+.top10 {
+  position: relative;
+  width: 150px;
+  height: 100px;
+  /* z-index: 1; */
+  transition: transform var(--transition), box-shadow var(--transition);
+  border-radius: var(--radius-md);
+}
+
+/* Ranking Hover Effects */
+.cardrank:hover .rank {
+  -webkit-text-stroke: 3px var(--accent);
+  color: var(--accent-glow);
+  z-index: 1;
+}
+
+.cardrank:hover .top10 {
+  transform: translateX(10px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(229, 9, 20, 0.3);
+}
+
+/* =========================================
+   Responsive / Mobile View
+   ========================================= */
+@media (max-width: 768px) {
+  .homePage {
+    padding-left: 0;
+  }
+
+  .heroBanner {
+    padding-left: 0;
+    margin-left: 0;
+    height: 80vh; /* Slightly taller to fit elements */
+    background-image: linear-gradient(
+      to bottom,
+      rgba(10, 10, 11, 0) 40%,
+      var(--bg-dark) 100%
+    );
+  }
+
+  .heroContent {
+
+    padding: 4px 20px 20px 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Badge / IMDB Rating Style */
+  .heroBadge {
+    font-size: 0.8rem;
+    color: #f5c518; /* IMDB Yellow */
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .heroTitleImage {
+    width: auto;
+    max-width: 250px;
+    max-height: 80px;
+    margin-bottom: 8px;
+    object-fit: contain;
+    object-position: left;
+  }
+
+  .heroMeta {
+    display: none; /* Hidden to keep UI clean like the image */
+  }
+
+  /* Un-hide and style the genre description ("Action, Superhero...") */
+  .heroDescription {
+    display: block; 
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.75);
+    width: 100%;
+    margin-bottom: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Creates the "..." effect */
+  }
+
+  .heroActions {
+    margin-top: 0;
+    width: 100%;
+    gap: 12px;
+  }
+
+  /* Wide Red Pill Button */
+  .playAction {
+    flex: 0 auto;  
+    /* Takes up remaining width */
+    background: #e50914; 
+    /* Netflix/App Red */
+    color: #fff;
+    width: 200px;
+    /* padding: 14px 10px; */
+    border-radius: 30px; /* Pill shape */
+    font-size: 1.05rem;
+  }
+
+  /* Circular Dark Button */
+  .infoAction {
+    flex: 0 0 auto; /* Prevents stretching */
+    width: 120px;
+    height: 50px;
+    padding: 0;
+    border-radius: 30px; /* Perfect circle */
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Centered Thumbnail Track */
+  .heroThumbs {
+    margin-top: 24px;
+    width: 100%;
+    gap: 10px;
+    justify-content: center; /* Centers them under the buttons */
+  }
+
+  .thumb {
+    width: 56px;
+    height: 32px;
+    border-radius: 6px;
+  }
+ 
+
+  .homeShell {
+    padding: 10px 0 60px 20px;
+  }
+
+  .sectionHeader {
+    margin-bottom: -3px;
+  }
+
+  .homeTitle {
+    font-size: 1.1rem;
+  }
+
+  .trackBtns {
+    display: none;
+    /* Rely on touch scrolling */
+  }
+
+  .homeTrack,
+  .studioTrack {
+    gap: 12px;
+    padding: 8px 20px 16px 0;
+    scroll-snap-type: x mandatory;
+  }
+
+  .homeTrack>*,
+  .studioTrack>* {
+    scroll-snap-align: start;
+  }
+
+  /* Mobile Top 10 Adjustments */
+  .cardrank{
+    /* width: 200px; */
+    height: 150px;
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* overflow: hidden; */
+  }
+  .rank {
+    /* height: 20px; */
+    /* overflow: hidden; */
+    top: -20px;
+    font-size: 110px;
+    
+    width: 50px;
+    /* left: 0px; */
+    -webkit-text-stroke: 2px var(--text-dim);
+  }
+
+  .cardrank:hover .top10 {
+    transform: none;
+    /* Disable hover scale on touch devices */
+    box-shadow: none;
+  }
+}

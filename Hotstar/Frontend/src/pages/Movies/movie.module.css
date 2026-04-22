@@ -1,0 +1,306 @@
+/* =========================================
+   Theme Variables (Consistent across app)
+   ========================================= */
+:root {
+  --bg-dark: #050506;
+  --bg-mid: #0a0a0b;
+  --bg-light: #1c1c1f;
+  --text-main: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.75);
+  --text-dim: rgba(255, 255, 255, 0.5);
+  --accent: #e50914;
+  /* Streaming Red */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-hover: rgba(255, 255, 255, 0.2);
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================
+   Base Layout
+   ========================================= */
+.page {
+  min-height: 100vh;
+  width: 100%;
+  color: var(--text-main);
+  background: radial-gradient(circle at 20% 0%, var(--bg-light) 0%, var(--bg-mid) 45%, var(--bg-dark) 100%);
+  /* Note: Assuming you kept the left side nav based on this padding. 
+     If using the Top Nav from earlier, change this to padding-left: 0; */
+  /* padding-left: 140px;  */
+  padding-bottom: 40px;
+}
+
+/* =========================================
+   Hero Banner Detail Section
+   ========================================= */
+.hero {
+  position: relative;
+  min-height: 75vh;
+  background-position: center top;
+  background-size: cover;
+  display: flex;
+  align-items: flex-end;
+  /* Smooth gradient fade into the background below */
+  background-image: linear-gradient(to bottom,
+      rgba(10, 10, 11, 0) 40%,
+      var(--bg-dark) 100%);
+  padding: 40px 2%;
+}
+
+.heroContent {
+  max-width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.badge {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.heading {
+  width: min(400px, 80%);
+  max-height: 180px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.6));
+}
+
+.meta {
+  margin: 16px 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.desc {
+  margin: 0;
+  width: 90%;
+  color: var(--text-main);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Action Buttons */
+.actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
+}
+
+.playBtn,
+.moreBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 12px 28px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--transition), background var(--transition);
+}
+
+.playBtn {
+  background: var(--text-main);
+  color: #000;
+}
+
+.playBtn:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(1.05);
+}
+
+.moreBtn {
+  color: var(--text-main);
+  background: rgba(109, 109, 110, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.moreBtn:hover {
+  background: rgba(109, 109, 110, 0.9);
+  transform: scale(1.05);
+}
+
+/* =========================================
+   Related Rails / Tracks
+   ========================================= */
+.rails {
+  padding: 20px 0 0 2%;
+}
+
+.title {
+  margin: 20px 0 12px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: none;
+  /* Firefox */
+  padding: 12px 6% 24px 0;
+  /* Right and bottom padding for hover scaling */
+  scroll-behavior: smooth;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+  /* Chrome/Safari */
+}
+
+/* =========================================
+   Responsive / Mobile View
+   ========================================= */
+@media (max-width: 768px) {
+  .page {
+    padding-left: 0;
+    padding-bottom: 100px;
+    /* Space for the bottom mobile nav bar */
+  }
+
+  /* =========================================
+   Responsive / Mobile View (Movie Banner)
+   ========================================= */
+  @media (max-width: 768px) {
+
+    /* 1. Adjust the Hero Container */
+    .hero {
+      min-height: 65vh;
+      /* Perfect height for mobile viewports */
+      padding: 0 20px 24px;
+      background-image: linear-gradient(to bottom,
+          rgba(10, 10, 11, 0) 30%,
+          var(--bg-dark) 100%);
+    }
+
+    /* 2. Turn content into a Flex Column so we can reorder items */
+    .heroContent {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    /* 3. Badge (e.g., "On Trending") */
+    .badge {
+      order: 1;
+      font-size: 0.75rem;
+      margin-bottom: 8px;
+      background: #e50914;
+      /* Red badge background */
+      color: #fff;
+      padding: 4px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      text-shadow: none;
+    }
+
+    /* 4. Movie Logo Image */
+    .heading {
+      order: 2;
+      width: auto;
+      max-width: 260px;
+      max-height: 80px;
+      margin-bottom: 12px;
+      object-position: left;
+      /* Keep image aligned to the left */
+    }
+
+    /* 5. Meta Data (Year • Action • 1 Season) */
+    .meta {
+      order: 3;
+      font-size: 0.85rem;
+      margin: 0 0 16px 0;
+      gap: 6px;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    /* 6. Action Buttons - Moved BEFORE the description */
+    .actions {
+      order: 4;
+      width: 100%;
+      margin: 0 0 16px 0;
+      gap: 12px;
+    }
+
+    /* Wide Red Pill Play Button */
+    .playBtn {
+      /* flex: 0; */
+      /* width: 200px; */
+      /* Stretches to fill available space */
+      background: #e50914;
+      color: #fff;
+      border-radius: 30px;
+      /* Pill shape */
+      padding: 14px 20px;
+      font-size: 1.05rem;
+    }
+
+    /* Circular Secondary Button (Bookmark/Info) */
+    .moreBtn {
+      /* flex: 0; */
+      /* Prevents stretching */
+      /* width: 110px; */
+      height: 50px;
+      border-radius: 30px;
+      padding: 0 20px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* 7. Description - Moved BELOW the buttons and truncated */
+    .desc {
+      order: 5;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      color: rgba(255, 255, 255, 0.65);
+      width: 100%;
+
+      /* Truncates text after 3 lines with an ellipsis (...) */
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+
+  .rails {
+    padding: 10px 0 0 20px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .track {
+    gap: 12px;
+    padding: 8px 20px 16px 0;
+    scroll-snap-type: x mandatory;
+    /* Native smooth snapping */
+  }
+
+  .track>* {
+    scroll-snap-align: start;
+  }
+}

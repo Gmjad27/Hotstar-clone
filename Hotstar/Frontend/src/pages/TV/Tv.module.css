@@ -1,0 +1,384 @@
+/* =========================================
+   Theme Variables (Consistent across app)
+   ========================================= */
+:root {
+  --bg-dark: #050506;
+  --bg-mid: #0a0a0b;
+  --bg-light: #1c1c1f;
+  --text-main: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.75);
+  --accent: #e50914;
+  /* Streaming Red */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-hover: rgba(255, 255, 255, 0.2);
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =========================================
+   Base Layout
+   ========================================= */
+.page {
+  min-height: 100vh;
+  width: 100%;
+  color: var(--text-main);
+  background: radial-gradient(circle at 20% 0%, var(--bg-light) 0%, var(--bg-mid) 45%, var(--bg-dark) 100%);
+  /* Assuming the top nav from earlier is used, this would be 0. 
+     If using the left side nav, keep this at ~90px to 140px */
+  /* padding-left: 0; */
+  padding-bottom: 40px;
+}
+
+/* =========================================
+   Hero Detail Banner
+   ========================================= */
+.hero {
+  position: relative;
+  min-height: 75vh;
+  /* 80vh is often too tall for smaller laptops */
+  background-position: center top;
+  background-size: cover;
+  display: flex;
+  align-items: flex-end;
+  /* Replaced box-shadow with a smooth gradient fade */
+  background-image: linear-gradient(to bottom,
+      rgba(5, 5, 6, 0) 40%,
+      var(--bg-dark) 100%);
+  padding: 40px 2%;
+}
+
+.heroContent {
+  max-width: 100%;
+  position: relative;
+  z-index: 2;
+  /* Ensures text stays above any absolute elements */
+}
+
+.badge {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.heading {
+  width: min(400px, 80%);
+  max-height: 160px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.5));
+}
+
+.meta {
+  margin: 16px 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.desc {
+  margin: 0;
+  max-width: 95%;
+  color: var(--text-main);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* =========================================
+   Action Buttons
+   ========================================= */
+.actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
+}
+
+.playBtn,
+.moreBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 12px 28px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--transition), background var(--transition);
+}
+
+.playBtn {
+  background: var(--text-main);
+  color: #000;
+}
+
+.playBtn:hover {
+  background: rgba(255, 255, 255, 0.85);
+  transform: scale(1.05);
+}
+
+.moreBtn {
+  color: var(--text-main);
+  background: rgba(109, 109, 110, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.moreBtn:hover {
+  background: rgba(109, 109, 110, 0.9);
+  transform: scale(1.05);
+}
+
+/* =========================================
+   Related Rails & Tracks
+   ========================================= */
+.rails {
+  position: relative;
+  padding: 30px 2px 60px 2%;
+  /* Pulls the rails slightly up into the dark part of the hero fade */
+  margin-top: -40px;
+  z-index: 5;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+}
+
+.title {
+  margin: 0 0 12px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: visible;
+  /* Prevents clipping if cards scale up on hover */
+  scrollbar-width: none;
+  padding: 8px 6% 32px 0;
+  /* Generous bottom padding for hover effects */
+  scroll-behavior: smooth;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+/* =========================================
+   Responsive / Mobile View
+   ========================================= */
+@media (max-width: 768px) {
+  .page {
+    padding-left: 0;
+    padding-bottom: 90px;
+    /* Space for mobile nav bar */
+  }
+
+  /* =========================================
+   Hero Banner Detail Section (Cinematic Desktop)
+   ========================================= */
+
+  /* Entrance Animation Keyframes */
+ @keyframes cinematicZoom {
+  0% { background-size: 100%; }
+  100% { background-size: 115%; }
+}
+
+@keyframes fadeUpReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes buttonShine {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; }
+}
+
+  .hero {
+    min-height: 65vh;
+    /* padding: 0 20px 24px; */
+    background-repeat: no-repeat;
+    /* background-position: center; */
+    background-size: cover;
+    /* background-position: center top; */
+
+    background-image: linear-gradient(to bottom,
+        rgba(10, 10, 11, 0) 30%,
+        var(--bg-dark) 100%);
+    overflow: hidden;
+    /* Prevents zoom clipping */
+    animation: cinematicZoom 25s linear infinite alternate;
+    /* Slow breathing effect */
+  }
+
+  /* 2. Flex Column Setup */
+  .heroContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Prime all children for the staggered reveal */
+  .heroContent>* {
+    opacity: 0;
+    animation: fadeUpReveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  /* 3. Badge (Enters 1st) */
+  .badge {
+    order: 1;
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+    background: #e50914;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    text-shadow: none;
+    animation-delay: 0.1s;
+  }
+
+  /* 4. Movie Logo Image (Enters 2nd) */
+  .heading {
+    order: 2;
+    width: auto;
+    max-width: 260px;
+    max-height: 80px;
+    margin-bottom: 12px;
+    object-position: left;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+    animation-delay: 0.2s;
+  }
+
+  /* 5. Meta Data (Enters 3rd) */
+  .meta {
+    order: 3;
+    font-size: 0.85rem;
+    margin: 0 0 16px 0;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.75);
+    animation-delay: 0.3s;
+  }
+
+  /* 6. Action Buttons (Enters 4th) */
+  .actions {
+    order: 4;
+    width: 100%;
+    margin: 0 0 16px 0;
+    gap: 12px;
+    animation-delay: 0.4s;
+  }
+
+  /* Shining Red Play Button */
+  .playBtn {
+    /* flex: 0; */
+    background: #e50914;
+    color: #fff;
+    border-radius: 30px;
+    padding: 14px 20px;
+    font-size: 1.05rem;
+    position: relative;
+    overflow: hidden;
+    /* Keeps the shine inside */
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  /* The sweeping light beam */
+  .playBtn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-25deg);
+    animation: buttonShine 5s infinite;
+  }
+
+  .playBtn:active {
+    transform: scale(0.95);
+    /* Satisfying touch shrink */
+  }
+
+  /* Frosted Glass Secondary Button */
+  .moreBtn {
+    /* flex: 0 0 auto; */
+    /* width: 50px; */
+    height: 50px;
+    border-radius: 30px;
+    padding: 0 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    /* Safari support */
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .moreBtn:active {
+    transform: scale(0.95);
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* 7. Description (Enters Last) */
+  .desc {
+    order: 5;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.65);
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    animation-delay: 0.5s;
+  }
+
+
+  .rails {
+    padding: 0 0 0 5%;
+    margin-top: -10px;
+  }
+
+  .section {
+    margin-top: 24px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .track {
+    gap: 12px;
+    padding: 8px 5% 16px 0;
+    scroll-snap-type: x mandatory;
+  }
+
+  .track>* {
+    scroll-snap-align: start;
+  }
+}
