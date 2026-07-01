@@ -127,26 +127,29 @@ const Tv = (props) => {
   return (
     <div className={styles.page}>
       {featured && (
-        <section className={styles.hero} style={{ backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.88), rgba(0,0,0,0.25)), url(${media.matches ? featured.name : featured.img})` }}>
-          <div className={styles.heroContent}>
-            <p className={styles.badge}>TV SHOW</p>
-            <h1>{featured.name2}</h1>
-            <p className={styles.meta}>{featured.releaseYear} • {featured.ua} • {featured.season}</p>
-            <p className={styles.desc}>{featured.desc}</p>
-            <div className={styles.actions}>
-              <button type="button" className={styles.playBtn} onClick={playFeatured}>
-                <i className="fa-solid fa-play"></i> Play
-              </button>
-              <button
-                type="button"
-                className={styles.moreBtn}
-                onClick={() => openWatch(featured.id)}
-              >
-                More Info
-              </button>
+        <div className={styles.heroBannerWrap}>
+          <section className={styles.heroBanner}>
+            <div className={styles.heroBg} style={{ backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.88), rgba(0,0,0,0.25)), url(${media.matches ? featured.name : featured.img})` }}></div>
+            <div className={styles.heroContent}>
+              <p className={styles.badge}>TV SHOW</p>
+              <h1 className={styles.heroTitle}>{featured.name2}</h1>
+
+              <p className={styles.desc}>{featured.desc}</p>
+              <div className={styles.actions}>
+                <button type="button" className={styles.btnWatch} onClick={playFeatured}>
+                  <i className="fa-solid fa-play"></i> Play
+                </button>
+                <button
+                  type="button"
+                  className={styles.btnWatch + ' ' + styles.more}
+                  onClick={() => openWatch(featured.id)}
+                >
+                  More Info
+                </button>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       )}
 
       <div className={styles.rails}>

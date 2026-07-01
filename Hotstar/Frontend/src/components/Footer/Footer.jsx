@@ -8,7 +8,8 @@ const Footer = () => {
             <div className="sec">
                 <h3>Company</h3>
 
-                <p>About Us</p>
+                <p><Link to={'/'}>Home</Link></p>
+                <p><Link to={'/detail'}>About Us</Link></p>
                 <p>Careers</p><br /><br />
                 <p>&copy; 2026 GIRISH JADAV M. All Rights Reserved.</p>
                 <p>Just a College Project. Not promoting piracy.</p>

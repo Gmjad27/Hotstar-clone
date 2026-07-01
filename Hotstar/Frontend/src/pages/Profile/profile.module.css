@@ -1,28 +1,7 @@
 /* =========================================
    Theme Variables (Premium Streaming System)
    ========================================= */
-:root {
-  --bg-dark: #050506;
-  --bg-mid: #0a0a0b;
-  --bg-light: #16161a;
-  --text-main: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.7);
-  --text-dim: rgba(255, 255, 255, 0.45);
-  
-  /* Hotstar-style Blue Accents */
-  --accent: #1a5cff;
-  --accent-glow: rgba(26, 92, 255, 0.25);
-  --accent-gradient: linear-gradient(135deg, #1a5cff 0%, #7c3aed 100%);
-  
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-hover: rgba(255, 255, 255, 0.12);
-  
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+
 
 /* =========================================
    Base Layout

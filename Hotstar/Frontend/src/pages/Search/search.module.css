@@ -1,328 +1,308 @@
-/* =========================================
-   Theme Variables (Matches App Ecosystem)
-   ========================================= */
-:root {
-  --bg-dark: #050506;
-  --bg-mid: #0a0a0b;
-  --bg-light: #1d1d1f;
-  --bg-panel: rgba(16, 16, 18, 0.85);
-  --text-main: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.75);
-  --text-dim: rgba(255, 255, 255, 0.45);
-  --accent: #e50914; /* Streaming Red */
-  --accent-glow: rgba(229, 9, 20, 0.2);
-  --glass-border: rgba(255, 255, 255, 0.15);
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-hover: rgba(255, 255, 255, 0.12);
-  --radius-lg: 12px;
-  --radius-md: 8px;
-  --radius-pill: 999px;
-  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+/* =========================
+   SEARCH PAGE
+========================= */
 
-/* =========================================
-   Base Layout
-   ========================================= */
 .con {
   min-height: 100vh;
-  width: 100%;
-  background: radial-gradient(circle at 20% 10%, var(--bg-light) 0%, var(--bg-mid) 45%, var(--bg-dark) 100%);
-  color: var(--text-main);
-  /* Assuming the 50px/130px padding is to accommodate a fixed side-nav */
-  /* padding-left: 50px;  */
+  background: #050505;
+  color: #fff;
+}
+
+.extra {
+  height: 90px;
 }
 
 .shell {
-  padding: 26px 4% 40px 30px; 
+  width: 100%;
+  padding: 0 4%;
 }
 
-/* =========================================
-   Sticky Search Header
-   ========================================= */
+/* =========================
+   SEARCH HEADER
+========================= */
+
 .searchHeader {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  padding: 16px 0 20px;
-  /* Smooth gradient fade so results scroll under it seamlessly */
-  background: linear-gradient(to bottom, rgba(7, 7, 8, 0.95) 40%, rgba(7, 7, 8, 0.6) 80%, transparent);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  margin-bottom: 35px;
 }
 
 .searchWrap {
-  width: min(980px, 100%);
-  height: 64px;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--glass-border);
-  background: var(--bg-panel);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 0 24px;
-  transition: all var(--transition);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-/* Lights up the whole wrapper when the user clicks inside the input */
-.searchWrap:focus-within {
-  border-color: var(--text-muted);
-  background: rgba(25, 25, 28, 0.95);
-  box-shadow: 0 4px 25px rgba(255, 255, 255, 0.05);
-}
-
-.icon {
-  color: var(--text-muted);
-  font-size: 20px;
-  transition: color var(--transition);
-}
-
-.searchWrap:focus-within .icon {
-  color: var(--text-main);
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
 }
 
 .search {
   width: 100%;
-  height: 100%;
-  border: none;
+  height: 65px;
+
+  padding: 0 25px 0 65px;
+
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px;
+
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(20px);
+
+  color: white;
+  font-size: 1rem;
+
   outline: none;
-  background: transparent;
-  color: var(--text-main);
-  font-size: 1.15rem;
-  font-weight: 500;
-  letter-spacing: 0.3px;
+
+  transition: .3s ease;
+}
+
+.search:focus {
+  border-color: #00bfff;
+  box-shadow:
+    0 0 0 2px rgba(0,191,255,.15),
+    0 10px 25px rgba(0,0,0,.35);
 }
 
 .search::placeholder {
-  color: var(--text-dim);
-  font-weight: 400;
+  color: rgba(255,255,255,.5);
 }
 
-/* =========================================
-   Filter Tags
-   ========================================= */
+.icon {
+  position: absolute;
+  left: 25px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: rgba(255,255,255,.6);
+  font-size: 1.1rem;
+}
+
+/* =========================
+   TAGS
+========================= */
+
 .tags {
-  margin-top: 16px;
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+
+  margin-top: 20px;
+  justify-content: center;
 }
 
 .tag {
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
-  color: var(--text-muted);
-  border-radius: var(--radius-pill);
-  padding: 8px 18px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  border: none;
   cursor: pointer;
-  backdrop-filter: blur(4px);
-  transition: all var(--transition);
+
+  padding: 10px 18px;
+
+  border-radius: 50px;
+
+  background: rgba(255,255,255,.08);
+  color: white;
+
+  transition: .3s;
 }
 
 .tag:hover {
-  border-color: var(--text-main);
-  background: var(--glass-hover);
-  color: var(--text-main);
-  transform: translateY(-2px);
+  background: #00bfff;
 }
 
-/* Optional: Add this class via JS when a tag is selected */
-.tag.active {
-  background: var(--text-main);
-  color: #000;
-  border-color: var(--text-main);
-}
+/* =========================
+   META
+========================= */
 
-/* =========================================
-   Results Typography & Layout
-   ========================================= */
 .meta {
-  margin: 24px 0 12px;
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  font-weight: 500;
+  margin: 25px 0;
+
+  color: rgba(255,255,255,.65);
+  font-size: .95rem;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section {
+  margin-bottom: 50px;
 }
 
 .title {
-  margin: 32px 0 8px;
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: var(--text-main);
+  font-size: 1.8rem;
+  font-weight: 800;
+
+  margin-bottom: 20px;
 }
 
-/* Horizontal scrolling track for search categories */
+/* =========================
+   CARD RAIL
+========================= */
+
 .rowTrack {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  gap: 18px;
+
   overflow-x: auto;
-  overflow-y: visible;
-  scrollbar-width: none;
-  padding: 8px 4% 24px 0; /* Extra bottom padding for hover effects */
+  overflow-y: hidden;
+
   scroll-behavior: smooth;
+
+  padding-bottom: 10px;
 }
 
 .rowTrack::-webkit-scrollbar {
-  display: none;
+  height: 6px;
 }
 
-/* =========================================
-   Empty State
-   ========================================= */
+.rowTrack::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.rowTrack::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.15);
+  border-radius: 20px;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
 .empty {
-  margin-top: 32px;
-  padding: 40px 24px;
-  border-radius: var(--radius-lg);
-  border: 1px dashed var(--glass-border);
-  background: var(--glass-bg);
-  text-align: center;
+  width: 100%;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  text-align: center;
+
+  padding: 100px 20px;
 }
 
 .empty h3 {
-  margin: 0 0 12px;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--text-main);
+  font-size: 2rem;
+  margin-bottom: 12px;
 }
 
 .empty p {
-  margin: 0;
-  color: var(--text-muted);
-  font-size: 1rem;
-  max-width: 400px;
-  line-height: 1.5;
+  color: rgba(255,255,255,.6);
+  max-width: 450px;
+  line-height: 1.7;
 }
-/* =========================================
-   Responsive / Mobile View (Premium App Feel)
-   ========================================= */
-@media (max-width: 768px) {
-  .con {
-    margin-top: 0; 
-    padding-left: 0;
-    /* padding-right: 20px; */
-    padding-bottom: 90px; /* Space for mobile bottom nav */
+
+/* =========================
+   LOADING TEXT
+========================= */
+
+.loading {
+  text-align: center;
+  padding: 40px 0;
+  color: #00bfff;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+.section {
+  animation: fadeUp .4s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
   }
 
-  /* Remove side padding from shell to let scrolling tracks bleed to the edge */
-  .shell {
-    padding: 10px 0 40px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  /* 1. Cinematic Sticky Header */
-  .searchHeader {
-    margin-top: 20px;
-    /* padding: 12px 20px 16px; */
-    background: linear-gradient(to bottom, rgba(5, 5, 6, 0.98) 40%, rgba(5, 5, 6, 0.8) 70%, transparent);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px); /* Smoother blur for iOS */
-  }
+/* =========================
+   TABLET
+========================= */
 
-  /* 2. iOS-Style Pill Search Bar */
-  .searchWrap {
-    height: 48px;
-    border-radius: 999px; /* Perfect pill shape */
-    padding: 0 16px;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.08); /* Frosted glass */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
-    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.3s;
-  }
+@media (max-width: 1024px) {
 
-  /* Smooth pop-out effect when typing */
-  .searchWrap:focus-within {
-    transform: scale(1.02);
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-  }
-
-  .icon {
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.6);
+  .title {
+    font-size: 1.5rem;
   }
 
   .search {
-    font-size: 1rem;
+    height: 60px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+  .extra {
+    height: 75px;
   }
 
-  /* 3. Horizontal Scrollable Tags */
-  .tags {
-    margin-top: 16px;
-    gap: 10px;
-    flex-wrap: nowrap; 
-    overflow-x: auto;
-    scrollbar-width: none;
-    padding-bottom: 4px;
-    padding-right: 20px; /* Allows scrolling past the right edge gracefully */
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .tags::-webkit-scrollbar {
-    display: none;
+  .shell {
+    padding: 0 15px;
   }
 
-  .tag {
-    padding: 8px 16px;
-    font-size: 0.85rem;
-    white-space: nowrap; 
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.06);
+  .search {
+    height: 55px;
+    font-size: .95rem;
+    padding-left: 55px;
   }
 
-  /* Satisfying "squish" effect when a user taps a tag */
-  .tag:active {
-    transform: scale(0.92);
-    background: rgba(255, 255, 255, 0.15);
+  .icon {
+    left: 18px;
   }
 
-  /* 4. Premium Metallic Titles */
   .title {
-    padding: 0 20px;
-    margin-top: 24px;
-    margin-bottom: 12px;
-    font-size: 1.3rem;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    background: linear-gradient(135deg, #ffffff 0%, #a5a5a5 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+    font-size: 1.25rem;
   }
 
   .meta {
-    padding: 0 20px;
-    font-size: 0.9rem;
+    font-size: .85rem;
   }
 
-  /* 5. Movie Results Row */
   .rowTrack {
     gap: 12px;
-    padding: 8px 20px 24px; /* Maintains left edge alignment */
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
   }
 
-  .rowTrack > * {
-    scroll-snap-align: start;
-  }
-
-  /* 6. Empty State Polish */
   .empty {
-    padding: 40px 20px;
-    margin: 24px 20px; /* Keeps it contained inside the screen */
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.03);
+    padding: 70px 20px;
   }
-  
+
   .empty h3 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+  .search {
+    border-radius: 14px;
+    height: 52px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .tag {
+    font-size: .8rem;
+    padding: 8px 14px;
+  }
+
+  .empty h3 {
+    font-size: 1.3rem;
+  }
+
+  .empty p {
+    font-size: .9rem;
   }
 }

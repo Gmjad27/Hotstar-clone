@@ -121,6 +121,7 @@ const normalizeItem = (item, mediaType) => {
   const releaseDate = (item.media_typ || mediaType) === "movie" ? item.release_date : item.first_air_date;
   const releaseYear = Number(String(releaseDate || "").slice(0, 4)) || 0;
   const tmdbId = Number(item.id) || 0;
+  // console.log(item);
 
   if (!tmdbId) return null;
 
@@ -325,7 +326,7 @@ export const fetchTMDBHomeSections = async () => {
 
   const combined = [...lordoftherings, ...lordoftherings2, ...lordoftherings3];
   const wiz = [...Wizarding, ...Wizarding2];
-  // console.log(lordoftherings3);
+  // console.log(trendingNow);
 
 
   return {
@@ -448,7 +449,7 @@ export const fetchTMDBDetails = async (mediaType, id) => {
   });
   if (!detail || typeof detail !== "object") return null;
 
-  // console.log(credits);
+  // console.log(detail);
 
   if (mediaType === "movie") {
     return {

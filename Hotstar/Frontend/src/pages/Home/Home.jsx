@@ -27,7 +27,7 @@ function Home(props) {
     () => (heroData.length > 0 ? heroData.slice(0, 5) : data.slice(0,)),
     [data, heroData]
   );
-  console.log("Home render - mediaData:", mediaData);
+  // console.log("Home render - mediaData:", mediaData);
   const currentHero = mediaData[heroIndex % Math.max(mediaData.length, 1)] || null;
 
   useEffect(() => {
@@ -53,44 +53,6 @@ function Home(props) {
     if (watch) watch.style.display = 'block';
     navigate(`${location.pathname}?watch=${selected.id}&name=${encodeURIComponent(selected.name2)}`);
   };
-  /////////////////////////////Backup code/////////////////////////////////
-
-  // const openWatch = async (id, mediaType) => {
-  //   try {
-  //     const res = await fetch(
-  //       `${TMDB_BASE_URL}/${mediaType}/${id}?api_key=${TMDB_API_KEY}`
-  //     );
-
-  //     const data = await res.json();
-  //     console.log(data);
-
-  //     const item = {
-  //       id: data.id,
-  //       name2: data.title || data.name,
-  //       img: data.poster_path,
-  //       desc: data.overview,
-  //       releaseYear: data.release_date || data.first_air_date,
-  //       type: mediaType
-  //     };
-
-  //     setWatchItem(item);
-
-  //     const watch = document.querySelector("#watch");
-  //     if (watch) watch.style.display = "block";
-
-  //     navigate(
-  //       `${location.pathname}?watch=${data.id}&name=${encodeURIComponent(
-  //         item.name2
-  //       )}`
-  //     );
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  //////////////////////////////////////////////////////////////
-
-
 
   const clearWatchFromUrl = () => {
     navigate(location.pathname);
@@ -169,71 +131,63 @@ function Home(props) {
 
   return (
     <div className="homePage" id="homepage" >
-      <section
-        className="heroBanner"
-        style={{
-          backgroundImage: `linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2) 100%), url(${media.matches ? currentHero?.name : currentHero?.img || ''})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 20%',
-          backgroundAttachment: 'fixed',
-        }}
-      >
-        <div className="heroOverlay"></div>
-        <div className="heroContent">
-          <div className="heroBadgeWrapper">
-            <span className="heroBadge">
-              {currentHero?.type === 'tv' ? ' SERIES' : ' MOVIE'}
-            </span>
-            {/* {currentHero?.ua && <span className="heroAgeRating">{currentHero?.ua}</span>} */}
-          </div>
+      <div className="homebanner">
 
-          <h1 className="heroTitle">{currentHero?.name2}</h1>
+        <section className="heroBanner">
+          <div
+            className="heroBg"
+            style={{
+              backgroundImage: `url(${media.matches ? currentHero?.name : currentHero?.img || ''})`,
+            }}
+          />
+          <div className="heroFade" />
 
-          <div className="heroMeta">
-            <span className="metaItem">
-              <i className="fa-regular fa-calendar"></i> {currentHero?.releaseYear}
-            </span>
-            <span className="metaDot"> </span>
-            {/* <span className="metaItem">
-              <i className="fa-regular fa-clock"></i> {currentHero?.duration || '2h 15m'}
-            </span> */}
-            <span className="metaDot">•</span>
-            <span className="metaItem rating">
-              <i className="fa-solid fa-star"></i> {currentHero?.rating?.toFixed(1)}
-            </span>
-          </div>
+          <div className="trendingPill">🔥 Now Trending</div>
 
-          <p className="heroDescription">{currentHero?.desc}</p>
+          <div className="heroContent">
+            <div className="heroTags">
+              {currentHero?.category?.slice(0, 2).map((tag) => (
+                <span key={tag} className="heroTag">{tag}</span>
+              ))}
+            </div>
 
-          <div className="heroActions">
-            <button type="button" className="playAction" onClick={playHero}>
-              <i className="fa-solid fa-play"></i> Play Now
-            </button>
-            <button type="button" className="infoAction" onClick={() => openWatch(currentHero?.id)}>
-              <i className="fa-solid fa-circle-info"></i> More Info
-            </button>
-            {/* <button type="button" className="watchlistAction" onClick={() => add(currentHero?.id)}>
-              <i className="fa-solid fa-plus"></i> My List
-            </button> */}
-          </div>
+            <h1 className="heroTitle">{currentHero?.name2}</h1>
 
-          <div className="heroThumbs">
-            {mediaData.slice(0, 5).map((item, index) => (
-              <button
-                key={item.id}
-                type="button"
-                className={`thumb ${heroIndex % 5 === index ? 'thumbActive' : ''}`}
-                style={{ backgroundImage: `url(${item.name})` }}
-                onClick={() => setHeroIndex(index)}
-                aria-label={item.name2}
-              >
-                <div className="thumbOverlay"></div>
-                <span className="thumbNumber">{index + 1}</span>
+            <p className="heroDesc">{currentHero?.desc}</p>
+
+            <div className="heroActions">
+              <button type="button" className="btnWatch" onClick={playHero}>
+                <div className="playTri" /> Watch Now
               </button>
+              <button type="button" className="btnWatch more" onClick={() => openWatch(currentHero?.id)} title="More Info">
+                More Info
+              </button>
+            </div>
+          </div>
+
+          {/* Prev / Next arrows */}
+          <button type="button" className="heroArrow heroArrowL"
+            onClick={() => setHeroIndex((heroIndex - 1 + mediaData.length) % mediaData.length)}>
+            ‹
+          </button>
+          <button type="button" className="heroArrow heroArrowR"
+            onClick={() => setHeroIndex((heroIndex + 1) % mediaData.length)}>
+            ›
+          </button>
+
+          {/* Dot indicators */}
+          <div className="heroDots">
+            {mediaData.slice(0, 5).map((_, i) => (
+              <button
+                key={i} type="button"
+                className={`heroDot ${heroIndex % 5 === i ? 'heroDotActive' : ''}`}
+                onClick={() => setHeroIndex(i)}
+                aria-label={`Slide ${i + 1}`}
+              />
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       <div className="homeShell">
         <Suspense fallback={<Skeleton type="section" count={10} />}>

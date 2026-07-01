@@ -148,59 +148,6 @@ const Studio = (props) => {
           `,
         }}
       >
-        {/* studio watermark top-right */}
-        <div className={styles.studioWatermark}>
-          {props.studioImg
-            ? <img src={props.studioImg} alt={studioName} className={styles.studioWatermarkImg} />
-            : <span>{studioName}</span>
-          }
-        </div>
-
-        <div className={styles.heroContent}>
-          <p className={styles.heroEyebrow}>
-            <span className={styles.eyebrowLine} />
-            Featured {featured?.type === 'tv' ? 'Series' : 'Film'}
-          </p>
-
-          <h1 className={styles.heading}>{featured?.name2 || studioName}</h1>
-
-          <div className={styles.heroMeta}>
-            {featured?.releaseYear && <span>{featured.releaseYear}</span>}
-            {featured?.ua && (
-              <>
-                <span className={styles.metaDot} />
-                <span className={styles.ratingBadge}>{featured.ua}</span>
-              </>
-            )}
-            {featured?.season && (
-              <>
-                <span className={styles.metaDot} />
-                <span>{featured.season} Season{featured.season > 1 ? 's' : ''}</span>
-              </>
-            )}
-            <span className={styles.metaDot} />
-            <span className={styles.matchScore}>98% Match</span>
-          </div>
-
-          <p className={styles.heroDesc}>
-            {featured?.desc?.slice(0, 160)}{featured?.desc?.length > 160 ? '…' : ''}
-          </p>
-
-          <div className={styles.heroActions}>
-            <button className={styles.playBtn} onClick={() => featured && openWatch(featured.id)}>
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-              Play
-            </button>
-            <button className={styles.addBtn} onClick={() => featured && props.add?.(featured.id)}>
-              + My List
-            </button>
-            <button className={styles.infoBtn} onClick={() => featured && openWatch(featured.id)}>
-              ⓘ More Info
-            </button>
-          </div>
-        </div>
       </section>
 
       {/* ── FILTER BAR ── */}

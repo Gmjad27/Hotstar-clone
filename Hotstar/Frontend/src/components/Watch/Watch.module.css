@@ -20,6 +20,7 @@
    Modal Wrapper
    ========================================= */
 .con {
+  overflow: auto;
   position: fixed;
   /* padding-top: 50px; */
   inset: 0;
@@ -318,147 +319,112 @@
   padding: 0 28px 40px;
   background-color: var(--bg-modal);
 }
-
 .episodeHead {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 24px;
+  gap: 20px;
+  margin-bottom: 24px;
 }
 
 .episodeTitle {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: var(--text-main);
+  margin: 0;
 }
 
 .select {
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: #242424;
-  color: var(--text-main);
-  border-radius: var(--radius-md);
-  padding: 10px 36px 10px 14px;
-  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   outline: none;
-  transition: background var(--transition);
 }
 
-.select:hover {
-  background: #333;
+.option {
+  background: #1d1d1f; /* Dark background for dropdown options */
+  color: white;
 }
 
+/* Horizontal Scrolling Episodes */
 .episods {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  max-height: 500px;
-  overflow-y: auto;
-  padding-right: 6px;
-  scroll-behavior: smooth;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 20px; /* Space for scrollbar if visible */
+  scroll-snap-type: x mandatory;
 }
 
 .episods::-webkit-scrollbar {
-  width: 4px;
+  display: none;
 }
-
-.episods::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.episods::-webkit-scrollbar-thumb {
-  background: var(--bg-glass-hover);
-  border-radius: 10px;
-}
-
-.episods::-webkit-scrollbar-thumb:hover {
-  background: var(--text-dim);
+.episods {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .epi {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px;
-  border-radius: var(--radius-md);
-  background: transparent;
-  border: 1px solid transparent;
+  flex: 0 0 auto;
+  width: 320px;
   cursor: pointer;
-  transition: all var(--transition);
+  scroll-snap-align: start;
+  transition: transform 0.2s;
 }
 
 .epi:hover {
-  background: var(--bg-glass);
-  border-color: rgba(255, 255, 255, 0.08);
+  transform: scale(1.02);
 }
 
 .epiBanner {
-  flex-shrink: 0;
-  width: 130px;
-  aspect-ratio: 16/9;
-  border-radius: 4px;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   background-size: cover;
   background-position: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.epiBanner::after {
-  content: '▶';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 1.3rem;
-  opacity: 0;
-  transition: opacity var(--transition);
-}
-
-.epi:hover .epiBanner::after {
-  opacity: 1;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .epiBody {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  padding: 0 4px;
 }
 
 .epiTop {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
+  margin-bottom: 8px;
 }
 
 .epiName {
-  font-size: 1rem;
   font-weight: 600;
-  color: var(--text-main);
+  font-size: 1rem;
+  color: #f5f5f7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80%;
 }
 
 .epiRuntime {
-  color: var(--text-muted);
   font-size: 0.85rem;
+  color: #a1a1a6;
+  margin: 0;
 }
 
 .epiDesc {
-  color: var(--text-dim);
   font-size: 0.85rem;
+  color: #86868b;
   line-height: 1.4;
+  margin: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-
-/* =========================================
+}/* =========================================
    Related Section
    ========================================= */
 .relatedSection {
@@ -476,7 +442,7 @@
   display: flex;
   gap: 12px;
   overflow-x: auto;
-  padding:22px 0px;
+  padding: 22px 0px;
   scrollbar-width: none;
 }
 
@@ -766,6 +732,8 @@
 
   /* Episode list: thumbnail + text grid */
   .episods {
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 0;
     margin-top: 4px;
     padding-right: 0;
@@ -799,24 +767,7 @@
   }
 
   /* Always-visible play circle on mobile */
-  .epiBanner::after {
-    content: '▶';
-    opacity: 1;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 1.5px solid rgba(255, 255, 255, 0.85);
-    background: rgba(0, 0, 0, 0.45);
-    font-size: 0.72rem;
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+ 
 
   .epiBody {
     display: contents;

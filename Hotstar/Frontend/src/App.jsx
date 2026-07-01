@@ -125,9 +125,9 @@ function App() {
 
   return (
     <>
-      <div className="img">
+      {/* <div className="img">
         <p className="author">Jadav Girish</p>
-      </div>
+      </div> */}
 
       <Router>
         <ErrorBoundary>

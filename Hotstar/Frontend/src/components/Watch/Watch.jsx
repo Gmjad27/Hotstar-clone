@@ -184,6 +184,11 @@ const Watch = (props) => {
             play={(tid) => props.play(tid)}
             onClick={() => {
               if (typeof props.sow === 'function') props.sow(item.id);
+              const container = document.getElementById('container');
+              container.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              });
             }}
           />
         ))}
@@ -198,12 +203,12 @@ const Watch = (props) => {
         <i className="fa-solid fa-xmark"></i>
       </button>
 
-      <div className={styles.watch}>
+      <div className={styles.watch} id="container">
         {/* ── Hero Banner ── */}
         <div
           className={styles.sec1}
           style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.25) 30%, #141414 100%), url('${mbg}')`
+            backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.25) 30%, #141414 100%), url('${props.img || mbg}')`,
           }}
         >
           <div className={styles.psec}>

@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import './Nav.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+import logo from '../../assets/image.png';
 
 const Nav = () => {
 
@@ -34,7 +35,9 @@ const Nav = () => {
 
     return (
         <div className='nav'>
-            <img className="applogo" src="src\assets\logo.svg" alt="cineflix" />
+            <Link to="/">
+                <img className="applogo" src={logo} alt="cineflix" />
+            </Link>
             <div className="logos">
                 {navItems.map((item) => (
                     <div className="navlink" key={item.label}>

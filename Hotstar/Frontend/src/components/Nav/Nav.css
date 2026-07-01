@@ -1,277 +1,196 @@
-/* =========================================
-   Theme Variables
-   ========================================= */
-:root {
-  --nav-bg: rgba(10, 10, 11, 0.85);
-  --nav-blur: blur(16px);
-  --text-main: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.65);
-  --accent: #e50914;
-  /* Streaming Red */
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-hover: rgba(255, 255, 255, 0.1);
-  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* ── Nav.css ── */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-/* =========================================
-   Desktop Layout: Top Horizontal Navbar
-   ========================================= */
+/* ─── Desktop Nav ─────────────────────────────────────── */
 .nav {
   position: fixed;
   top: 0;
   left: 0;
-  /* padding: 30px; */
-  width: 100%;
-  height: 72px;
-  /* Smooth gradient fade so content scrolls under it seamlessly */
-  background: linear-gradient(to bottom, rgba(5, 5, 6, 0.95) 20%, rgba(5, 5, 6, 0.6) 70%, transparent);
-  backdrop-filter: var(--nav-blur);
-  -webkit-backdrop-filter: var(--nav-blur);
+  right: 0;
+  z-index: 1000;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  /* Pushes logo left, links right/center */
-  /* padding: 0 4%; */
-  z-index: 1000;
-  transition: background var(--transition);
+  padding: 0 2rem;
+  height: 64px;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-/* Ensure main content isn't hidden under the top nav on desktop */
-body {
-  padding-top: 72px;
-}
-
-
+/* ─── Logo ────────────────────────────────────────────── */
 .applogo {
-  width: 160px;
-  height: auto;
+  height: 36px;
+  width: auto;
   object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease;
 }
 
-/* Container for the Logo (Assuming .img is used for logo) */
-.nav .img {
-  display: flex;
-  align-items: center;
-
-  height: 100%;
+.applogo:hover {
+  opacity: 0.8;
 }
 
-/* Container for Nav Links */
+/* ─── Nav Links Container ─────────────────────────────── */
 .logos {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  gap: 32px;
-  height: 100%;
-  background: transparent;
-  box-shadow: none;
-  transition:all 0.3s ease;
+  gap: 0.25rem;
 }
 
-.l {
+/* ─── Individual Nav Item ─────────────────────────────── */
+.navlink {
+  display: flex;
+}
+
+/* ─── NavLink Anchor ──────────────────────────────────── */
+a.l {
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  height: 100%;
+  border-radius: 8px;
+  padding: 0.45rem 0.75rem;
+  transition: background 0.2s ease, color 0.2s ease;
+  color: rgba(255, 255, 255, 0.5);
 }
 
-/* Individual Link Layout */
+a.l:hover {
+  /* background: rgba(255, 255, 255, 0.07); */
+  color: rgba(255, 255, 255, 0.85);
+}
+
+a.l.active {
+  /* background: rgba(229, 57, 53, 0.15); */
+  color: #e53935;
+}
+
+/* ─── Icon + Label Stack ──────────────────────────────── */
 .la {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  height: 100%;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: color var(--transition);
-  position: relative;
+  gap: 3px;
 }
 
-.la:hover {
-  color: var(--text-main);
-}
-
-.la .button {
-  font-size: 20px;
-  background: transparent;
-  color: inherit;
-  border: none;
-  cursor: pointer;
-  padding: 0;
+/* ─── Icon ────────────────────────────────────────────── */
+.button {
+  font-size: 1.1rem;
+  line-height: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-.la .name {
-  display: block;
-  /* Always visible on top nav */
-  font-size: 1rem;
-  font-weight: 500;
-  text-decoration: none;
-  letter-spacing: 0.3px;
+/* ─── Label ───────────────────────────────────────────── */
+p.name.button {
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1;
 }
 
-/* Active State for Desktop (Red underline indicator) */
-.l.active .la {
-  color: var(--text-main);
+/* ─── Body offset so content isn't hidden behind fixed nav ── */
+body {
+  padding-top: 64px;
 }
 
-.l.active .name {
-  font-weight: 700;
-}
-
-.l.active .la::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background-color: var(--accent);
-  border-radius: 3px 3px 0 0;
-  box-shadow: 0 -2px 8px rgba(229, 9, 20, 0.4);
-}
-
-/* =========================================
-   Mobile Layout: Bottom App Tab Bar
-   ========================================= */
+/* ─── Tablet ──────────────────────────────────────────── */
 @media (max-width: 768px) {
-  body {
-    padding-top: 0;
-    padding-bottom: 90px;
-    /* Space for bottom bar */
-  }
-
   .nav {
-    position: fixed;
-    top: auto;
-    bottom: -2.3%;
-    /* left: -12px; */
-    height: 86px;
-    /* width: 100%; */
-    padding:16px 16px;
-    /* Extra bottom padding for iOS home indicator */
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    justify-content: center;
-  }
-
-  /* Hide the desktop logo in the bottom bar */
-  .nav .img {
-    display: none;
+    padding: 0 1.25rem;
+    height: 56px;
   }
 
   .applogo {
-    position: fixed;
-    top: 16px; left: 16px;
-    width: 120px;
-    height: auto;
-    object-fit: contain;
+    height: 28px;
+  }
+
+  .logos {
+    gap: 0;
+  }
+
+  a.l {
+    padding: 0.4rem 0.55rem;
+  }
+
+  p.name.button {
+    font-size: 0.5rem;
+  }
+}
+
+/* ─── Mobile: Bottom Nav ──────────────────────────────── */
+@media (max-width: 540px) {
+  body {
+    padding-top: 0;
+    padding-bottom: 68px;
+  }
+
+  .nav {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 68px;
+    padding: 0 0.5rem;
+    border-bottom: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 20px 20px 0 0;
+    justify-content: center;
+    background: rgba(10, 10, 15, 0.95);
+  }
+
+  /* hide logo on mobile — save space */
+  .nav > a:first-child {
+    display: none;
   }
 
   .logos {
     width: 100%;
-    max-width: 500px;
-    /* Keeps it from stretching too wide on tablets */
-    height: 64px;
-    background: var(--nav-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    backdrop-filter: var(--nav-blur);
-    -webkit-backdrop-filter: var(--nav-blur);
-    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.4);
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    align-items: center;
-    gap: 4px;
-    padding: 6px;
+    justify-content: space-around;
+    gap: 0;
   }
 
-  .l {
+  .navlink {
+    flex: 1;
+    justify-content: center;
+  }
+
+  a.l {
+    flex-direction: column;
+    padding: 0.5rem 0.25rem;
+    border-radius: 10px;
     width: 100%;
-    height: 100%;
-    border-radius: 14px;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  a.l:hover {
+    /* background: rgba(255, 255, 255, 0.05); */
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  a.l.active {
+    /* background: rgba(229, 57, 53, 0.12); */
+    color: #e53935;
   }
 
   .la {
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
-    justify-content: center;
-    gap: 4px;
-    border-radius: 14px;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    gap: 5px;
   }
 
-  .la .button {
-    font-size: 20px;
-    line-height: 1;
+  .button {
+    font-size: 1.25rem;
   }
 
-  .la .name {
-    font-size: 10px;
-    font-weight: 500;
-  }
-
-  /* Touch Interaction States */
-  .l:active .la {
-    transform: scale(0.95);
-  }
-
-  /* Active State for Mobile (Pill background instead of underline) */
-  .l.active .la::after {
-    display: none;
-    /* Remove desktop underline */
-  }
-
-  .l.active .la {
-    color: var(--text-main);
-    background: var(--glass-hover);
-  }
-}
-
-/* =========================================
-   Small Screens Adjustments
-   ========================================= */
-@media (max-width: 480px) {
-  .nav {
-    height: 80px;
-    padding: 0 12px 12px;
-  }
-
-  .logos {
-    height: 60px;
-    /* width: 100%; */
-    /* width: 400px; */
-    border-radius: 18px;
-    /* padding: 4px; */
-  }
-  .la{
-    width: 50px;
-    height: 30px;
-  }
-  .navlink {
-    width: 10px;
-  }
-
-  .la .button {
-    font-size: 18px;
-  }
-
-  .la .name {
-    display: none;
-    font-size: 9px;
-  }
-}
-
-@media (max-width: 360px) {
-  .la .button {
-    font-size: 16px;
-  }
-
-  .la .name {
-    font-size: 8px;
+  p.name.button {
+    font-size: 0.52rem;
+    letter-spacing: 0.06em;
   }
 }

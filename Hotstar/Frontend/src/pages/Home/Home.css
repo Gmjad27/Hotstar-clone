@@ -1,463 +1,444 @@
-/* =========================================
-   Theme Variables (Matches the Modal)
-   ========================================= */
-:root {
-  --bg-dark: #050506;
-  --bg-mid: #0a0a0b;
-  --bg-light: #1b1b1e;
-  --text-main: #ffffff;
-  --text-muted: rgba(255, 255, 255, 0.75);
-  --text-dim: rgba(255, 255, 255, 0.5);
-  --accent: #e50914;
-  /* Netflix Red */
-  --accent-glow: rgba(229, 9, 20, 0.4);
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-hover: rgba(255, 255, 255, 0.2);
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* =========================================
-   Base & Layout
-   ========================================= */
-body.stop {
-  overflow: hidden;
-}
+/* =========================
+   HOME PAGE
+========================= */
 
 .homePage {
-  position: relative;
-  min-height: 100vh;
   width: 100%;
-  color: var(--text-main);
-  background: radial-gradient(circle at 20% 0%, var(--bg-light) 0%, var(--bg-mid) 45%, var(--bg-dark) 100%);
+  min-height: 100vh;
+  background: #050505;
+  color: white;
   overflow-x: hidden;
 }
 
-/* =========================================
-   Hero Banner Section
-   ========================================= */
+/* =========================
+   HERO SECTION
+========================= */
+
+.homebanner {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
 .heroBanner {
-  height: 90vh;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
   background-size: cover;
-  background-position: center top;
-  display: flex;
-  align-items: flex-end;
-  /* Smooth bottom fade into the background */
-  background-image: linear-gradient(to bottom,
-      rgba(10, 10, 11, 0) 50%,
-      var(--bg-dark) 100%);
-  transition: background-image var(--transition);
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: all .8s ease;
+  transform: scale(1.05);
+}
+
+.heroFade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to top,
+      #050505 5%,
+      rgba(0,0,0,.4) 40%,
+      rgba(0,0,0,.15) 100%
+    );
 }
 
 .heroContent {
-  padding: 40px 40px 40px 40px;
-  max-width: 100%;
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  left: 6%;
+  bottom: 18%;
+  z-index: 10;
+  max-width: 650px;
 }
 
-.heroBadge {
-  display: inline-block;
-  margin-bottom: 12px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--accent);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+.heroTags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
-.heroTitleImage {
-  width: min(450px, 90%);
-  max-height: 200px;
-  object-fit: contain;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
+.heroTag {
+  padding: 8px 15px;
+  border-radius: 50px;
+  background: rgba(255,255,255,.1);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255,255,255,.1);
+  font-size: .85rem;
 }
 
-.heroMeta {
-  margin: 16px 0;
-  color: var(--text-muted);
+.heroTitle {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 20px;
+  text-shadow: 0 5px 20px rgba(0,0,0,.8);
+}
+
+.heroDesc {
   font-size: 1rem;
-  font-weight: 500;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
+  line-height: 1.8;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 30px;
+  max-width: 600px;
 
-.heroDescription {
-  width: 70%;
-  margin: 0;
-  color: var(--text-main);
-  font-size: 1.1rem;
-  line-height: 1.5;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
-}
-
-/* Action Buttons */
-.heroActions {
-  margin-top: 24px;
-  display: flex;
-  gap: 16px;
-}
-
-.playAction,
-.infoAction {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: var(--radius-sm);
-  padding: 12px 24px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform var(--transition), background var(--transition);
-}
-
-.playAction {
-  background: var(--text-main);
-  color: #000;
-}
-
-.playAction:hover {
-  background: rgba(255, 255, 255, 0.8);
-  transform: scale(1.05);
-}
-
-.infoAction {
-  color: var(--text-main);
-  background: rgba(109, 109, 110, 0.7);
-  backdrop-filter: blur(4px);
-}
-
-.infoAction:hover {
-  background: rgba(109, 109, 110, 0.9);
-  transform: scale(1.05);
-}
-
-/* Hero Thumbnails */
-.heroThumbs {
-  margin-top: 24px;
-  display: flex;
-  gap: 12px;
-}
-
-.thumb {
-  width: 70px;
-  height: 40px;
-  border-radius: var(--radius-sm);
-  border: 2px solid transparent;
-  background-size: cover;
-  background-position: center;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: all var(--transition);
-}
-
-.thumb:hover {
-  opacity: 1;
-}
-
-.thumbActive {
-  border-color: var(--text-main);
-  opacity: 1;
-  transform: scale(1.05);
-}
-
-/* =========================================
-   Movie Rails & Track Sections
-   ========================================= */
-.homeShell {
-  position: relative;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  padding: 2px 0 40px 30px;
+}
+
+.trendingPill {
+  position: absolute;
+  top: 100px;
+  left: 6%;
+  z-index: 10;
+
+  padding: 12px 18px;
+  border-radius: 50px;
+
+  background: rgba(255, 68, 68, .15);
+  backdrop-filter: blur(20px);
+
+  border: 1px solid rgba(255,255,255,.1);
+
+  font-weight: 600;
+}
+
+/* =========================
+   HERO BUTTONS
+========================= */
+
+.heroActions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btnWatch {
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 15px 30px;
+  border-radius: 50px;
+
+  font-weight: 700;
+  font-size: 1rem;
+
+  transition: .3s;
+}
+
+.btnWatch:hover {
+  transform: translateY(-3px);
+}
+
+.btnWatch:first-child {
+  background: white;
+  color: black;
+}
+
+.btnWatch.more {
+  background: rgba(255,255,255,.15);
+  color: white;
+  backdrop-filter: blur(20px);
+}
+
+.playTri {
+  width: 0;
+  height: 0;
+
+  border-left: 12px solid black;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+}
+
+/* =========================
+   HERO ARROWS
+========================= */
+
+.heroArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 55px;
+  height: 55px;
+
+  border-radius: 50%;
+  border: none;
+
+  cursor: pointer;
+
+  background: rgba(0,0,0,.45);
+  color: white;
+
+  font-size: 2rem;
+  z-index: 10;
+
+  backdrop-filter: blur(10px);
+
+  transition: .3s;
+}
+
+.heroArrow:hover {
+  background: rgba(255,255,255,.2);
+}
+
+.heroArrowL {
+  left: 20px;
+}
+
+.heroArrowR {
+  right: 20px;
+}
+
+/* =========================
+   DOTS
+========================= */
+
+.heroDots {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+}
+
+.heroDot {
+  width: 12px;
+  height: 12px;
+
+  border-radius: 50%;
+  border: none;
+
+  cursor: pointer;
+
+  background: rgba(255,255,255,.3);
+}
+
+.heroDotActive {
+  background: white;
+  width: 30px;
+  border-radius: 30px;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.homeShell {
+  padding: 20px 0 60px;
+}
+
+.homeSection {
+  margin-bottom: 45px;
 }
 
 .sectionHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* margin-bottom: -20px; */
-  /* padding-right: 4%; */
+
+  padding: 0 4%;
+  margin-bottom: 20px;
 }
 
 .homeTitle {
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: var(--text-main);
+  font-size: 1.7rem;
+  font-weight: 800;
 }
 
 .trackBtns {
   display: flex;
-  gap: 12px;
-  pointer-events: none;
+  gap: 10px;
 }
 
 .scrollBtn {
-  pointer-events: auto;
   width: 40px;
   height: 40px;
-  border-radius: 5px;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--glass-bg);
-  color: var(--text-main);
-  font-size: 1.2rem;
+
+  border: none;
+  border-radius: 50%;
+
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition);
+
+  color: white;
+  background: rgba(255,255,255,.08);
+
+  transition: .3s;
 }
 
 .scrollBtn:hover {
-  background: var(--text-main);
-  color: #000;
-  transform: scale(1.1);
+  background: rgba(255,255,255,.2);
 }
+
+/* =========================
+   MOVIE TRACKS
+========================= */
 
 .homeTrack,
 .studioTrack {
   display: flex;
-  /* overflow: hidden; */
-  align-items: center;
-  gap: 16px;
+  gap: 20px;
+
   overflow-x: auto;
   overflow-y: hidden;
-  scrollbar-width: none;
-  /* Firefox */
-  padding: 16px 4% 32px 0;
-  /* Extra bottom padding for hover effects */
+
   scroll-behavior: smooth;
+
+  padding: 10px 4%;
 }
 
 .homeTrack::-webkit-scrollbar,
 .studioTrack::-webkit-scrollbar {
   display: none;
-  /* Chrome/Safari */
 }
 
-/* =========================================
-   Top 10 Rankings Cards
-   ========================================= */
+/* =========================
+   TOP 10
+========================= */
+
 .cardrank {
   display: flex;
-  width: 300px;
-  height: 320px;
   align-items: center;
-  /* position: relative; */
-  /* overflow: hidden; */
-  /* border: 1px solid red; */
+  min-width: max-content;
 }
 
 .rank {
-  /* border: 1px solid var(--text-dim); */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  position: relative;
-  width: 60px;
-  height: 50px;
-  /* Give it a bit more breathing room */
-  left: 10px;
-  /* top: 103px; */
-  font-size: 160px;
+  font-size: 8rem;
   font-weight: 900;
-  letter-spacing: -15px;
+
+  margin-right: -25px;
+
   color: transparent;
-  
-  -webkit-text-stroke: 3px var(--text-dim);
-  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
-  z-index: 3;
-  transition: all var(--transition);
+  -webkit-text-stroke: 2px white;
+
+  text-shadow: 0 0 20px rgba(255,255,255,.3);
 }
 
-.top10 {
-  position: relative;
-  width: 150px;
-  height: 100px;
-  /* z-index: 1; */
-  transition: transform var(--transition), box-shadow var(--transition);
-  border-radius: var(--radius-md);
+/* =========================
+   STUDIO CARDS
+========================= */
+
+.studioTrack {
+  padding-bottom: 15px;
 }
 
-/* Ranking Hover Effects */
-.cardrank:hover .rank {
-  -webkit-text-stroke: 3px var(--accent);
-  color: var(--accent-glow);
-  z-index: 1;
-}
+/* =========================
+   RESPONSIVE
+========================= */
 
-.cardrank:hover .top10 {
-  transform: translateX(10px) scale(1.05);
-  box-shadow: 0 20px 40px rgba(229, 9, 20, 0.3);
-}
+@media (max-width: 1024px) {
 
-/* =========================================
-   Responsive / Mobile View
-   ========================================= */
-@media (max-width: 768px) {
-  .homePage {
-    padding-left: 0;
+  .heroContent {
+    max-width: 500px;
   }
 
+  .heroTitle {
+    font-size: 3rem;
+  }
+
+  .rank {
+    font-size: 6rem;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .homebanner,
   .heroBanner {
-    padding-left: 0;
-    margin-left: 0;
-    height: 80vh; /* Slightly taller to fit elements */
-    background-image: linear-gradient(
-      to bottom,
-      rgba(10, 10, 11, 0) 40%,
-      var(--bg-dark) 100%
-    );
+    height: 85vh;
   }
 
   .heroContent {
-
-    padding: 4px 20px 20px 0px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    left: 20px;
+    right: 20px;
+    bottom: 90px;
+    max-width: 100%;
   }
 
-  /* Badge / IMDB Rating Style */
-  .heroBadge {
-    font-size: 0.8rem;
-    color: #f5c518; /* IMDB Yellow */
-    margin-bottom: 8px;
-    letter-spacing: 0.5px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+  .heroTitle {
+    font-size: 2.2rem;
   }
 
-  .heroTitleImage {
-    width: auto;
-    max-width: 250px;
-    max-height: 80px;
-    margin-bottom: 8px;
-    object-fit: contain;
-    object-position: left;
+  .heroDesc {
+    font-size: .9rem;
+    -webkit-line-clamp: 3;
   }
 
-  .heroMeta {
-    display: none; /* Hidden to keep UI clean like the image */
+  .btnWatch {
+    padding: 12px 20px;
+    font-size: .9rem;
   }
 
-  /* Un-hide and style the genre description ("Action, Superhero...") */
-  .heroDescription {
-    display: block; 
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.75);
-    width: 100%;
-    margin-bottom: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Creates the "..." effect */
+  .trendingPill {
+    top: 85px;
+    left: 20px;
   }
 
-  .heroActions {
-    margin-top: 0;
-    width: 100%;
-    gap: 12px;
-  }
-
-  /* Wide Red Pill Button */
-  .playAction {
-    flex: 0 auto;  
-    /* Takes up remaining width */
-    background: #e50914; 
-    /* Netflix/App Red */
-    color: #fff;
-    width: 200px;
-    /* padding: 14px 10px; */
-    border-radius: 30px; /* Pill shape */
-    font-size: 1.05rem;
-  }
-
-  /* Circular Dark Button */
-  .infoAction {
-    flex: 0 0 auto; /* Prevents stretching */
-    width: 120px;
-    height: 50px;
-    padding: 0;
-    border-radius: 30px; /* Perfect circle */
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* Centered Thumbnail Track */
-  .heroThumbs {
-    margin-top: 24px;
-    width: 100%;
-    gap: 10px;
-    justify-content: center; /* Centers them under the buttons */
-  }
-
-  .thumb {
-    width: 56px;
-    height: 32px;
-    border-radius: 6px;
-  }
- 
-
-  .homeShell {
-    padding: 10px 0 60px 20px;
-  }
-
-  .sectionHeader {
-    margin-bottom: -3px;
+  .heroArrow {
+    width: 45px;
+    height: 45px;
+    font-size: 1.5rem;
   }
 
   .homeTitle {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
   }
 
-  .trackBtns {
-    display: none;
-    /* Rely on touch scrolling */
-  }
-
-  .homeTrack,
-  .studioTrack {
-    gap: 12px;
-    padding: 8px 20px 16px 0;
-    scroll-snap-type: x mandatory;
-  }
-
-  .homeTrack>*,
-  .studioTrack>* {
-    scroll-snap-align: start;
-  }
-
-  /* Mobile Top 10 Adjustments */
-  .cardrank{
-    /* width: 200px; */
-    height: 150px;
-    /* border: 1px solid red; */
-    display: flex;
-    align-items: center;
-    position: relative;
-    /* overflow: hidden; */
-  }
   .rank {
-    /* height: 20px; */
-    /* overflow: hidden; */
-    top: -20px;
-    font-size: 110px;
-    
-    width: 50px;
-    /* left: 0px; */
-    -webkit-text-stroke: 2px var(--text-dim);
+    font-size: 5rem;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .heroBanner {
+    height: 75vh;
   }
 
-  .cardrank:hover .top10 {
-    transform: none;
-    /* Disable hover scale on touch devices */
-    box-shadow: none;
+  .heroTitle {
+    font-size: 1.8rem;
+  }
+
+  .heroDesc {
+    font-size: .85rem;
+  }
+
+  .heroActions {
+    width: 100%;
+  }
+
+  .btnWatch {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .heroArrow {
+    display: none;
+  }
+
+  .rank {
+    font-size: 4rem;
+    margin-right: -15px;
+  }
+
+  .scrollBtn {
+    width: 35px;
+    height: 35px;
   }
 }

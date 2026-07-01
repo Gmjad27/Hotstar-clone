@@ -15,7 +15,8 @@ const Movie = (props) => {
   const movies = useMemo(() => data.filter((item) => item.type === 'movie'), [data]);
   const [pageSections, setPageSections] = useState({ heroBanner: [], rails: [] });
   const [sectionsLoading, setSectionsLoading] = useState(true);
-  const [watchItem, setWatchItem] = useState(movies[0] || null);
+  const [watchItem, setWatchItem] = useState(null);
+  const [isWatchOpen, setIsWatchOpen] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -37,10 +38,6 @@ const Movie = (props) => {
       active = false;
     };
   }, []);
-
-  useEffect(() => {
-    if (!watchItem && movies.length > 0) setWatchItem(movies[0]);
-  }, [movies, watchItem]);
 
   const featured = useMemo(() => {
     if (Array.isArray(pageSections.heroBanner) && pageSections.heroBanner.length > 0) {
@@ -74,26 +71,29 @@ const Movie = (props) => {
     if (!selected) return;
 
     setWatchItem(selected);
-    const watch = document.querySelector('#watch');
-    if (watch) watch.style.display = 'block';
+    setIsWatchOpen(true);
     navigate(`${location.pathname}?watch=${selected.id}&name=${encodeURIComponent(selected.name2)}`);
   };
 
   const clearWatchFromUrl = () => {
+    setIsWatchOpen(false);
+    setWatchItem(null);
     navigate(location.pathname);
   };
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const watchId = Number(params.get('watch'));
-    if (!watchId) return;
+    if (!watchId) {
+      setIsWatchOpen(false);
+      return;
+    }
 
     const selected = allItems.find((item) => item.id === watchId);
     if (!selected) return;
 
     setWatchItem(selected);
-    const watch = document.querySelector('#watch');
-    if (watch) watch.style.display = 'block';
+    setIsWatchOpen(true);
   }, [allItems, location.search]);
 
   const playFeatured = () => {
@@ -139,33 +139,34 @@ const Movie = (props) => {
   return (
     <div className={styles.page}>
       {featured && (
-        <section
-          className={styles.hero}
-          style={{
-            backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.88), rgba(0,0,0,0.25)), url(${media.matches ? featured.name : featured.img})`,
-          }}
-        >
-          <div className={styles.heroContent}>
-            <p className={styles.badge}>FEATURED MOVIE</p>
-            <h1>{featured.name2}</h1>
-            <p className={styles.meta}>
-              {featured.releaseYear} • {featured.ua} • {featured.season}
-            </p>
-            <p className={styles.desc}>{featured.desc}</p>
-            <div className={styles.actions}>
-              <button type="button" className={styles.playBtn} onClick={playFeatured}>
-                <i className="fa-solid fa-play"></i> Play
-              </button>
-              <button
-                type="button"
-                className={styles.moreBtn}
-                onClick={() => openWatch(featured.id)}
-              >
-                More Info
-              </button>
+        <div className={styles.featured}>
+
+          <section
+            className={styles.hero}
+            style={{
+              backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.88), rgba(0,0,0,0.25)), url(${media.matches ? featured.name : featured.img})`,
+            }}
+          >
+            <div className={styles.heroContent}>
+              <p className={styles.badge}>FEATURED MOVIE</p>
+              <h1 className={styles.title}>{featured.name2}</h1>
+
+              <p className={styles.desc}>{featured.desc}</p>
+              <div className={styles.actions}>
+                <button type="button" className={styles.btnWatch} onClick={playFeatured}>
+                  <i className="fa-solid fa-play"></i> Play
+                </button>
+                <button
+                  type="button"
+                  className={styles.btnMore}
+                  onClick={() => openWatch(featured.id)}
+                >
+                  More Info
+                </button>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       )}
 
       <div className={styles.rails}>
@@ -180,31 +181,33 @@ const Movie = (props) => {
 
       <Footer />
 
-      <Watch
-        data={allItems}
-        sow={openWatch}
-        onClose={clearWatchFromUrl}
-        sid={watchItem?.id}
-        El={Array.isArray(props.e) && props.e.includes(watchItem?.id) ? 'ADDED' : '+'}
-        img={watchItem?.img}
-        type={watchItem?.type}
-        id={watchItem?.tmdbId}
-        s={watchItem?.episodes}
-        mname={watchItem?.name2}
-        name={watchItem?.nameImg}
-        name2={watchItem?.name2}
-        yr={watchItem?.releaseYear}
-        ua={watchItem?.ua}
-        season={watchItem?.season}
-        lan={watchItem?.language?.length || 0}
-        desc={watchItem?.desc}
-        cat={watchItem?.category}
-        rating={watchItem?.rating}
-        language={watchItem?.language}
-        add={props.add}
-        e={props.e}
-        play={props.play}
-      />
+      {isWatchOpen && watchItem && (
+        <Watch
+          data={allItems}
+          sow={openWatch}
+          onClose={clearWatchFromUrl}
+          sid={watchItem?.id}
+          El={Array.isArray(props.e) && props.e.includes(watchItem?.id) ? 'ADDED' : '+'}
+          img={watchItem?.img}
+          type={watchItem?.type}
+          id={watchItem?.tmdbId}
+          s={watchItem?.episodes}
+          mname={watchItem?.name2}
+          name={watchItem?.nameImg}
+          name2={watchItem?.name2}
+          yr={watchItem?.releaseYear}
+          ua={watchItem?.ua}
+          season={watchItem?.season}
+          lan={watchItem?.language?.length || 0}
+          desc={watchItem?.desc}
+          cat={watchItem?.category}
+          rating={watchItem?.rating}
+          language={watchItem?.language}
+          add={props.add}
+          e={props.e}
+          play={props.play}
+        />
+      )}
     </div>
   );
 };

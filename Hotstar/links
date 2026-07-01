@@ -17,6 +17,13 @@
         srclang="en">
 </video>
 
+<!-- multimovie api -->
+
+<iframe class="metaframe rptss"
+    src="https://stream.techinmind.space/embed/tv/124364/1/1?key=e11a7debaaa4f5d25b671706ffe4d2acb56efbd4"
+    frameborder="0" scrolling="no" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+
+
 
 <!-- net mirror -->
 <iframe class="player-iframe"
