@@ -1,21 +1,12 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Card from '../../components/Card/Card';
-import styles from './search.module.css';
 import Watch from '../../components/Watch/Watch';
 import { searchTMDBTitles } from '../../content/tmdb';
 import Footer from '../../components/Footer/Footer';
 import Skeleton from '../../components/Skeleton/Skeleton';
-
-const TRENDING_QUERIES = [
-  'Action',
-  'Sci-Fi',
-  'Thriller',
-  'TMDB Movies',
-  'TMDB TV',
-  'Comedy',
-  'Adventure',
-];
+import RailRow from '../../components/RailRow/RailRow';
+import { useRailScroll } from '../../hooks/useRailScroll';
 
 const scoreItem = (item, value) => {
   const name = String(item.name2 || '').toLowerCase();
@@ -35,13 +26,12 @@ const Search = (props) => {
   const [query, setQuery] = useState('');
   const [remoteResults, setRemoteResults] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
+  const [watchOpen, setWatchOpen] = useState(false);
+  const [watchItem, setWatchItem] = useState(null);
 
   const navigate = useNavigate();
   const location = useLocation();
-
   const data = Array.isArray(props.data) ? props.data : [];
-  const [watchItem, setWatchItem] = useState(data[0] || null);
-
   const normalizedQuery = query.trim().toLowerCase();
 
   useEffect(() => {
@@ -61,18 +51,15 @@ const Search = (props) => {
     let active = true;
     setSearchLoading(true);
 
-    // Create an AbortController to cancel in-flight API requests
     const controller = new AbortController();
 
     const timer = setTimeout(async () => {
       try {
-        // Pass the controller's signal to your TMDB fetch function
         const results = await searchTMDBTitles(normalizedQuery, { signal: controller.signal });
         if (active) setRemoteResults(results);
       } catch (error) {
-        // If the error is just an AbortError, safely ignore it.
         if (error.name === 'AbortError') {
-          console.log('Previous search request aborted.');
+          console.log('Search request aborted.');
         } else {
           console.error('TMDB search failed:', error);
           if (active) setRemoteResults([]);
@@ -80,49 +67,60 @@ const Search = (props) => {
       } finally {
         if (active) setSearchLoading(false);
       }
-    }, 500); // 500ms debounce prevents API spam while typing
+    }, 500);
 
     return () => {
       active = false;
-      clearTimeout(timer); // Clear the timeout if the user types again before 500ms
-      controller.abort();  // Cancel the actual network fetch if it's already in progress
+      clearTimeout(timer);
+      controller.abort();
     };
   }, [normalizedQuery]);
 
   // ==========================================
-  // Local Filtering
+  // Local & remote merging
   // ==========================================
   const localResults = useMemo(() => {
     if (!normalizedQuery) return [];
-
-    return data.map((item) => ({ item, score: scoreItem(item, normalizedQuery) }))
-      .filter((entry) => entry.score > 0)
+    return data
+      .map((item) => ({ item, score: scoreItem(item, normalizedQuery) }))
+      .filter((e) => e.score > 0)
       .sort((a, b) => b.score - a.score || b.item.releaseYear - a.item.releaseYear)
-      .map((entry) => entry.item);
+      .map((e) => e.item);
   }, [data, normalizedQuery]);
 
   const rankedResults = remoteResults.length > 0 ? remoteResults : localResults;
-  const movieResults = rankedResults.filter((item) => item.type === 'movie');
-  const seriesResults = rankedResults.filter((item) => item.type === 'tv');
+
+  const movieResults = useMemo(() => rankedResults.filter((i) => i.type === 'movie'), [rankedResults]);
+  const seriesResults = useMemo(() => rankedResults.filter((i) => i.type === 'tv'), [rankedResults]);
+
   const trendingItems = data.slice(0, 20);
   const combinedForLookup = useMemo(() => [...rankedResults, ...data], [data, rankedResults]);
 
+  const railKeys = useMemo(() => {
+    const keys = [];
+    if (!normalizedQuery) keys.push('trending');
+    if (movieResults.length > 0) keys.push('movies');
+    if (seriesResults.length > 0) keys.push('series');
+    return keys;
+  }, [normalizedQuery, movieResults, seriesResults]);
+
+  const { scrollState, setTrackRef, onRailScroll, handleRailScroll } = useRailScroll(railKeys);
+
   // ==========================================
-  // Modal / Watch Logic
+  // Watch modal logic
   // ==========================================
-  const openWatch = (id) => {
+  const openWatch = useCallback((id) => {
     const selected = combinedForLookup.find((item) => item.id === id);
     if (!selected) return;
-
     setWatchItem(selected);
-    const watch = document.querySelector('#watch');
-    if (watch) watch.style.display = 'block';
+    setWatchOpen(true);
     navigate(`${location.pathname}?watch=${selected.id}&name=${encodeURIComponent(selected.name2)}`);
-  };
+  }, [combinedForLookup, navigate, location.pathname]);
 
-  const clearWatchFromUrl = () => {
+  const clearWatchFromUrl = useCallback(() => {
+    setWatchOpen(false);
     navigate(location.pathname);
-  };
+  }, [navigate, location.pathname]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -133,138 +131,161 @@ const Search = (props) => {
     if (!selected) return;
 
     setWatchItem(selected);
-    const watch = document.querySelector('#watch');
-    if (watch) watch.style.display = 'block';
+    setWatchOpen(true);
   }, [combinedForLookup, location.search]);
 
-  // ==========================================
-  // UI Rendering
-  // ==========================================
-  const renderRow = (items) => (
-    <div className={styles.rowTrack}>
-      {items.map((item) => (
-        <Card
-          key={item.id}
-          sow={openWatch}
-          id={item.id}
-          img={item.name}
-          name={item.name2}
-          ry={item.releaseYear}
-          ua={item.ua}
-          lan={item.language?.length || 0}
-          desc={item.desc}
-          s={item.season}
-          type={item.type}
-          tid={item.tmdbId}
-          add={props.add}
-          e={props.e}
-          play={props.play}
-        />
-      ))}
-    </div>
+  const renderCard = useCallback(
+    (item) => (
+      <Card
+        sow={openWatch}
+        id={item.id}
+        img={item.name}
+        name={item.name2}
+        ry={item.releaseYear}
+        ua={item.ua}
+        lan={item.language?.length || 0}
+        desc={item.desc}
+        s={item.season}
+        type={item.type}
+        tid={item.tmdbId}
+        add={props.add}
+        e={props.e}
+        play={props.play}
+      />
+    ),
+    [openWatch, props.add, props.e, props.play]
   );
 
+  // ==========================================
+  // Loading state
+  // ==========================================
   if (props.loading) {
-    return <Skeleton type="card" count={12} />;
+    return (
+      <div className="min-h-screen bg-black text-white">
+        <div className="pt-6 pb-4 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto">
+          <div className="h-11 sm:h-12 bg-gray-800 rounded-full animate-pulse w-full max-w-xl mx-auto" />
+        </div>
+        <Skeleton type="card" count={12} />
+      </div>
+    );
   }
 
   return (
-    <div className={styles.con}>
-      <div className={styles.extra}></div>
-      <div className={styles.shell}>
-        <div className={styles.searchHeader}>
-          <div className={styles.searchWrap}>
-            <i className={`fa-solid fa-magnifying-glass ${styles.icon}`}></i>
-            <input
-              type="text"
-              className={styles.search}
-              placeholder="Search TMDB titles, genres, language"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-            />
-          </div>
-
-          {/* {!normalizedQuery && (
-            <div className={styles.tags}>
-              {TRENDING_QUERIES.map((item) => (
-                <button
-                  key={item}
-                  type="button"
-                  className={styles.tag}
-                  onClick={() => setQuery(item)}
-                >
-                  {item}
-                </button>
-              ))}
-            </div>
-          )} */}
+    <div className="min-h-screen bg-black text-white">
+      {/* Search Header */}
+      <div className="pt-4 sm:pt-6 pb-4 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto">
+        <div className="relative w-full max-w-xl mx-auto">
+          <i className="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-base sm:text-lg" />
+          <input
+            type="text"
+            inputMode="search"
+            className="w-full pl-11 sm:pl-12 pr-4 py-2.5 sm:py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white text-sm sm:text-base placeholder-gray-400 focus:outline-none focus:border-white/50 focus:bg-white/20 transition"
+            placeholder="Search titles, genres, languages..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
         </div>
+      </div>
 
+      {/* Results / Trending */}
+      <div className="pb-20">
         {normalizedQuery ? (
           <>
-            <p className={styles.meta}>
+            <p className="text-sm text-gray-400 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto mb-4">
               {rankedResults.length} result{rankedResults.length === 1 ? '' : 's'} for "{query}"
             </p>
-            {searchLoading && <p className={styles.meta}>Searching TMDB...</p>}
-
-            {movieResults.length > 0 && (
-              <section className={styles.section}>
-                <h2 className={styles.title}>Movies</h2>
-                {renderRow(movieResults)}
-              </section>
+            {searchLoading && (
+              <p className="text-sm text-gray-500 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto mb-4 animate-pulse">
+                Searching TMDB...
+              </p>
             )}
 
+            {movieResults.length > 0 && (
+              <div className="px-4 sm:px-6 md:px-8 max-w-7xl mx-auto mb-6 sm:mb-10">
+                <RailRow
+                  title="Movies"
+                  railKey="movies"
+                  items={movieResults}
+                  scrollState={scrollState}
+                  setTrackRef={setTrackRef}
+                  onRailScroll={onRailScroll}
+                  handleRailScroll={handleRailScroll}
+                  eager
+                  renderItem={renderCard}
+                />
+              </div>
+            )}
             {seriesResults.length > 0 && (
-              <section className={styles.section}>
-                <h2 className={styles.title}>Series</h2>
-                {renderRow(seriesResults)}
-              </section>
+              <div className="px-4 sm:px-6 md:px-8 max-w-7xl mx-auto mb-6 sm:mb-10">
+                <RailRow
+                  title="Series"
+                  railKey="series"
+                  items={seriesResults}
+                  scrollState={scrollState}
+                  setTrackRef={setTrackRef}
+                  onRailScroll={onRailScroll}
+                  handleRailScroll={handleRailScroll}
+                  eager
+                  renderItem={renderCard}
+                />
+              </div>
             )}
 
             {rankedResults.length === 0 && !searchLoading && (
-              <div className={styles.empty}>
-                <h3>No matches found</h3>
-                <p>Try a different title, genre, language, or studio.</p>
+              <div className="text-center py-16 sm:py-20 px-4">
+                <h3 className="text-xl sm:text-2xl font-semibold mb-2">No matches found</h3>
+                <p className="text-gray-400 text-sm sm:text-base">Try a different title, genre, or language.</p>
               </div>
             )}
           </>
         ) : (
-          <section className={styles.section}>
-            <h2 className={styles.title}>Trending Now</h2>
-            {renderRow(trendingItems)}
-          </section>
+          <div className="px-4 sm:px-6 md:px-8 max-w-7xl mx-auto">
+            <RailRow
+              title="Trending Now"
+              railKey="trending"
+              items={trendingItems}
+              scrollState={scrollState}
+              setTrackRef={setTrackRef}
+              onRailScroll={onRailScroll}
+              handleRailScroll={handleRailScroll}
+              eager
+              renderItem={renderCard}
+            />
+          </div>
         )}
       </div>
 
       <Footer />
 
-      <Watch
-        data={combinedForLookup}
-        sow={openWatch}
-        onClose={clearWatchFromUrl}
-        sid={watchItem?.id}
-        El={Array.isArray(props.e) && props.e.includes(watchItem?.id) ? 'ADDED' : '+'}
-        img={watchItem?.img}
-        type={watchItem?.type}
-        id={watchItem?.tmdbId}
-        s={watchItem?.episodes}
-        mname={watchItem?.name2}
-        name={watchItem?.nameImg}
-        name2={watchItem?.name}
-        yr={watchItem?.releaseYear}
-        ua={watchItem?.ua}
-        season={watchItem?.season}
-        lan={watchItem?.language?.length || 0}
-        desc={watchItem?.desc}
-        cat={watchItem?.category}
-        rating={watchItem?.rating}
-        language={watchItem?.language}
-        add={props.add}
-        e={props.e}
-        play={props.play}
-      />
+      {watchOpen && (
+        <Watch
+          data={combinedForLookup}
+          sow={openWatch}
+          onClose={clearWatchFromUrl}
+          sid={watchItem?.id}
+          El={Array.isArray(props.e) && props.e.includes(watchItem?.id) ? 'ADDED' : '+'}
+          img={watchItem?.img}
+          type={watchItem?.type}
+          id={watchItem?.tmdbId}
+          s={watchItem?.episodes}
+          mname={watchItem?.name2}
+          name={watchItem?.nameImg}
+          name2={watchItem?.name}
+          yr={watchItem?.releaseYear}
+          ua={watchItem?.ua}
+          season={watchItem?.season}
+          lan={watchItem?.language?.length || 0}
+          desc={watchItem?.desc}
+          cat={watchItem?.category}
+          rating={watchItem?.rating}
+          language={watchItem?.language}
+          add={props.add}
+          e={props.e}
+          play={props.play}
+        />
+      )}
     </div>
   );
 };
 
-export default Search;
+export default React.memo(Search);

@@ -15,7 +15,6 @@ const Movie = lazy(() => import("./pages/Movies/Movie"));
 const Profile = lazy(() => import("./pages/Profile/Profile"));
 const Stream = lazy(() => import("./pages/Stream/Stream"));
 const Tv = lazy(() => import("./pages/TV/Tv"));
-const Watch = lazy(() => import("./pages/Watch/Watch"));
 const Search = lazy(() => import("./pages/Search/Search"));
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Signup = lazy(() => import("./pages/Auth/Signup"));
@@ -175,11 +174,7 @@ function App() {
                   <MovieViewAll {...sharedProps} sow={sow} />
                 </></ProtectedRoute>
               } />
-              <Route path="/watch" element={
-                <ProtectedRoute><><Nav />
-                  <Watch {...sharedProps} />
-                </></ProtectedRoute>
-              } />
+
 
               <Route path="*" element={<Navigate to="/" />} />
 

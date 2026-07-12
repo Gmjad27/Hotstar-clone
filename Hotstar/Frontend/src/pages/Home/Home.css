@@ -1,444 +1,419 @@
-/* =========================
-   HOME PAGE
-========================= */
+/* =========================================================================
+   CineFlix — Home
+   Design language: dark cinematic theme, warm gold signature accent,
+   soft glass surfaces. Matches the tone set in Watch.module.css.
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap');
+
+:root {
+  --cf-bg:        #0a0a0d;
+  --cf-bg-soft:   #101014;
+  --cf-surface:   #16161c;
+  --cf-surface-hi:#1f1f28;
+  --cf-border:    rgba(255,255,255,0.08);
+  --cf-text:      #f5f3ee;
+  --cf-text-dim:  #a9a7b3;
+  --cf-text-mute: #6f6d78;
+  --cf-gold:      #e8b84b;
+  --cf-gold-dim:  #b8923a;
+  --cf-ember:     #c1443c;
+  --cf-font-display: 'Sora', 'Segoe UI', sans-serif;
+  --cf-font-body:    'Inter', 'Segoe UI', sans-serif;
+  --cf-font-mono:    'JetBrains Mono', monospace;
+  --cf-radius: 14px;
+  --cf-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
 
 .homePage {
-  width: 100%;
+  background: var(--cf-bg);
+  color: var(--cf-text);
+  font-family: var(--cf-font-body);
   min-height: 100vh;
-  background: #050505;
-  color: white;
   overflow-x: hidden;
 }
 
-/* =========================
-   HERO SECTION
-========================= */
+/* -------------------------------------------------------------------- */
+/* Hero banner                                                          */
+/* -------------------------------------------------------------------- */
 
-.homebanner {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-}
+.homebanner { position: relative; }
 
 .heroBanner {
-  width: 100%;
-  height: 100vh;
   position: relative;
+  height: 84vh;
+  min-height: 480px;
+  max-height: 860px;
+  width: 100%;
   overflow: hidden;
+  display: flex;
+  align-items: flex-end;
 }
 
 .heroBg {
   position: absolute;
   inset: 0;
   background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  transition: all .8s ease;
-  transform: scale(1.05);
+  background-position: center 20%;
+  transform: scale(1.06);
+  animation: cfKenBurns 16s ease-in-out infinite alternate;
+}
+
+@keyframes cfKenBurns {
+  from { transform: scale(1.06) translateY(0); }
+  to   { transform: scale(1.14) translateY(-1.5%); }
+}
+
+/* Subtle film-grain texture — the signature cinematic touch */
+.heroGrain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 .heroFade {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(
-      to top,
-      #050505 5%,
-      rgba(0,0,0,.4) 40%,
-      rgba(0,0,0,.15) 100%
-    );
-}
-
-.heroContent {
-  position: absolute;
-  left: 6%;
-  bottom: 18%;
-  z-index: 10;
-  max-width: 650px;
-}
-
-.heroTags {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-
-.heroTag {
-  padding: 8px 15px;
-  border-radius: 50px;
-  background: rgba(255,255,255,.1);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255,255,255,.1);
-  font-size: .85rem;
-}
-
-.heroTitle {
-  font-size: clamp(2.5rem, 5vw, 5rem);
-  font-weight: 900;
-  line-height: 1;
-  margin-bottom: 20px;
-  text-shadow: 0 5px 20px rgba(0,0,0,.8);
-}
-
-.heroDesc {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: rgba(255,255,255,.85);
-  margin-bottom: 30px;
-  max-width: 600px;
-
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+    linear-gradient(180deg, rgba(10,10,13,0.15) 0%, rgba(10,10,13,0.05) 30%, rgba(10,10,13,0.55) 68%, var(--cf-bg) 100%),
+    linear-gradient(90deg, rgba(10,10,13,0.85) 0%, rgba(10,10,13,0.15) 45%, rgba(10,10,13,0) 70%);
 }
 
 .trendingPill {
   position: absolute;
-  top: 100px;
-  left: 6%;
-  z-index: 10;
-
-  padding: 12px 18px;
-  border-radius: 50px;
-
-  background: rgba(255, 68, 68, .15);
-  backdrop-filter: blur(20px);
-
-  border: 1px solid rgba(255,255,255,.1);
-
-  font-weight: 600;
+  top: 28px;
+  left: 32px;
+  z-index: 3;
+  font-family: var(--cf-font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(22,22,28,0.55);
+  border: 1px solid var(--cf-border);
+  backdrop-filter: blur(10px);
+  color: var(--cf-text-dim);
 }
 
-/* =========================
-   HERO BUTTONS
-========================= */
-
-.heroActions {
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
+.heroContent {
+  position: relative;
+  z-index: 2;
+  padding: 0 5vw 6vw;
+  max-width: 640px;
 }
+
+.heroTags { display: flex; gap: 8px; margin-bottom: 14px; }
+
+.heroTag {
+  font-family: var(--cf-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--cf-gold);
+  border: 1px solid rgba(232,184,75,0.35);
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(232,184,75,0.08);
+}
+
+.heroTitle {
+  font-family: var(--cf-font-display);
+  font-weight: 800;
+  font-size: clamp(2rem, 5.2vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.5);
+}
+
+.heroDesc {
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  line-height: 1.55;
+  color: var(--cf-text-dim);
+  margin: 0 0 26px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.heroActions { display: flex; gap: 14px; flex-wrap: wrap; }
 
 .btnWatch {
-  border: none;
-  outline: none;
-  cursor: pointer;
-
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
-
-  padding: 15px 30px;
-  border-radius: 50px;
-
-  font-weight: 700;
-  font-size: 1rem;
-
-  transition: .3s;
+  font-family: var(--cf-font-body);
+  font-weight: 600;
+  font-size: 15px;
+  color: #14140f;
+  background: var(--cf-text);
+  border: none;
+  border-radius: 999px;
+  padding: 13px 26px;
+  cursor: pointer;
+  transition: transform 0.2s var(--cf-ease), background 0.2s ease, box-shadow 0.2s ease;
 }
 
-.btnWatch:hover {
-  transform: translateY(-3px);
-}
-
-.btnWatch:first-child {
-  background: white;
-  color: black;
-}
+.btnWatch:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+.btnWatch:active { transform: translateY(0) scale(0.98); }
 
 .btnWatch.more {
-  background: rgba(255,255,255,.15);
-  color: white;
-  backdrop-filter: blur(20px);
+  color: var(--cf-text);
+  background: rgba(120,118,130,0.28);
+  backdrop-filter: blur(10px);
 }
 
 .playTri {
-  width: 0;
-  height: 0;
-
-  border-left: 12px solid black;
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
+  width: 0; height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 10px solid #14140f;
 }
-
-/* =========================
-   HERO ARROWS
-========================= */
 
 .heroArrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-
-  width: 55px;
-  height: 55px;
-
+  z-index: 3;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  border: none;
-
+  border: 1px solid var(--cf-border);
+  background: rgba(16,16,20,0.45);
+  backdrop-filter: blur(8px);
+  color: var(--cf-text);
+  font-size: 22px;
+  line-height: 1;
   cursor: pointer;
-
-  background: rgba(0,0,0,.45);
-  color: white;
-
-  font-size: 2rem;
-  z-index: 10;
-
-  backdrop-filter: blur(10px);
-
-  transition: .3s;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
-.heroArrow:hover {
-  background: rgba(255,255,255,.2);
-}
+.heroBanner:hover .heroArrow,
+.heroArrow:focus-visible { opacity: 1; }
 
-.heroArrowL {
-  left: 20px;
-}
-
-.heroArrowR {
-  right: 20px;
-}
-
-/* =========================
-   DOTS
-========================= */
+.heroArrowL { left: 24px; }
+.heroArrowR { right: 24px; }
+.heroArrow:hover { background: rgba(232,184,75,0.85); color: #14140f; transform: translateY(-50%) scale(1.06); }
 
 .heroDots {
   position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-
+  z-index: 3;
+  right: 32px;
+  bottom: 28px;
   display: flex;
-  gap: 10px;
-  z-index: 20;
+  gap: 8px;
 }
 
 .heroDot {
-  width: 12px;
-  height: 12px;
-
-  border-radius: 50%;
+  width: 26px;
+  height: 3px;
+  border-radius: 2px;
   border: none;
-
+  background: rgba(255,255,255,0.25);
   cursor: pointer;
-
-  background: rgba(255,255,255,.3);
+  padding: 0;
+  transition: background 0.25s ease, width 0.25s ease;
 }
 
-.heroDotActive {
-  background: white;
-  width: 30px;
-  border-radius: 30px;
-}
+.heroDotActive { background: var(--cf-gold); width: 40px; }
 
-/* =========================
-   CONTENT
-========================= */
+/* -------------------------------------------------------------------- */
+/* Rails                                                                 */
+/* -------------------------------------------------------------------- */
 
 .homeShell {
-  padding: 20px 0 60px;
+  padding: 8px 0 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.homeSection {
-  margin-bottom: 45px;
-}
+.homeSection { padding: 22px 0 4px; }
 
 .sectionHeader {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
-  padding: 0 4%;
-  margin-bottom: 20px;
+  padding: 0 5vw;
+  margin-bottom: 14px;
 }
 
 .homeTitle {
-  font-size: 1.7rem;
-  font-weight: 800;
+  font-family: var(--cf-font-display);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  letter-spacing: -0.01em;
+  margin: 0;
+  position: relative;
+  padding-left: 14px;
 }
 
-.trackBtns {
-  display: flex;
-  gap: 10px;
+.homeTitle::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 3px;
+  bottom: 3px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--cf-gold);
 }
 
-.scrollBtn {
-  width: 40px;
-  height: 40px;
-
-  border: none;
-  border-radius: 50%;
-
-  cursor: pointer;
-
-  color: white;
-  background: rgba(255,255,255,.08);
-
-  transition: .3s;
-}
-
-.scrollBtn:hover {
-  background: rgba(255,255,255,.2);
-}
-
-/* =========================
-   MOVIE TRACKS
-========================= */
+.trackWrapper { position: relative; }
 
 .homeTrack,
 .studioTrack {
   display: flex;
-  gap: 20px;
-
+  gap: 14px;
   overflow-x: auto;
-  overflow-y: hidden;
-
   scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  padding: 4px 5vw 14px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4vw, #000 96vw, transparent 100vw);
+  mask-image: linear-gradient(90deg, transparent 0, #000 4vw, #000 96vw, transparent 100vw);
+}
 
-  padding: 10px 4%;
+.homeTrack.atStart, .studioTrack.atStart {
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 96vw, transparent 100vw);
+  mask-image: linear-gradient(90deg, #000 0, #000 96vw, transparent 100vw);
+}
+
+.homeTrack.atEnd, .studioTrack.atEnd {
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4vw, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 4vw, #000 100%);
+}
+
+.homeTrack.atStart.atEnd, .studioTrack.atStart.atEnd {
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 .homeTrack::-webkit-scrollbar,
-.studioTrack::-webkit-scrollbar {
-  display: none;
-}
+.studioTrack::-webkit-scrollbar { display: none; }
 
-/* =========================
-   TOP 10
-========================= */
+.homeTrack > *, .studioTrack > * { scroll-snap-align: start; flex: 0 0 auto; }
 
-.cardrank {
+/* Scroll arrows sit over the rail edges, glass-morphism style */
+.railArrow {
+  position: absolute;
+  top: 0;
+  bottom: 14px;
+  width: 56px;
+  z-index: 4;
+  border: none;
+  cursor: pointer;
+  font-size: 26px;
+  color: var(--cf-text);
   display: flex;
   align-items: center;
-  min-width: max-content;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
 }
+
+.railArrowL {
+  left: 0;
+  background: linear-gradient(90deg, var(--cf-bg) 10%, transparent 100%);
+  justify-content: flex-start;
+  padding-left: 1.2vw;
+}
+
+.railArrowR {
+  right: 0;
+  background: linear-gradient(270deg, var(--cf-bg) 10%, transparent 100%);
+  justify-content: flex-end;
+  padding-right: 1.2vw;
+}
+
+.trackWrapper:hover .railArrow,
+.railArrow:focus-visible { opacity: 1; }
+
+.railArrow span,
+.railArrow { transition: color 0.2s ease, transform 0.2s ease, opacity 0.2s ease; }
+
+.railArrow:hover { color: var(--cf-gold); transform: scale(1.1); }
+
+.railArrowHidden { opacity: 0 !important; pointer-events: none; }
+
+/* Cards */
+.cardrank { position: relative; display: flex; align-items: flex-end; }
 
 .rank {
-  font-size: 8rem;
-  font-weight: 900;
-
-  margin-right: -25px;
-
+  font-family: var(--cf-font-display);
+  font-weight: 800;
+  font-size: 88px;
+  line-height: 1;
   color: transparent;
-  -webkit-text-stroke: 2px white;
-
-  text-shadow: 0 0 20px rgba(255,255,255,.3);
+  -webkit-text-stroke: 2px rgba(255,255,255,0.35);
+  margin-right: -22px;
+  z-index: 1;
+  user-select: none;
 }
 
-/* =========================
-   STUDIO CARDS
-========================= */
-
-.studioTrack {
-  padding-bottom: 15px;
+/* Generic hover lift for whatever card markup Card/Card2 render internally */
+.homeTrack a, .homeTrack button,
+.studioTrack a, .studioTrack button {
+  transition: transform 0.28s var(--cf-ease), box-shadow 0.28s var(--cf-ease);
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 1024px) {
-
-  .heroContent {
-    max-width: 500px;
-  }
-
-  .heroTitle {
-    font-size: 3rem;
-  }
-
-  .rank {
-    font-size: 6rem;
-  }
+.homeTrack a:hover, .studioTrack a:hover {
+  transform: translateY(-6px) scale(1.035);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.45), 0 0 0 1px rgba(232,184,75,0.25);
+  z-index: 2;
 }
 
-@media (max-width: 768px) {
+/* -------------------------------------------------------------------- */
+/* Responsive                                                            */
+/* -------------------------------------------------------------------- */
 
-  .homebanner,
-  .heroBanner {
-    height: 85vh;
-  }
-
-  .heroContent {
-    left: 20px;
-    right: 20px;
-    bottom: 90px;
-    max-width: 100%;
-  }
-
-  .heroTitle {
-    font-size: 2.2rem;
-  }
-
-  .heroDesc {
-    font-size: .9rem;
-    -webkit-line-clamp: 3;
-  }
-
-  .btnWatch {
-    padding: 12px 20px;
-    font-size: .9rem;
-  }
-
-  .trendingPill {
-    top: 85px;
-    left: 20px;
-  }
-
-  .heroArrow {
-    width: 45px;
-    height: 45px;
-    font-size: 1.5rem;
-  }
-
-  .homeTitle {
-    font-size: 1.3rem;
-  }
-
-  .rank {
-    font-size: 5rem;
-  }
+@media (max-width: 1100px) {
+  .heroBanner { height: 78vh; }
+  .rank { font-size: 68px; }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 900px) {
+  .heroBanner { height: 66vh; min-height: 420px; }
+  .heroContent { max-width: 100%; padding: 0 6vw 12vw; }
+  .heroDesc { -webkit-line-clamp: 2; }
+  .heroArrow { display: none; } /* swipe on touch devices instead */
+  .heroDots { right: 6vw; bottom: 20px; }
+  .sectionHeader, .homeTrack, .studioTrack { padding-left: 6vw; padding-right: 6vw; }
+  .railArrow { display: none; } /* rely on native touch scrolling */
+  .homeTrack, .studioTrack { -webkit-mask-image: none !important; mask-image: none !important; }
+  .rank { font-size: 52px; margin-right: -14px; }
+}
 
-  .heroBanner {
-    height: 75vh;
-  }
+@media (max-width: 560px) {
+  .heroBanner { height: 58vh; min-height: 380px; }
+  .heroTitle { font-size: 1.7rem; }
+  .heroActions { gap: 10px; }
+  .btnWatch { padding: 11px 20px; font-size: 14px; }
+  .trendingPill { top: 18px; left: 18px; font-size: 10.5px; padding: 6px 11px; }
+  .homeTitle { font-size: 1rem; }
+  .homeSection { padding: 16px 0 2px; }
+  .homeTrack, .studioTrack { gap: 10px; }
+}
 
-  .heroTitle {
-    font-size: 1.8rem;
-  }
+@media (min-width: 1600px) {
+  .heroContent { max-width: 720px; }
+  .heroTitle { font-size: 4rem; }
+}
 
-  .heroDesc {
-    font-size: .85rem;
-  }
-
-  .heroActions {
-    width: 100%;
-  }
-
-  .btnWatch {
-    flex: 1;
-    justify-content: center;
-  }
-
-  .heroArrow {
-    display: none;
-  }
-
-  .rank {
-    font-size: 4rem;
-    margin-right: -15px;
-  }
-
-  .scrollBtn {
-    width: 35px;
-    height: 35px;
-  }
+/* Accessibility: visible focus rings throughout */
+.btnWatch:focus-visible,
+.heroArrow:focus-visible,
+.railArrow:focus-visible,
+.heroDot:focus-visible {
+  outline: 2px solid var(--cf-gold);
+  outline-offset: 2px;
 }

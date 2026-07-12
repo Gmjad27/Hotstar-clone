@@ -177,7 +177,7 @@
 
 /* Hover */
 .card2:hover {
-  transform: translateY(-8px) scale(1.05);
+  /* transform: translateY(-8px) scale(1.05); */
 
   border-color: var(--studiocolor, #00bfff);
 

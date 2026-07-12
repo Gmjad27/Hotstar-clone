@@ -21,7 +21,7 @@ export const STUDIO_COLLECTIONS = [
     key: "NETFLIX",
     label: "NETFLIX",
     img: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg",
-    bg: "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202012/Netflix-New-Feature-Audio-Only_1200x768.jpeg?size=1200:675",
+    bg: "https://wallpapercave.com/wp/wp14818830.webp",
     color: "#E50914",
     companyIds: [178464],
     networkIds: [213]
